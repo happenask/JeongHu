@@ -1,0 +1,636 @@
+<!DOCTYPE html> 
+<html>
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1,width=device-width"/>
+<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="msapplication-tap-highlight" content="no" />
+    
+<title>Insert title here</title>
+<style>
+.overlay{
+	display:none;
+}
+.countdown{
+	display:none;
+
+
+}
+.result_list{
+	display:none;
+}
+
+</style>
+
+<script type="text/javascript" src = "./js/jquery-1.11.1.js"></script>
+<script src="./jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<script type="text/javascript"  src="js/firstFlipCardGame.js"></script>
+<script type="text/javascript"  src="./js/secondFlipCardGame.js"></script>
+<script type="text/javascript"  src="./js/phonegap_db.js"></script>
+<script type="text/javascript"  src="cordova.js"></script>
+<script type="text/javascript"  src="cordova_plugins.js"></script>     
+
+<link rel="stylesheet" href="./jquery.mobile-1.4.5/jquery.mobile.structure-1.4.5.css" />
+<link rel="stylesheet" href="./jquery.mobile-1.4.5/jquery.mobile.icons-1.4.5.min.css" />
+<link rel="stylesheet" href="./jquery.mobile-1.4.5/brain_game2.css" />
+<link rel="stylesheet" href="./jquery.mobile-1.4.5/main_page.css" />
+<link rel="stylesheet" href="./jquery.mobile-1.4.5/basic_theme.min.css" />
+<link rel="stylesheet" href="./jquery.mobile-1.4.5/brain_game.css" />
+<link rel="stylesheet" href="./jquery.mobile-1.4.5/brain_game2.css" />
+
+
+<script type="text/javascript">
+
+var firstGame_elapsedTime;
+var secondGame_elapsedTime;
+	
+	// -------------- PhoneGap event --------------------------------------	
+	function onBackButton()
+	{
+		navigator.app.exitApp();
+
+	}
+	
+	function firstGameAlertCallback()
+	{
+		$PhoneGapDB.updateRecord('firstGame',firstGame_elapsedTime);
+		
+//		return false;
+	}
+	function secondGameAlertCallback()
+	{
+		$PhoneGapDB.updateRecord('secondGame',secondGame_elapsedTime);
+		
+//		return false;
+	}
+
+	
+// Jquery Mobile and PhonGap Initialization
+
+
+
+// 	var deviceReadyDeferred = $.Deferred();
+// 	var jqmReadyDeferred = $.Deferred();
+// 	var jqmSecondReadyDeferred = $.Deferred();
+	 
+// 	document.addEventListener("deviceReady", deviceReady, false);
+	 
+// 	function deviceReady() {
+// 	  document.addEventListener("backbutton", onBackButton, false);
+	  
+// 	  $PhoneGapDB.selectOption();
+// 	  deviceReadyDeferred.resolve();
+// 	}
+	
+
+	
+// 	$(document).on("pagecreate","#page", function () {
+// 		$('.overlay').hide();
+// 	});
+	
+// 	$(document).on("pagecreate","#game1", function () {
+// 		$('.overlay').hide();
+// 	//	$PhoneGapDB.selectOption();
+	
+// 		$( "#popupGameExplanation" ).on({       // 게임 방법 설명 팝업이 실행 되기전 자동으로 사이즈를 조정한다.
+// 	       popupbeforeposition: function() {
+// 	          var maxHeight = $( window ).height() - 60 + "px";
+// 	          $( "#popupGameExplanation img" ).css( "max-height", maxHeight );
+// 	        }
+// 	    });
+		
+	
+// 		setTimeout(function(){jqmReadyDeferred.resolve();},600);
+	  
+// 	});
+	 
+// 	$(document).on("pagecreate","#game2", function () {
+// 		$('.overlay').hide();
+// 	//	$PhoneGapDB.selectOption();
+	
+// 		$( "#popupGameExplanation2" ).on({
+// 	    	    popupbeforeposition: function() {
+// 	            var maxHeight = $( window ).height() - 60 + "px";
+// 	            $( "#popupGameExplanation2 img" ).css( "max-height", maxHeight );
+// 	        }
+// 	    });
+	
+// 		setTimeout(function(){jqmSecondReadyDeferred.resolve();},500);
+		  
+// 	});
+
+// 	$.when(deviceReadyDeferred, jqmReadyDeferred).then(doFirstGameWhenBothFrameworksLoaded);
+	
+	
+// 	$.when(deviceReadyDeferred, jqmSecondReadyDeferred).then(doSecondGameWhenBothFrameworksLoaded);
+
+	
+	
+// 	$(document).one("pageshow","#game1", function () {
+
+// 		$('#popupGameExplanation').popup('open') // 게임 방법 팝업을 실행 한다.
+// 	});
+	
+// 	$(document).one("pageshow","#game2", function () {
+
+// 		$('#popupGameExplanation2').popup('open')
+// 	});
+	
+	//	Jquery initialization
+	
+	
+	
+	$(document).on("pagecreate","#page", function () {
+		
+		$('.overlay').hide();
+	});
+	
+	$(document).on("pagecreate","#game1", function () {
+		 $PhoneGapDB.selectOption();
+		
+		$('.overlay').hide();
+		
+		$( "#popupGameExplanation" ).on({       // 게임 방법 설명 팝업이 실행 되기전 자동으로 사이즈를 조정한다.
+		       popupbeforeposition: function() {
+		          var maxHeight = $( window ).height() - 60 + "px";
+		          $( "#popupGameExplanation img" ).css( "max-height", maxHeight );
+		        }
+		    });
+		
+		doFirstGameWhenBothFrameworksLoaded();
+	});
+	 
+	$(document).on("pagecreate","#game2", function () {
+		$('.overlay').hide();
+		
+		$( "#popupGameExplanation" ).on({       // 게임 방법 설명 팝업이 실행 되기전 자동으로 사이즈를 조정한다.
+		       popupbeforeposition: function() {
+		          var maxHeight = $( window ).height() - 60 + "px";
+		          $( "#popupGameExplanation img" ).css( "max-height", maxHeight );
+		        }
+		    });
+		
+		doSecondGameWhenBothFrameworksLoaded();
+	});
+
+$(document).one("pageshow","#game1", function () {
+
+		$('#popupGameExplanation').popup('open') // 게임 방법 팝업을 실행 한다.
+	});
+	
+	$(document).one("pageshow","#game2", function () {
+
+		$('#popupGameExplanation2').popup('open')
+	});
+		
+	
+	function doFirstGameWhenBothFrameworksLoaded() {
+				
+		var game_level = 'advance';   // DB에서 옵션 값을 받는다.
+		var game_operator = '*'; // DB에서 옵션 값을 받는다.
+		var game_sound = 'on';		  // DB에서 옵션 값을 받는다.
+		
+		
+// 		var game_level = $PhoneGapDB.gameLevel;   // DB에서 옵션 값을 받는다.
+// 		var game_operator = $PhoneGapDB.operator; // DB에서 옵션 값을 받는다.
+// 		var game_sound = $PhoneGapDB.sound;		  // DB에서 옵션 값을 받는다.
+		
+		
+		//alert(game_level+','+game_operator+','+game_sound);
+		$.mobile.loader.prototype.options.disabled = true;
+		
+		var time;
+		
+		
+		$( "#popupGameExplanation" ).bind({              // 게임 설명 팝업이 close 되면 시간 을 잰다.
+			   popupafterclose: function(event, ui) {
+				   time = $firstGame.caculate_elapsedTime();
+			   }
+			});
+		
+		
+		var first_node_number = 20;
+		
+
+		
+			
+			$("<div class='ui-grid-b'>").appendTo('.flip');
+
+
+			for(var i = 1;i<=first_node_number;i+=3)
+			{
+				$('.ui-grid-b').append("<div class='ui-block-a'><div id ='card'></div></div>");
+				$('.ui-grid-b').append("<div class='ui-block-b'><div id ='card'></div></div>");
+				$('.ui-grid-b').append("<div class='ui-block-c'><div id ='card'></div></div>");
+			//	var div_card = $('body').append("<div class='card+"+i+'>")
+	            
+			}
+			
+
+
+			$('.flip .ui-grid-b #card').addClass(function(index){
+			    
+			    $(this).append("<div class = 'face front' ></div>");
+			    $(this).append("<div class = 'face back'>back</div>");
+			    return 'card '+'c'+index;
+			});
+			
+			
+			
+			
+//----------------------- End Creating Div --------------------
+
+			var array = $firstGame.make_result(first_node_number,game_operator,game_level);
+
+			$('.flip .card').each(function(i){
+		        
+				var result = $firstGame.randomItem(array);
+			   
+				$firstGame.make_number.call(this,result,game_operator,game_level);
+
+		
+				   if(!$(this).find('.back').is('h1'))
+			    	{
+			         	$(this).find('.back').html($(this).data('expression'));   
+			    	}
+		
+				$(this).attr('action','hide');
+	    	//    $(this).find('h1').hide();
+			});
+	
+		$('.flip .card:last').find('.back').html('END'); // 21 개카드 에서 하나를 지우고 20개 로 만든다. 마지막 카드는 END 카드 표시해 준다.
+		
+//---------------------------------- End Creating Value ----------------
+//		
+
+///////////////	Card event Binding 	////////////////////////////////////////////				
+
+				var cnt = 0;
+		
+
+		$(document).on("tap",".flip div[answer=false]",function(event){
+
+ 			
+//			$firstGame.flipCardSoundEffect(game_sound);
+			
+					if($(this).attr('action')=='show')
+					{
+						
+						$(this).removeClass('flipped');
+						$(this).attr('action','hide');
+				
+						event.preventDefault();  //고스트 클릭 방지
+					}
+					
+					else if($(this).attr('action')=='hide')
+					{
+				//		++cnt;
+				//		console.log(cnt);
+						if($('.flip div[answer=false][action=show]').length>2)
+						{
+							//cnt=0;
+							return false;
+						}
+					    $(this).addClass('flipped');
+						$(this).attr('action','show');
+						
+						event.preventDefault(); //고스트 클릭 방지
+						
+					}
+					
+					$firstGame.compare_result();		
+						
+						
+					
+ 					var check = $firstGame.endGameCheck();
+					
+					
+ 					if (check) {
+ 		 				var endDate = new Date();
+ 		 				firstGame_elapsedTime = time(endDate);
+ 		 			
+//  		 				navigator.notification.vibrate(800);
+//  		 				navigator.notification.alert(
+//  		 						"경과시간:" + firstGame_elapsedTime, // message
+//  		 						firstGameAlertCallback, //callback
+//  		 						"Game Over", // title
+//  		 						"Done" // buttonName
+//  		 						);
+ 		 			
+ 		 				alert("경과시간:" + firstGame_elapsedTime);
+ 		 			}
+				
+				});
+		
+// 		setTimeout(function(){
+			
+// 		    var $elem = $('.card:even');
+			
+// 		    $('.card:even').animate({
+// 		        deg: 720
+// 		    }, {
+// 		        duration: 1200,
+// 		        step: function (now) {
+// 		            // in the step-callback (that is fired each step of the animation),
+// 		            // you can use the `now` paramter which contains the current
+// 		            // animation-position (`0` up to `angle`)
+// 		            $elem.css({
+// 		                transform: 'rotateX(' + now + 'deg)'
+// 		            });
+// 		        },
+// 		        complete: function(event){$('.card:even').removeAttr('style');}
+// 		    });
+		
+			
+// 		},1500);			
+				
+		
+    
+}
+	
+	
+//=========================   Second Game ===============================================
+	
+var MAX_NUMBER   = 14;
+var MAX_NODENUM  = 18;
+
+//var DEFAULT_ARRAY = [1,2,3,4,5,6,7,8,9,10,11,12,13,14];
+
+var OPERATOR_ARRAY = ['+','-','*','/'];
+var r_array = new Array();
+
+	
+	function doSecondGameWhenBothFrameworksLoaded()
+	{
+//		var game_sound = $PhoneGapDB.sound;		  // DB에서 옵션 값을 받는다.
+	    var game_level = 'beginner';   // DB에서 옵션 값을 받는다.
+	    
+	    $('#small_info').text('now is '+game_level+' mode');
+	    if(game_level == 'beginner')
+	    {
+	    	MAX_NUMBER = 10;
+	    	MAX_NODENUM = 12;
+	    	
+	    	DEFAULT_ARRAY =  [1,2,3,4,5,6,7,8,9,10];
+	    	OPERATOR_ARRAY = ['+','-'];
+	    }
+	    
+	    
+		$('.overlay').hide();
+		$('.countdown').show();
+		$('.result_list').show();
+		
+		$.mobile.loader.prototype.options.disabled = true;
+
+
+
+		var node_number = MAX_NODENUM;
+
+		$("<div class='ui-grid-b'>").appendTo('.flip2');
+
+		for ( var i = 1; i <= node_number; i += 3) {
+			$('.ui-grid-b').append(
+					"<div class='ui-block-a'><div id ='card'></div></div>");
+			$('.ui-grid-b').append(
+					"<div class='ui-block-b'><div id ='card'></div></div>");
+			$('.ui-grid-b').append(
+					"<div class='ui-block-c'><div id ='card'></div></div>");
+			//	var div_card = $('body').append("<div class='card+"+i+'>")
+
+		}
+
+		$('.flip2 .ui-grid-b #card').addClass(function(index) {
+
+			$(this).append("<div class = 'face front' ></div>");
+			$(this).append("<div class = 'face back'>back</div>");
+			return 'card ' + 'c' + index;
+		});
+
+		//----------------------- End Creating Div --------------------
+
+		//			var array = make_result(node_number);
+
+		sarray = $secondGame.make_number();
+
+		$('.flip2 .card').each(function(i) {
+
+			var card_expression = sarray[i];
+
+			$.data(this,"expression",card_expression);
+
+			if (!$(this).find('.back').is('h1')) {
+				$(this).find('.back').html(card_expression);
+			}
+
+			$(this).attr('action', 'hide');
+//			$(this).addClass('flipped');
+		});
+		
+		
+		
+		//---------------------------------- End Creating Value ----------------
+		//
+		$('.card_result').hide();
+		
+		var time ;
+		
+		$( "#popupGameExplanation2" ).bind({              // 게임 설명 팝업이 close 되면 시간 을 잰다.
+			   popupafterclose: function(event, ui) {
+
+				   time = $secondGame.caculate_elapsedTime();
+				   
+					$('.flip2 .card').attr('action', 'show');
+					$('.flip2 .card').addClass('flipped');
+
+				   fnSecondGameTimer();
+			   }
+			});
+		
+			
+		// -------------------------------- Start Creating Result Value -------------
+		
+		// --------------------------------End Creating Result Value
+
+		///////////////	Card event Binding 	////////////////////////////////////////////				
+
+		var c_array =[];
+		
+	//	var myMedia =null; 
+
+		$(document).on("tap", ".flip2 #card", function(event) {
+			
+	//		$secondGame.flipCardSoundEffect(game_sound);
+ 		
+
+			if ($(this).attr('action') == 'hide') {
+	
+				if($('.flip2 div[action=show]').length>2)
+				{
+					return false;
+				}
+				
+				$(this).addClass('flipped');
+				$(this).attr('action', 'show');
+				
+				c_array.push($(this).data("expression"));
+				
+				
+				event.preventDefault();
+				
+			}
+			
+			if(c_array.length==3)
+			{
+				event.preventDefault(); // 고스트 클릭 방지
+				
+				$secondGame.compare_result(c_array,time);
+				c_array = [];
+			}
+			
+
+ 	
+		
+
+		});
+
+// additional CSS
+//		$('.flip2 .card .back').filter(":contains('+'),:contains('-'),:contains('*'),:contains('/')").css({"background-color":"#193161"});
+	
+	}
+	
+
+	function fnSecondGameTimer()
+	{
+		var timer = 5;
+		
+		var countdown = setInterval(function(){
+			$('.countdown').html(timer);
+			timer = timer - 1;
+		},1000);
+		
+		setTimeout(function(){
+			
+			clearInterval(countdown);
+			
+			$('.countdown').hide();
+			var rarray = $secondGame.make_result(1);
+			$('.card_result').each(function(i){
+				$(this).html(rarray[i]);
+			});
+			
+			$('.card_result:eq(0)').show();
+			$('.card_result:eq(1)').show();
+			
+			$('.flip2 .card').attr('action', 'hide');
+			$('.flip2 .card').removeClass('flipped');
+		},6000);	
+	}
+
+
+
+
+</script>
+</head>
+<body>
+<div id='page' data-role="page" data-theme='a'>
+
+	<div id="d1" data-role="content" >
+			  <p id="title"><span>BRAIN</span><span>TRAINER</span></p>
+	</div>
+	
+	<div id="d2" data-role="content" >
+		   	  <p id="subtitle"><span>mental arithmetic</span><span> and </span><span>memory</span></p>
+	</div>
+	
+	<div id='d3' data-role="content">
+	
+		<div style="height:50px;"></div> 
+	 		<!-- <h1 class="circle"><a href="#game1" id="click1" data-transition = 'slideup' >GAME A</a></h1>  -->
+	
+	 	 	<a href="#game1" id = "ui-custom-a" class="ui-shadow ui-btn ui-corner-all ui-custom-a" data-transition = 'slideup' >GAME A</a> 
+			<a href="#game2" id = "ui-custom-a" class="ui-shadow ui-btn ui-corner-all ui-custom-a" data-transition = 'slidedown'>GAME B</a> 
+	
+	<!-- 		<button id="click2" onclick="window.location.href='game2.html'">PLAY2</button> -->
+	</div>
+
+</div>
+
+<div id='game1' data-role="page"  data-theme='a'>
+<div data-role="header">
+	<h1>Flip Card!</h1>
+	<div  class = 'ui-btn-right'     data-role="controlgroup"  data-type="horizontal" >
+		<a href="#page"  data-role="button" data-icon="home" data-iconpos="notext" data-transition = "slidefade" data-theme="a">home</a>
+		<a href="javascript:window.location.reload();"  data-role="button" data-icon="refresh" data-iconpos="notext" data-theme="a" data-inline="true">REFRESH</a>
+		<a href="#"  data-role="button" data-icon="delete" data-iconpos="notext" data-theme="a">cancel</a>
+	</div>
+		<a href="option_page.html" data-role="button" data-icon="gear" data-iconpos="left" data-theme="a"  data-rel='dialog' data-transition = 'slidedown'>OPTION</a>
+</div>
+<div id="content" data-role="content">
+	<div class = 'flip ui-body' ></div>
+	
+	
+	<div class="photopopup" id="popupGameExplanation" data-role="popup" data-tolerance="30,15" data-corners="false" data-overlay-theme="a">
+    	<div data-role="header" >
+			<h3>Game Explanation</h3>
+		</div>
+    	
+    	<a class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right" href="#" data-rel="back">Close</a>
+    	<img alt="Photo landscape" src="./jquery.mobile-1.4.5/images/game1_explanation.png">
+	</div>
+	
+</div>
+</div>
+
+
+
+<div id='game2' data-role="page"  data-theme='b'>
+
+
+<div data-role="header">
+	<h1>Flip Card!</h1>
+	<div  class = 'ui-btn-right'     data-role="controlgroup"  data-type="horizontal" >
+		<a href="#page"  data-role="button" data-icon="home" data-iconpos="notext" data-transition = "slidefade" data-theme="b">home</a>
+		<a href="javascript:window.location.reload();"  data-role="button" data-icon="refresh" data-iconpos="notext" data-theme="b" data-inline="true">REFRESH</a>
+		<a href="#"  data-role="button" data-icon="delete" data-iconpos="notext" data-theme="b">cancel</a>
+	</div>
+		<a href="option_page2.html" data-role="button" data-icon="gear" data-iconpos="left" data-theme="b"  data-rel='dialog' data-transition = 'slidedown'>OPTION</a>
+</div>
+<div id="content" data-role="content">
+<span id = 'small_info'></span>
+		<div class ="countdown"><h1 style="font-size: 46px;">MEMORIZE!!</h1></div>
+		<ul class = "result_list">
+			<li class = 'card_result'></li>
+ <!-- 			<li class = 'card_result'></li>
+			<li class = 'card_result'></li>
+			<li class = 'card_result'></li>
+			<li class = 'card_result'></li>
+			<li class = 'card_result'></li>
+			<li class = 'card_result'></li>
+			<li class = 'card_result'></li>
+			<li class = 'card_result'></li>
+			<li class = 'card_result'></li>  -->
+		</ul>
+	<div class = 'flip2 ui-body' ></div>
+	
+	<div class="photopopup" id="popupGameExplanation2" data-role="popup" data-tolerance="30,15" data-corners="false" data-overlay-theme="a">
+    	<div data-role="header" >
+			<h3>How To Play Game!</h3>
+		</div>
+    	
+    	<a class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right" href="#" data-rel="back">Close</a>
+    	<img alt="Photo landscape" src="./jquery.mobile-1.4.5/images/game2_explanation.png">
+	</div>
+</div>
+	
+</div>
+
+
+
+<div class="overlay" ><div class='over_des'><img alt="correct" src="jquery.mobile-1.4.5/images/correct.png"></div></div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,228 @@
+<!DOCTYPE html> 
+<html>
+<head>
+	<title>Page Title</title>
+	<meta charset="utf-8">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+	<meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+	
+	
+	<title>jQuery Mobile: Theme Download</title>
+	<script type="text/javascript" src = "./js/jquery-1.11.1.js"></script>
+    <script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+	<script src="./jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script type="text/javascript"  src="cordova.js"></script>
+	<script type="text/javascript"  src="cordova_plugins.js"></script>  
+	<link rel="stylesheet" href="./jquery.mobile-1.4.5/jquery.mobile.icons-1.4.5.min.css" />
+	<link rel="stylesheet" href="./jquery.mobile-1.4.5/jquery.mobile.structure-1.4.5.min.css" />
+	
+
+
+</head>
+
+<body>
+<div id='option_page' data-role="page" >
+<script type="text/javascript">
+	// page trasition 할 경우 header 태그 를 못읽는 거 같다 그래서 여기다 놓았다...........
+	var deviceReadyDeferred_option = $.Deferred();  // deviceReadyDeferred 변수가 겹치는거 같애서 임시방편으로 이름을 달리 주었다.
+	var jqmReadyDeferred_option = $.Deferred();
+	
+	 
+	document.addEventListener("deviceReady", OnDeviceReady, false);
+	
+	//------------  Phone Gap DataBase  -------------------
+	
+	function OnDeviceReady() {
+
+		deviceReadyDeferred_option.resolve();
+	}
+	
+	
+	//-----------End Phone Gap DataBase -----------------------------
+	
+	
+	$(document).on("pagebeforeshow",'#option_page', function () {
+	  jqmReadyDeferred_option.resolve();
+	});
+	
+
+ 	$.when(deviceReadyDeferred_option, jqmReadyDeferred_option).then(doWhenBothFrameworksLoaded);
+	
+	
+// 	$(document).on("pageinit",'#page', function () {
+// 		doWhenBothFrameworksLoaded();
+// 		});
+	
+	
+	$('#option_page').bind("pagebeforehide",updateDB);
+	
+	function doWhenBothFrameworksLoaded() {
+	  // TBD
+	   $('#resetBtn').bind("tap",fnResetRecord);
+	  
+	  
+		var db = window.openDatabase("BrainTrainer", "1.0", "BrainTrainer", 100000);
+		db.transaction(setTableDB, errorDB, successDB);
+		
+	}
+	
+	function setTableDB(tx) 
+    {
+		//tx.executeSql("DROP TABLE IF EXISTS brain_option");
+		tx.executeSql("CREATE TABLE IF NOT EXISTS brainOption (b_level varchar, b_operator varchar,b_sound varchar)");
+		tx.executeSql("CREATE TABLE IF NOT EXISTS brainGameRecord (b_gameId varchar , b_record varchar)");
+	}
+	function successDB() 
+	{
+		var db = window.openDatabase("BrainTrainer", "1.0", "BrainTrainer", 100000);
+		db.transaction(queryDB, errorDB);
+	}
+	function queryDB(tx) 
+	{
+		tx.executeSql('SELECT * FROM brainOption', [], renderEntry, errorDB);
+		tx.executeSql("SELECT * FROM brainGameRecord where b_gameId = 'firstGame'", [], renderEntryRecord, errorDB);
+	}
+	function renderEntry(tx,results)
+	{
+		if(results.rows.length==0)
+		{
+			tx.executeSql("INSERT INTO brainOption (b_level, b_operator, b_sound) VALUES ('beginner', '+', 'on')");
+		}
+		else
+		{
+			tx.executeSql('SELECT * FROM brainOption', [], querySuccess, errorDB);
+		}
+	}
+	
+
+	function querySuccess(tx, results) 
+	{
+ 		var level    =  results.rows.item(0).b_level;
+ 		var operator = ""+results.rows.item(0).b_operator+"";
+ 		var sound    =  ""+results.rows.item(0).b_sound+"";
+ 		
+		
+	//	var record   =  window.localStorage.getItem("record");
+		
+ 		//first get the number of rows in the result set
+ 		$('input[value='+level+']').attr("checked", true);
+    		$('#select-choice-a').val(operator).attr("selected", "selected");
+    		
+    		$('#flip-select-second').val(sound).attr("selected", "selected");
+       
+       		$('input[type=radio]').checkboxradio("refresh"); // radio refresh
+
+    		$('#select-choice-a').selectmenu("refresh");     //select refresh
+   		
+    		$('#flip-select-second').flipswitch("refresh");     //select refresh
+
+	}
+	
+	function errorDB(err) 
+	{
+		alert("Error processing SQL: "+err.code);
+		
+	}
+	
+	function updateDB()
+	{
+		var db = window.openDatabase("BrainTrainer", "1.0", "BrainTrainer", 100000);
+		db.transaction(updateQuery, errorDB);
+		
+	}
+	
+	function updateQuery(tx)
+	{
+		var level    = $("input[type=radio]:checked").val();
+		var operator = $("#select-choice-a").val();
+		var sound    = $("#flip-select-second").val();
+		
+		tx.executeSql("UPDATE brainOption SET b_level = '"+level+"' ,b_operator = '"+operator+"' ,b_sound = '"+sound+"'");
+		
+	}
+	
+	function renderEntryRecord(tx,results)
+	{
+		if(results.rows.length!=0)
+		{
+			tx.executeSql("SELECT * FROM brainGameRecord where b_gameId = 'firstGame'", [], queryRecordSuccess, errorDB);
+		}
+	}
+	function queryRecordSuccess(tx, results) 
+	{
+		var game_score = results.rows.item(0).b_record;
+		$('#bestScore').html(game_score);
+		
+	}
+	
+	
+	
+	function fnResetRecord(event)
+	{
+
+		
+		var db = window.openDatabase("BrainTrainer", "1.0", "BrainTrainer", 100000);
+		db.transaction(deleteRecordDB, errorDB,successDelDB);
+
+		event.preventDefault();  //고스트 클릭 방지
+		
+	}
+	
+	function deleteRecordDB(tx)
+	{
+		$('#bestScore').empty();
+		tx.executeSql("DELETE FROM brainGameRecord WHERE b_gameId = 'firstGame'");
+	}
+	
+	function successDelDB()
+	{
+		navigator.notification.alert("your best score is deleted.");
+	}
+	</script>
+
+
+
+	<div id='header' data-role="header" data-theme="a">
+	 <h1>by justin</h1>
+	</div>
+	<P style="color:blue;font-weight: bold;"> SET OPTIONS AND REFRESH PAGE</P>
+	<div id="content" data-role="content">
+	
+		<h2>EXERCISE</h2>
+		<div data-role="fieldcontain"> 
+				<fieldset data-role="controlgroup" data-type="horizontal">
+					<input data-theme="a" type="radio" class="radio-view-a" name="radio-view-a" id="radio-view-a-a" value="beginner" checked="checked"/> 
+					<label for="radio-view-a-a" data-form="ui-btn-up-a">BEGINNER</label> 
+					<input data-theme="a" type="radio" class="radio-view-a" name="radio-view-a" id="radio-view-b-a" value="advance"  /> 
+					<label for="radio-view-b-a" data-form="ui-btn-up-a">ADVANCED</label> 
+				</fieldset> 
+	
+		
+		<select name="select-choice" id="select-choice-a" data-native-menu="false" data-theme="a" data-form="ui-btn-up-a" >
+			<option value="+"  selected>+</option>
+			<option value="-"         >-</option>
+			<option value="×"         >X</option>
+		</select>
+					
+		</div>
+		
+ 
+    <h2>SOUND</h2>
+
+		 <select name="flip-select" id="flip-select-second" class='aaaaa' data-role="flipswitch">
+        <option value = "on" >On</option>
+        <option value ="off">Off</option>
+  	    </select>
+		
+		
+
+	 <h2>HIGHSCORE</h2>
+	BEST SCORE IS : <span id ="bestScore"></span> 
+		<input type="button" id = 'resetBtn' value="RESET HIGHSCORE" data-theme ="a">
+		
+	</div>
+		
+</div>
+</body>
+</html>

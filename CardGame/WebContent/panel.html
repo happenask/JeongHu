@@ -1,0 +1,43 @@
+<!DOCTYPE html> 
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+<link rel="stylesheet" href="./jquery.mobile-1.4.5/brain_card_game.css" />
+<link rel="stylesheet" href="./jquery.mobile-1.4.5/jquery.mobile.icons-1.4.5.min.css" />
+<link rel="stylesheet" href="./jquery.mobile-1.4.5/jquery.mobile.structure-1.4.5.css" />
+<script type="text/javascript" src = "./jquery-1.11.1.js"></script>
+<script type="text/javascript" src = "./jquery.cookie.js"></script>
+<script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+<script src="./jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<script type="text/javascript">
+
+
+</script>
+</head>
+<body>
+	<div id='page' data-role="page" data-theme="b" >
+	
+		<div data-role="panel" id="leftpanel2" data-position="left" data-display="overlay" data-theme="b">
+
+       <ul data-role="listview">
+	    <li>Acura</li>
+	    <li>Audi</li>
+	    <li>BMW</li>
+	    <li>Cadillac</li>
+	    <li>Ferrari</li>
+		</ul>
+
+
+		</div>
+		<div id="header" data-role="header"></div>
+		<div id="content" data-role="content">
+			<a href="#leftpanel2" class="ui-btn ui-btn-inline ui-corner-all ui-shadow">Open Panel</a>
+		</div>
+	</div>
+</body>
+
+<script >
+$('#leftpanel2').trigger('updatelayout');
+</script>
+</html>

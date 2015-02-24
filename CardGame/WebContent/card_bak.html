@@ -1,0 +1,491 @@
+<!DOCTYPE html> 
+<html>
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1,width=device-width"/>
+<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="msapplication-tap-highlight" content="no" />
+    
+<title>Insert title here</title>
+
+<style type="text/css">
+
+.flip {
+  -webkit-perspective: 100%;
+ /*   
+   width:  700px;
+   height: 700px; */
+   border: 1px solid black;
+    position: relative;
+
+
+   
+}
+.flip .card.flipped {
+  -webkit-transform: rotatex(-180deg);
+}
+.flip .card {
+  margin: 2px;
+  width: 97%;
+  height: 70px;
+  
+  
+  -webkit-transform-style: preserve-3d;
+  -webkit-transition: 0.5s;
+}
+ .card .face {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display:block;
+  border-radius: 10px;
+  -webkit-backface-visibility: hidden ;
+  
+  z-index: 2;
+    font-family: Georgia;
+    font-size: 1em;
+    text-align: center;
+    line-height: 70px;
+}
+.flip .card .front {
+  z-index: 1;
+    background: #002266;
+    color: white;
+    cursor: pointer;
+}
+.flip .card .back {
+  -webkit-transform: rotatex(-180deg);
+    background: #23A41A;
+    color: #EAEAEA;
+    cursor: pointer;
+    border:2px solid #F6F6F6; 
+    border-style:groove;
+    text-align: center;
+    
+}
+
+
+
+</style>
+
+<link rel="stylesheet" href="./jquery.mobile-1.4.5/brain_card_game.css" />
+<link rel="stylesheet" href="./jquery.mobile-1.4.5/jquery.mobile.icons-1.4.5.min.css" />
+<link rel="stylesheet" href="./jquery.mobile-1.4.5/jquery.mobile.structure-1.4.5.css" />
+<script type="text/javascript" src = "./jquery-1.11.1.js"></script>
+<script type="text/javascript" src = "./jquery.cookie.js"></script>
+<script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+<script src="./jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<!-- <script type="text/javascript"  src="cordova.js"></script>
+<script type="text/javascript"  src="cordova_plugins.js"></script>    -->
+	<link rel="stylesheet" href="./jquery.mobile-1.4.5/circle.css" />
+	<link rel="stylesheet" href="./jquery.mobile-1.4.5/main_page.css" />
+
+<script type="text/javascript">
+
+
+		function Operation(num1,num2,operator)
+		{
+		    this.num1 = num1;
+		    this.num2 = num2;
+		    this.operator = operator;
+		    
+		    this.toString = function(){
+		        var output = "";
+		        
+		        output = this.num1+this.operator+this.num2;
+		        return output;
+		    };
+		}
+
+		
+		function make_number(result,operator){
+			
+			
+			switch(operator)
+		    {
+		        case '+': 
+					
+		        	var num1   = Math.floor((Math.random()*(result-1)))+1; // 결과보다 낮은 값 중에서 랜덤으로 숫자를 생성한다.
+		    		var num2   = result - num1;
+		        	var operation = new Operation(num1,num2,operator);
+		        	
+		        	$.data(this,'expression',operation.toString());
+		        	$.data(this,'result',result);
+		        	$(this).attr('answer',false);
+					break;
+			
+		        	
+		        case '-': return this.num1 - this.num2;   
+		        case '*': return this.num1 * this.num2;   
+		        
+		    
+		    }
+			
+		}
+		
+		function make_result(node_number){
+			
+			var array = [];
+			var array_result=[];
+			
+			for(var i =0;i<node_number/2;i++)
+			{
+				var result = Math.floor(Math.random()*18)+1;
+				
+				array.push(result);
+			}
+			
+			array_result = array.concat(array);
+			
+			return array_result;
+		}
+	
+		function randomItem(a){
+			
+			var index = Math.floor(Math.random()*a.length);
+			var array = a.splice(index,1); //배열의 요소를 반환 후 제거한다.
+			
+			return array;
+		}
+		
+		
+		function compare_result()
+		{
+			
+			var first_result;
+			var second_result;
+			
+			var compare_result = $("div[action=show][answer=false]");
+			
+			
+			if(compare_result.length==2)
+			{
+		
+				first_result = $(compare_result[0]).data('result');
+				second_result =$(compare_result[1]).data('result');
+	
+				if(Number(first_result) == Number(second_result))
+				{
+					$(compare_result[0]).attr('answer',true);
+					$(compare_result[1]).attr('answer',true);
+					
+				//	$("div[answer=true]").unbind("click");
+					
+				}
+				else
+				{
+					setTimeout(function(){
+						
+//					$('div[answer=false]').attr('action','hide');
+//				    $('div[answer=false]').removeClass('flipped');
+					$(compare_result[0]).attr('action','hide').removeClass('flipped');
+					$(compare_result[1]).attr('action','hide').removeClass('flipped');
+						
+						
+					},'700');
+					    
+					
+							
+				}
+			}
+	//		$("div[answer=false]").bind("click");
+			
+		}
+	
+	function caculate_elapsedTime() { // 게임 경과 시간을 계산하는 함수 closer를 활용했다.
+	    var startTime = new Date();
+
+	    return function (endTime) {
+
+	        var elapsed = (endTime.getTime() - startTime.getTime()) / 1000;
+
+	        elapsed    =  Math.round(elapsed * 100) / 100;
+	        
+	        return elapsed;
+
+	    };
+
+
+	}
+	
+	
+		
+	function endGameCheck()
+	{
+		var length = $('.card').length;
+		
+		var compare_result = $("div[action=show][answer=true]");
+		
+//		alert(compare_result.length);
+		if(length==compare_result.length)
+		{
+			alert(compare_result.length);
+			return true;			
+		}
+		return false;
+	}
+	
+// Jquery Mobile and PhonGap Initialization
+
+
+
+// 	var deviceReadyDeferred = $.Deferred();
+// 	var jqmReadyDeferred = $.Deferred();
+	 
+// 	document.addEventListener("deviceReady", deviceReady, false);
+	 
+// 	function deviceReady() {
+// 	  deviceReadyDeferred.resolve();
+// 	}
+	 
+// 	$(document).on("pageinit", function () {
+// 	  jqmReadyDeferred.resolve();
+// 	});
+	 
+// 	$.when(deviceReadyDeferred, jqmReadyDeferred).then(doWhenBothFrameworksLoaded);
+	
+// Jquery Mobile  Initialization
+
+	$(document).on("pageinit", function () {
+		doWhenBothFrameworksLoaded();
+	});
+	
+	function doWhenBothFrameworksLoaded() {
+		$.mobile.loader.prototype.options.disabled = true;
+// TBD
+//  			$.mobile.changePage('#page', { transition: 'pop',
+//                allowSamePageTransition: true} );
+
+
+		
+//			var my_operator = window.localStorage.getItem("my_operator");
+		
+//			var my_numbers  = window.localStorage.getItem("my_numbers");
+		
+//			alert(my_operator);
+		
+//			alert(my_numbers);
+		
+		
+		
+/////////////////////////////////////////////////////////////////////////////////////////
+
+
+			
+		
+		var time = caculate_elapsedTime();
+		
+		
+		var node_number = 21;
+		
+//		var col = 3;
+//		var row = node_number/3;
+	
+//		var dynamic_table = "<tr>";
+		
+//		for(var i = 1;i<=col;i++)
+//		{
+//			dynamic_table+="<td><div></div></td>"
+//		}
+		
+//		dynamic_table += "</tr>";
+		
+//		for(var i = 1;i<=row;i++)
+//		{
+//			$('table').append(dynamic_table);
+//		}
+
+		
+		$('.circle').bind('click',function(){
+			
+			$("<div class='ui-grid-b'>").appendTo('.flip');
+
+
+			for(var i = 1;i<=node_number;i+=3)
+			{
+				$('.ui-grid-b').append("<div class='ui-block-a'><div id ='card'></div></div>");
+				$('.ui-grid-b').append("<div class='ui-block-b'><div id ='card'></div></div>");
+				$('.ui-grid-b').append("<div class='ui-block-c'><div id ='card'></div></div>");
+			//	var div_card = $('body').append("<div class='card+"+i+'>")
+	            
+			}
+			
+
+
+			$('.flip .ui-grid-b #card').addClass(function(index){
+			    
+			    $(this).append("<div class = 'face front' >FRONT</div>");
+			    $(this).append("<div class = 'face back'>back</div>");
+			    return 'card '+'c'+index;
+			});
+			
+			
+			
+			
+//----------------------- End Creating Div --------------------
+
+			var array = make_result(node_number);
+
+			$('.card').each(function(i){
+		        
+				var result = randomItem(array);
+			   
+				make_number.call(this,result,'+');
+
+		
+				   if(!$(this).find('.back').is('h1'))
+			    	{
+			         	$(this).find('.back').html($(this).data('expression'));   
+			    	}
+		
+				$(this).attr('action','hide');
+	    	//    $(this).find('h1').hide();
+			});
+
+		
+//---------------------------------- End Creating Value ----------------
+//		
+
+				
+			//  	  $( ".card" ).animate({ width: "100%",height:'100%' }, 1000 );
+			
+	//********************* 슬라이드 효과 ******************			
+			//	var offset = $('.flip').offset();
+			//	$('.flip').css('left','0');
+			//	$('.flip').animate({'left':offset.left},5000);
+			//});
+		
+	
+				
+	//------------------------------ FADE OUT ------------------------------------
+
+		//		$('.card').fadeOut('slow');
+		//		$('.card').fadeIn('slow');
+		
+		
+	
+			    
+///////////////	Card event Binding 	////////////////////////////////////////////				
+
+				var cnt = 0;
+				
+
+		$("div[answer=false]").bind("tap",function(event){
+					if($(this).attr('action')=='show')
+					{
+						
+						$(this).removeClass('flipped');
+						$(this).attr('action','hide');
+						
+					}
+					
+					else if($(this).attr('action')=='hide'){
+						 $(this).addClass('flipped');
+						$(this).attr('action','show');
+						++cnt;
+						
+						console.log("cnt:"+cnt)
+					}
+					
+						compare_result();		
+						
+					
+					var check = endGameCheck();
+					
+					
+					if(check)
+					{
+						var endDate = new Date();
+						var elapsed_time = time(endDate);
+						alert("경과시간:"+elapsed_time);
+					}
+					
+				});
+				
+
+			
+		
+		setTimeout(function(){
+			
+		
+		window.location.href="#page";
+		
+
+
+		},1000);
+
+		});
+		
+		setTimeout(function(){
+			
+		    var $elem = $('.card:even');
+			
+		    $('.card:even').animate({
+		        deg: 720
+		    }, {
+		        duration: 1500,
+		        step: function (now) {
+		            // in the step-callback (that is fired each step of the animation),
+		            // you can use the `now` paramter which contains the current
+		            // animation-position (`0` up to `angle`)
+		            $elem.css({
+		                transform: 'rotateX(' + now + 'deg)'
+		            });
+		        },
+		        complete: function(event){$('.card:even').removeAttr('style');}
+		    });
+		
+			
+		},1500);			
+				
+		
+    
+}
+
+
+
+
+
+
+</script>
+</head>
+<body>
+<table border='1' cellspacing="1">
+</table>
+
+
+<div id='page2' data-role="page" >
+
+<div id="content" data-role="content">
+	<div>
+		  <p id="title">b<span>RA</span>I<span>N</span></p>
+	  	  <p id="subtitle">TRA<span>IN</span><span>ER</span></p>
+	   	  <p id="subtitle2">mental arithmetic and memory</p>
+	</div>
+	<div style="height:50px;"></div> 
+	<div class="circle">
+		<h1><a href="#page" id="click1" data-transition = 'slideup'>GAME START</a></h1>
+	</div>
+	<div class="bottom_message">
+		tap a circle to start !
+	</div>
+	
+</div>
+<a href="#page" id="click2" data-transition = 'slideup'>GAME START</a>
+
+</div>
+
+<div id='page' data-role="page" data-theme="b" >
+<div id="header" data-role="header"></div>
+<div id="content" data-role="content">
+	<div class = 'flip ui-body' ></div>
+	
+	
+</div>
+
+<a href="#page2" id="click3" data-transition = 'slideup'>GAME START</a>
+</div>
+</body>
+</html>

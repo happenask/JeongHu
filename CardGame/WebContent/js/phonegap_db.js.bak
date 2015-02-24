@@ -1,0 +1,105 @@
+var $PhoneGapDB = {
+		
+		
+		selectOption: function(){
+			var db = window.openDatabase("BrainTrainer", "1.0", "BrainTrainer", 100000);
+			db.transaction(setTableDB, errorDB, successDB);
+		}
+//       ,
+//		
+//		updateRecord: function(record){
+//			var db = window.openDatabase("BrainTrainer", "1.0", "BrainTrainer", 100000);
+//			db.transaction(setRecordTableDB, errorDB, successRecordDB);
+//			
+//				
+//				function setRecordTableDB(tx) 
+//			    {
+//					tx.executeSql("CREATE TABLE IF NOT EXISTS brainRecord (b_record varchar");
+//				}
+//				function successRecordDB() 
+//				{
+//					var db = window.openDatabase("BrainTrainer", "1.0", "BrainTrainer", 100000);
+//					db.transaction(queryRecordDB, errorDB);
+//				}
+//				function queryRecordDB(tx) 
+//				{
+//					tx.executeSql('SELECT * FROM brainRecord', [], renderEntryRecord, errorDB);
+//				}
+//				function renderEntry(tx,results)
+//				{
+//					if(results.rows.length==0)
+//					{
+//						tx.executeSql("INSERT INTO brainRecord (b_record) VALUES ('"+record+"')");
+//					
+//					}
+//					else
+//					{
+//						tx.executeSql('SELECT * FROM brainRecord', [], queryRecordSuccess, errorDB);
+//					}
+//				}
+//				
+//				function queryRecordSuccess(tx, results) 
+//				{
+//					var db_record  =  results.rows.item(0).b_record;
+//					
+//					$PhoneGapDB.gameRecord = db_record;
+//					
+//					if(record< db_record)
+//					{
+//						alert("최고 기록입니다.");
+//						tx.executeSql("UPDATE brainRecord SET b_record = '"+record+"'");	
+//						
+//						window.localStorage.setItem("record", record);
+//					}
+//					else
+//					{
+//						window.localStorage.setItem("record", db_record);
+//					}
+//				}
+//		}
+};
+
+	
+	function setTableDB(tx) 
+    {
+		tx.executeSql("CREATE TABLE IF NOT EXISTS brainOption (b_level varchar, b_operator varchar, b_sound varchar)");
+	}
+	function successDB() 
+	{
+		var db = window.openDatabase("BrainTrainer", "1.0", "BrainTrainer", 100000);
+		db.transaction(queryDB, errorDB);
+	}
+	function queryDB(tx) 
+	{
+		tx.executeSql('SELECT * FROM brainOption', [], renderEntry, errorDB);
+	}
+	function renderEntry(tx,results)
+	{
+		if(results.rows.length==0)
+		{
+			tx.executeSql("INSERT INTO brainOption (b_level, b_operator, b_sound) VALUES ('beginner', '+', 'on')");
+			
+			tx.executeSql('SELECT * FROM brainOption', [], querySuccess, errorDB);
+		}
+		else
+		{
+			tx.executeSql('SELECT * FROM brainOption', [], querySuccess, errorDB);
+		}
+	}
+	
+	function querySuccess(tx, results) 
+	{
+		$PhoneGapDB.gameLevel  =  results.rows.item(0).b_level;
+		$PhoneGapDB.operator   =  results.rows.item(0).b_operator;
+		$PhoneGapDB.sound      =  results.rows.item(0).b_sound;
+	}
+	
+	function errorDB(err) 
+	{
+		alert("Error processing SQL: "+err.code);
+		
+	}
+	
+	
+	
+	

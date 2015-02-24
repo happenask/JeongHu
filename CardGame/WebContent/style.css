@@ -1,0 +1,85 @@
+/*simple reset*/
+ *{
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: none;
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+	    -ms-box-sizing: border-box;
+	     -o-box-sizing: border-box;
+	       -box-sizing: border-box;
+}
+
+
+.star {
+	display: block;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 24px;
+	height: 42px;
+	background: #F0DA17;
+	overflow: hidden;
+	z-index: 2;
+ 	animation: glitter 4.5s linear 0s infinite normal;
+	-webkit-animation: glitter 4.5s linear 0s infinite normal;
+	-moz-animation: glitter 4.5s linear 0s infinite normal;
+	-ms-animation: glitter 4.5s linear 0s infinite normal;
+	-o-animation: glitter 4.5s linear 0s infinite normal; 
+}
+.star-top,.star-bottom{
+	position: relative;
+	display: block;
+}
+.star-top:before , 
+.star-top:after ,
+.star-bottom:before ,
+.star-bottom:after{
+	content: "";
+	width: 28px;
+	height: 42px;
+	background: #F6F6F6;
+	border-radius: 50%;
+	position: absolute;
+}
+/*CSS3 pseudo class for positioning curves*/
+.star-top:before {
+top: -14px;
+left: -19px;
+}
+.star-top:after {
+bottom: -25px;
+left: 5px;
+}
+.star-bottom:before {
+top: 20px;
+left: -19px;
+}
+.star-bottom:after {
+top: 20px;
+left: 7px;
+}
+/*css3 keyframes for glittering effect*/
+@-webkit-keyframes glitter {
+	0%   { -webkit-transform: scale(1.0); opacity: 1; }
+	25%  { -webkit-transform: scale(0.5); opacity: 0; }
+	50%  { -webkit-transform: scale(1.0); opacity: 1; }
+	75%  { -webkit-transform: scale(0.5); opacity: 0; }
+	100% { -webkit-transform: scale(1.0); opacity: 1; }
+}
+@-moz-keyframes glitter {
+	0%   { -moz-transform: scale(1.0); opacity: 1; }
+	25%  { -moz-transform: scale(0.5); opacity: 0; }
+	50%  { -moz-transform: scale(1.0); opacity: 1; }
+	75%  { -moz-transform: scale(0.5); opacity: 0; }
+	100% { -moz-transform: scale(1.0); opacity: 1; }
+}
+@keyframes glitter {
+	0%   { -moz-transform: scale(1.0); opacity: 1; }
+	25%  { -moz-transform: scale(0.5); opacity: 0; }
+	50%  { -moz-transform: scale(1.0); opacity: 1; }
+	75%  { -moz-transform: scale(0.5); opacity: 0; }
+	100% { -moz-transform: scale(1.0); opacity: 1; }
+}
+

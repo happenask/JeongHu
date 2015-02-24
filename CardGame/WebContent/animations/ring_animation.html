@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="msapplication-tap-highlight" content="no" />
+	
+	<title>jQuery Mobile: Theme Download</title>
+	<link rel="stylesheet" href="./jquery.mobile-1.4.5/jquery.mobile.icons-1.4.5.min.css" />
+	<link rel="stylesheet" href="./jquery.mobile-1.4.5/jquery.mobile.structure-1.4.5.min.css" />
+	<script type="text/javascript" src = "./jquery-1.11.1.js"></script>
+	<script src="./jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+<style type="text/css">
+#rings {
+    position: relative;
+    text-align: center;
+    width: 300px;
+    height: 300px;
+    margin:0 auto;
+    -webkit-tap-highlight-color: transparent;
+}
+
+#first-ring {
+    position: absolute;
+    border: 5px solid #4698f2;
+    border-top-color: #eee;
+    margin: 0 auto;
+    text-align: center;
+    width: 280px;
+    height: 280px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    -webkit-animation: turn_counter_clockwise 10s infinite;
+    -moz-animation: turn_counter_clockwise 10s infinite;
+    animation: turn_counter_clockwise 10s infinite;   
+}
+
+#second-ring {
+    position: absolute;
+    border: 10px solid #eee;
+    border-top-color: #fff;
+    border-bottom-color: #fff;
+    width: 250px;
+    height: 250px;
+    margin: 5px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    -webkit-animation: turn_counter_clockwise 8s infinite;
+    -moz-animation: turn_counter_clockwise 8s infinite;
+    animation: turn_counter_clockwise 8s infinite;  
+}
+
+#third-ring {
+    position: absolute;
+    border: 2px solid #315379;
+    border-bottom-color: #eee;
+    margin: 5px;
+    width: 236px;
+    height: 236px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    -webkit-animation: turn_clockwise 10s infinite;
+    -moz-animation: turn_clockwise 10s infinite;
+    animation: turn_clockwise 10s infinite;
+}	
+#ring-content {
+    position: absolute;
+    width: 230px;
+    height: 230px;
+    background-color: #4698f2;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    margin: 30px;
+    cursor: pointer;
+    transition: all .4s ease-in-out;
+}
+
+
+
+#ring-content .value {
+    font-size: 50px;
+    line-height: 50px;
+    padding-top: 40px;
+    font-weight: 700;
+    color: #BD9E8E;
+    text-shadow: 0 0 2px #831F1F,0 1px 2px rgba(0,0,0,.3);
+}
+
+
+
+Now to the animations:
+@-webkit-keyframes turn_clockwise {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@-moz-keyframes turn_clockwise {
+    0% {
+        -moz-transform: rotate(0deg);
+    }
+    100% {
+        -moz-transform: rotate(360deg);
+    }
+}
+
+@keyframes turn_clockwise {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes turn_counter_clockwise {
+    0% {
+        -webkit-transform: rotate(360deg);
+    }
+    100% {
+        -webkit-transform: rotate(0deg);
+    }
+}
+
+@-moz-keyframes turn_counter_clockwise {
+    0% {
+        -moz-transform: rotate(360deg);
+    }
+    100% {
+        -moz-transform: rotate(0deg);
+    }
+}
+
+@keyframes turn_counter_clockwise {
+    0% {
+        transform: rotate(360deg);
+    }
+    100% {
+        transform: rotate(0deg);   
+    }   
+}	
+
+
+
+</style>
+</head>
+<body>
+<div id='page' data-role="page" data-theme="a">
+
+	<div id='header' data-role="header" data-theme="a">
+	 produced by justin
+	</div>
+	<div id="content" data-role="content">
+			<div id="rings">
+				<div id="first-ring">
+					<div id="second-ring">
+						<div id="third-ring"></div>
+					</div>
+				</div>
+
+				<div id="ring-content">
+					<div class="container active" data-index="1">
+						<div class="value">BRAIN TRAINER</div>
+					</div>
+				</div>
+			</div>
+	
+	     
+
+	</div>
+
+</div>
+
+</div>
+</body>
+</html>

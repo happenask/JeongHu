@@ -1,0 +1,35 @@
+/*
+===================================================================== 
+DEMO 2
+=====================================================================
+*/
+.ui-page { -webkit-backface-visibility: hidden; }
+.circle {
+/* 	background:rgb(48, 41, 41); */
+	border-radius: 100%;
+	cursor: pointer;
+	position: relative;
+	margin: 0 auto;
+	width: 3.0em; height: 3.0em;
+	overflow: hidden;
+	font-weight: bold;
+	font-size: 2.8em;
+	line-height: 3.0em;
+	text-align: center;
+	text-transform: uppercase;
+	
+	border-color: #7f2921;
+	text-shadow: 0 1px 0 #444444;
+	background-color: #e74c3c;
+
+}
+
+
+.circle a {
+   font-family: 'Monoton', cursive;
+	color:#fff;
+	text-decoration: none;
+}
+
+
+

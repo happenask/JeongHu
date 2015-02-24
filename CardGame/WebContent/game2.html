@@ -1,0 +1,285 @@
+<!DOCTYPE html> 
+<html>
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1,width=device-width"/>
+<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="msapplication-tap-highlight" content="no" />
+    
+<title>Insert title here</title>
+
+<link rel="stylesheet" href="./jquery.mobile-1.4.5/jquery.mobile.icons-1.4.5.min.css" />
+<link rel="stylesheet" href="./jquery.mobile-1.4.5/jquery.mobile.structure-1.4.5.css" />
+<script type="text/javascript"  src="./js/secondFlipCardGame.js"></script>
+<script type="text/javascript" src = "./js/jquery-1.11.1.js"></script>
+<script src="./jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<!-- <script type="text/javascript"  src="cordova.js"></script>
+<script type="text/javascript"  src="cordova_plugins.js"></script>    -->
+<link rel="stylesheet" href="./jquery.mobile-1.4.5/basic_theme.min.css" />
+<link rel="stylesheet" href="./jquery.mobile-1.4.5/brain_game2.css" />
+
+
+</head>
+<body>
+
+<div id='game2' data-role="page"  data-theme='b'>
+
+<script type="text/javascript">
+
+function caculate_elapsedTime() { // 게임 경과 시간을 계산하는 함수 closer를 활용했다.
+    var startTime = new Date();
+
+    return function (endTime) {
+
+        var elapsed = (endTime.getTime() - startTime.getTime()) / 1000;
+
+        elapsed    =  Math.round(elapsed * 100) / 100;
+        
+        return elapsed;
+
+    };
+
+
+}
+
+
+var MAX_NUMBER   = 14;
+var MAX_NODENUM  = 18;
+
+var DEFAULT_ARRAY = [];
+
+var OPERATOR_ARRAY = ['+','-','*','/'];
+var r_array = [];
+
+
+//	Jquery Mobile and PhonGap Initialization
+
+// 		var deviceReadyDeferred = $.Deferred();
+// 		var jqmReadyDeferred = $.Deferred();
+
+// 		document.addEventListener("deviceReady", deviceReady, false);
+
+// 		function deviceReady() {
+// 		  deviceReadyDeferred.resolve();
+// 		}
+
+// 		$(document).on("pageinit","#game2", function () {
+// 		  jqmReadyDeferred.resolve();
+// 		});
+
+// 		$.when(deviceReadyDeferred, jqmReadyDeferred).then(doWhenBothFrameworksLoaded);
+
+	// Jquery Mobile  Initialization
+
+	$(document).on("pageinit", "#game2", function() {
+		doWhenBothFrameworksLoaded();
+	});
+
+	function doWhenBothFrameworksLoaded() {
+		$('.overlay').hide();
+		$.mobile.loader.prototype.options.disabled = true;
+		// TBD
+		//  			$.mobile.changePage('#page', { transition: 'pop',
+		//                allowSamePageTransition: true} );
+
+		//			var my_operator = window.localStorage.getItem("my_operator");
+
+		//			var my_numbers  = window.localStorage.getItem("my_numbers");
+
+
+
+		/////////////////////////////////////////////////////////////////////////////////////////
+
+		var time = caculate_elapsedTime();
+
+		var node_number = MAX_NODENUM;
+
+		$("<div class='ui-grid-b'>").appendTo('.flip2');
+
+		for ( var i = 1; i <= node_number; i += 3) {
+			$('.ui-grid-b').append(
+					"<div class='ui-block-a'><div id ='card'></div></div>");
+			$('.ui-grid-b').append(
+					"<div class='ui-block-b'><div id ='card'></div></div>");
+			$('.ui-grid-b').append(
+					"<div class='ui-block-c'><div id ='card'></div></div>");
+			//	var div_card = $('body').append("<div class='card+"+i+'>")
+
+		}
+
+		$('.flip2 .ui-grid-b #card').addClass(function(index) {
+
+			$(this).append("<div class = 'face front' ></div>");
+			$(this).append("<div class = 'face back'>back</div>");
+			return 'card ' + 'c' + index;
+		});
+
+		//----------------------- End Creating Div --------------------
+
+		//			var array = make_result(node_number);
+
+		sarray = $secondGame.make_number();
+
+		$('.card').each(function(i) {
+
+			var card_expression = sarray[i];
+
+			$.data(this,"expression",card_expression);
+
+			if (!$(this).find('.back').is('h1')) {
+				$(this).find('.back').html(card_expression);
+			}
+
+			$(this).attr('action', 'show');
+			$(this).addClass('flipped');
+		});
+		
+		
+		
+		//---------------------------------- End Creating Value ----------------
+		//
+		
+		
+		var timer = 5;
+		$('.card_result').hide();
+		var countdown = setInterval(function(){
+			$('.countdown').html(timer);
+			timer = timer - 1;
+		},1000);
+		
+		setTimeout(function(){
+			
+			clearInterval(countdown);
+			
+			$('.countdown').hide();
+			var rarray = $secondGame.make_result(10, DEFAULT_ARRAY);
+			$('.card_result').each(function(i){
+				$(this).html(rarray[i]);
+			});
+			
+			$('.card_result:eq(0)').show();
+			$('.card_result:eq(1)').show();
+			
+			$('.card').attr('action', 'hide');
+			$('.card').removeClass('flipped');
+		},5000);
+		// -------------------------------- Start Creating Result Value -------------
+		
+		// --------------------------------End Creating Result Value
+
+		///////////////	Card event Binding 	////////////////////////////////////////////				
+
+		var c_array =[];
+		
+	//	var myMedia =null; 
+
+		$(document).on("tap", "#card", function(event) {
+	//		myMedia = new Media("/android_asset/www/flip_sound.mp3",onSuccess,onError);
+	//		myMedia.play();
+			
+// 			setTimeout(function(){
+// 				myMedia.stop();
+// 				myMedia.release();
+// 			},350);
+
+			if ($(this).attr('action') == 'hide') {
+	
+				//		++cnt;
+				//		console.log(cnt);
+				if($('div[action=show]').length>2)
+				{
+				//cnt=0;
+					
+					return false;
+				}
+				
+				$(this).addClass('flipped');
+				$(this).attr('action', 'show');
+				
+				c_array.push($(this).data("expression"));
+				
+	//			alert(c_array.length);
+			}
+	//		var target = event.target; 
+	//		alert("target = "+target.className+", this="+this.className);
+
+			if(c_array.length==3)
+			{
+				event.preventDefault(); // 고스트 클릭 방지
+				
+				$secondGame.compare_result(c_array);
+				c_array = [];
+			}
+
+			var check = endGameCheck();
+
+			if (check) {
+				var endDate = new Date();
+				var elapsed_time = time(endDate);
+				alert("경과시간:" + elapsed_time);
+			}
+
+		});
+
+				
+
+		$("#click1").click(function() {
+			//		event.preventDefault();
+			$(".circle").css({
+				"border" : "3px solid rgb(239, 18, 219)",
+				"border-style" : "groove"
+			});
+
+		});
+
+
+	}
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<div data-role="header">
+	<h1>Flip Card!</h1>
+	<div  class = 'ui-btn-right'     data-role="controlgroup"  data-type="horizontal" >
+		<a href="javascript:window.location.reload();"  data-role="button" data-icon="refresh" data-iconpos="notext" data-theme="b" data-inline="true">REFRESH</a>
+		<a href="#"  data-role="button" data-icon="delete" data-iconpos="notext" data-theme="b">cancel</a>
+	</div>
+		<a href="option_page.html" data-role="button" data-icon="gear" data-iconpos="left" data-theme="b"  data-rel='dialog' data-transition = 'slidedown'>OPTION</a>
+</div>
+<div id="content" data-role="content">
+		<div class ="countdown"><h1 style="font-size: 45px;">Keep it In Mind !!</h1></div>
+		<ul class = "result_list">
+			<li class = 'card_result'></li>
+			<li class = 'card_result'></li>
+			<li class = 'card_result'></li>
+			<li class = 'card_result'></li>
+			<li class = 'card_result'></li>
+			<li class = 'card_result'></li>
+			<li class = 'card_result'></li>
+			<li class = 'card_result'></li>
+			<li class = 'card_result'></li>
+			<li class = 'card_result'></li>
+		</ul>
+	<div class = 'flip2 ui-body' ></div>
+</div>
+	
+</div>
+
+
+	<div class="overlay" ><div class='over_des'><img alt="correct" src="jquery.mobile-1.4.5/images/correct.png"></div></div>
+
+
+
+</body>
+</html>

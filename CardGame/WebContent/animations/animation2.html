@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+		<script type="text/javascript">
+		function initCanvas(canvas) {
+	        if (typeof FlashCanvas != "undefined") {
+	          FlashCanvas.initElement(canvas);
+	        }
+	        return canvas;
+	      }
+	      
+				window.onload = function(){
+			  	var canvas = initCanvas(document.getElementById("test-canvas")),
+					    ctx = canvas.getContext('2d');
+					
+			  	ctx.font = "3em Arial";
+	        ctx.textAlign = 'center';
+
+			  	var i, n = 0, 
+	            components = [0, 0, 0], 
+	            operations = [1, 2, 3];
+	            
+			  	function draw(){
+			          ctx.clearRect(0, 0, 500, 200);
+			          ctx.fillStyle = "rgb("+components.join(',')+")";
+			          ctx.textBaseline = 'top';
+			          
+			          // Jumping text
+			          ctx.save();
+			            ctx.translate(200, 0);
+			  		  		ctx.fillText('BRAIN TRAINER', 0, components[1]);
+			          ctx.restore();
+			          
+			          // Rotating text
+			          ctx.save();
+			            ctx.translate(250, 150);
+			            ctx.rotate(0.01*n++);
+			            ctx.fillStyle = '#000';
+			            ctx.textBaseline = 'middle';
+			            ctx.fillText('MATH ', 0, 0);
+			          ctx.restore();
+			          
+			          for(i = 0; i < 3; i++) {
+			            components[i] += operations[i];
+			            if ((components[i] >= 256) || (components[i] <= 0)) operations[i] *= -1;
+			          }
+			          
+								/*if (n < 1000)*/ setTimeout(draw, 10);
+			  	}
+			    draw();
+				}
+
+		
+		</script>
+	</head>
+	<body>
+	    
+		<canvas width="500" height="300" id="test-canvas"></canvas>
+
+		
+	</body>
+</html>
