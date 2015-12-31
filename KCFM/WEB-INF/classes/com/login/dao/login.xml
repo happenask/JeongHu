@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="login">
+
+<select id="user_check" parameterType="HashMap" resultType="HashMap">
+    SELECT   a.사용자ID                     as 사용자ID
+            ,a.사용자명                     as 사용자명
+            ,ISNULL(a.권한코드        ,' ') as 권한코드
+            ,a.기업코드                     as 기업코드
+            ,a.법인코드                     as 법인코드
+            ,ISNULL(a.소속브랜드코드  ,' ') as 소속브랜드코드
+            ,ISNULL(a.소속사업부코드  ,' ') as 소속사업부코드
+            ,ISNULL(a.소속거점구분코드,' ') as 소속거점구분코드
+            ,ISNULL(a.소속거점코드    ,' ') as 소속거점코드
+            ,ISNULL(a.소속부서        ,' ') as 소속부서
+            ,ISNULL(a.직책            ,' ') as 직책         
+            ,ISNULL((SELECT top 1 세부코드명 FROM 공통코드 WITH(NOLOCK) where 기업코드=a.기업코드 AND 법인코드=a.법인코드 AND 분류코드='USRROLE' AND 세부코드 = a.권한코드       AND 사용여부='Y' and 삭제여부='N' ), ' ') AS 권한명
+            ,ISNULL((select top 1 기업명     from 기업     WITH(NOLOCK) where 기업코드=a.기업코드                                                                                AND 사용여부='Y' and 삭제여부='N' ), ' ') as 기업명
+            ,ISNULL((select top 1 법인명     from 법인     WITH(NOLOCK) where 기업코드=a.기업코드 AND 법인코드=a.법인코드                                                        AND 사용여부='Y' and 삭제여부='N' ), ' ') as 법인명
+            ,ISNULL((select top 1 브랜드명   from 브랜드   WITH(NOLOCK) where 기업코드=a.기업코드 AND 법인코드=a.법인코드 AND 브랜드코드= a.소속브랜드코드                       AND 사용여부='Y' and 삭제여부='N' ), ' ') as 소속브랜드명
+            ,ISNULL((select top 1 사업부명   from 사업부   WITH(NOLOCK) where 기업코드=a.기업코드 AND 법인코드=a.법인코드 AND 사업부코드= a.소속사업부코드                       AND 사용여부='Y' and 삭제여부='N' ), ' ') as 소속사업부명
+            ,ISNULL((SELECT top 1 세부코드명 FROM 공통코드 WITH(NOLOCK) where 기업코드=a.기업코드 AND 법인코드=a.법인코드 AND 분류코드='LUNIT' AND 세부코드 = a.소속거점구분코드 AND 사용여부='Y' and 삭제여부='N' ), ' ') AS 소속거점구분명
+            ,case when a.소속거점구분코드 IN ('3')     then ISNULL((select top 1 가맹점명 from 가맹점   WITH(NOLOCK) where 기업코드=a.기업코드 AND 법인코드=a.법인코드 AND 가맹점코드=a.소속거점코드 AND 사용여부='Y' and 삭제여부='N'), ' ')
+                  when a.소속거점구분코드 IN ('1','2') then ISNULL((select top 1 거점명   from 물류거점 WITH(NOLOCK) where 기업코드=a.기업코드 AND 법인코드=a.법인코드 AND 거점코드  =a.소속거점코드 AND 사용여부='Y' and 삭제여부='N'), ' ')
+                  else ' '
+             end AS 소속거점명
+            ,case when a.소속거점구분코드 IN ('1') then ISNULL(a.소속거점코드    ,' ')
+                  when a.소속거점구분코드 IN ('2') then ISNULL((select top 1 상위거점코드 from 물류거점 WITH(NOLOCK) where 기업코드=a.기업코드 AND 법인코드=a.법인코드 AND 거점코드  =a.소속거점코드 AND 사용여부='Y' and 삭제여부='N'), ' ')
+                  else ' '
+             end AS 소속물류센터코드 
+            ,case when a.소속거점구분코드 IN ('1') then ISNULL((select top 1 거점명   from 물류거점 WITH(NOLOCK) where 기업코드=a.기업코드 AND 법인코드=a.법인코드 AND 거점코드  =a.소속거점코드 AND 사용여부='Y' and 삭제여부='N'), ' ')
+                  else ' '
+             end AS 소속물류센터명 
+            ,case when a.소속거점구분코드 IN ('2') then ISNULL(a.소속거점코드    ,' ')
+                  when a.소속거점구분코드 IN ('3') then ISNULL((select top 1 지사코드     from 가맹점 WITH(NOLOCK)   where 기업코드=a.기업코드 AND 법인코드=a.법인코드 AND 가맹점코드=a.소속거점코드 AND 사용여부='Y' and 삭제여부='N'), ' ')
+                  else ' '
+             end AS 소속지사코드 
+            ,case when a.소속거점구분코드 IN ('2') then ISNULL((select top 1 거점명   from 물류거점 WITH(NOLOCK) where 기업코드=a.기업코드 AND 법인코드=a.법인코드 AND 거점코드  =a.소속거점코드 AND 사용여부='Y' and 삭제여부='N'), ' ')
+                  else ' '
+             end AS 소속지사명 
+
+            ,case when a.소속거점구분코드 IN ('3') then ISNULL(a.소속거점코드    ,' ')
+                  else ' '
+             end AS 소속가맹점코드
+            ,case when a.소속거점구분코드 IN ('3')     then ISNULL((select top 1 가맹점명 from 가맹점 WITH(NOLOCK)   where 기업코드=a.기업코드 AND 법인코드=a.법인코드 AND 가맹점코드=a.소속거점코드 AND 사용여부='Y' and 삭제여부='N'), ' ')
+                  else ' '
+             end AS 소속가맹점명
+			,case when a.소속거점구분코드 IN ('1','0') then ISNULL((select 수불마감년월 from 법인     WITH(NOLOCK) where 기업코드=a.기업코드 AND 법인코드=a.법인코드 AND 사용여부='Y' and 삭제여부='N' ), '000000')
+                  when a.소속거점구분코드 IN ('2')     then ISNULL((select 수불마감년월 from 물류거점 WITH(NOLOCK) where 기업코드=a.기업코드 AND 법인코드=a.법인코드 AND 거점코드=a.소속거점코드 AND 창고재고상태='1' AND 사용여부='Y' and 삭제여부='N'), ISNULL((select 수불마감년월 from 법인 where 기업코드=a.기업코드 AND 법인코드=a.법인코드 AND 사용여부='Y' and 삭제여부='N' ), '000000'))
+                  else ''
+             end AS 수불마감년월
+			,case when a.소속거점구분코드 IN ('1','0') then ISNULL((select 미수마감년월 from 법인     WITH(NOLOCK) where 기업코드=a.기업코드 AND 법인코드=a.법인코드 AND 사용여부='Y' and 삭제여부='N' ), '000000')
+                  when a.소속거점구분코드 IN ('2'    ) then ISNULL((select 미수마감년월 from 물류거점 WITH(NOLOCK) where 기업코드=a.기업코드 AND 법인코드=a.법인코드 AND 거점코드=a.소속거점코드 AND 창고재고상태='1' AND 사용여부='Y' and 삭제여부='N'), ISNULL((select 미수마감년월 from 법인 where 기업코드=a.기업코드 AND 법인코드=a.법인코드 AND 사용여부='Y' and 삭제여부='N' ), '000000'))
+                  else ''
+             end AS 미수마감년월  
+	FROM	 사용자 a WITH(NOLOCK)
+	WHERE    1 = 1
+	AND      사용자ID  = #{txtUserID}
+	AND      비밀번호  = #{txtPwd}
+</select>
+
+
+
+
+
+</mapper>

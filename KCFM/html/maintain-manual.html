@@ -1,0 +1,299 @@
+
+<!-- 
+/** ############################################################### */
+/** Program ID   : maintain-manual.html                                       														 */
+/** Program Name : maintain-manual	       						                   													 */
+/** Program Desc :  교육자료 관리																					 */
+/** Create Date  :   2015.03.30					              														 */
+/** Update Date  :                                                  															 */
+/** Programmer   :   s.h.e                                           														 */
+/** ############################################################### */
+ -->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=9" /> <!-- 문서모드 IE9 표준 호환 / content="IE=edge" 최신으로 렌덩링-->
+ 	<meta name="keywords" content="" /><!-- 검색용 키워드 -->
+ 	<meta name="description" content="스쿨푸드 PRM 서비스입니다." /><!-- 페이지 설명 -->
+    
+	<title>KCFM 관리자</title>  
+		
+	<link href="../assets/css/common.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+	
+	<!-- IE8 이하에서 미디어 쿼리(Media Query) 사용 지원 -->
+	<!--[if lt IE 9]><script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+    <!-- IE 8 이하에서 HTML5 태그 지원하도록 스크립트 링크 -->
+    <!--[if lt IE 9]><script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script><![endif]-->
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+	<script type="text/javascript" src="../assets/js/jquery.ui.datepicker-ko.js"></script>
+	<script type="text/javascript" src="../assets/js/calendar.js"></script><!-- 달력 시작일, 종료일 세팅 -->
+    <script type="text/javascript" src="../assets/js/style.js"></script>
+    
+    <script type="text/javascript">
+	$(document).ready(function()
+	{ 
+		getCurrent();
+		fnCalendar();
+	});
+	
+	$(function(){
+		$("#btn-left").hover(function(){
+			$("#ic-box-menu2-sub").stop().slideToggle();
+		},function(){
+			$("#ic-box-menu2-sub").stop().slideToggle();
+		});
+	});
+    
+	function fnNewWriting(pageGb)	//notice
+	{ 
+		location.href= "admin-writing.jsp?pageGb="+ pageGb;
+	}
+	function fnModiWriting(pageGb)	//수정
+	{ 
+		location.href= "admin-writing-modify.jsp?pageGb="+ pageGb;
+	}
+    </script>
+</head>
+
+<body>
+ 	<div id="wrap" >
+	 	<section class="header-bg">
+	 	<div id="header">
+	 		<header>
+	 			<h1>헤더-타이틀</h1>
+	 			<span id="logo">유니포스-로고</span>
+	 			<span id="btns">
+	 				<input type="button" id="logout-btn" class="rd-bord-btn" value="로그아웃" class="button" onclick="location.href='../index.html'">
+	 				<input type="button" id="main-btn" class="nv-bord-btn" value="메인으로 이동" class="button" onclick="location.href='../main.html'">
+	 				<input type="button" id="account" class="rd-bord-btn" value="정보수정 ▶" class="button" onclick="">
+	 				</span>
+	 			
+	 				<div class="gnb">
+	 					<div id="currentTime">현재 날짜<span> 현재 시간</span></div>
+	 				</div>
+	 				
+	 			<!-- <nav class="gnb">
+	 				<ul class="topmenu">
+	 					<li class="disable"><a href="#">전자계약</a></li>
+	 					<li><a href="transactional-info.html">거래내역</a>
+	 						<ul class="submenu">
+								<li><a href="transactional-info.html?tabNo=1">매입 현황</a></li>
+								<li><a href="transactional-info.html?tabNo=2">여신 현황</a></li>
+								<li><a href="transactional-info.html?tabNo=3">재고 현황</a></li>
+								<li><a href="transactional-info.html?tabNo=4">카드 승인 내역</a></li>
+								<li><a href="transactional-info.html?tabNo=5">매출 현황</a></li>
+							</ul>
+						</li>
+	 					<li><a href="prom-material.html">홍보물신청</a>
+	 						<ul class="submenu">
+								<li><a href="prom-material.html?tabNo=1">인쇄사용문구</a></li>
+								<li><a href="prom-material.html?tabNo=2">전단지종류</a></li>
+								<li><a href="prom-material.html?tabNo=3">전단지선택</a></li>
+							</ul>
+	 					</li>
+	 					<li class="disable"><a href="#">메세지전송</a></li>
+	 					<li><a href="tax-bill.html ">세금계산서</a>
+	 						<ul class="submenu">
+								<li><a href="tax-bill.html?tabNo=A">스쿨푸드</a></li>
+								<li><a href="tax-bill.html?tabNo=B">Z.POS</a></li>
+								
+							</ul>
+	 					</li>
+	 					<li><a href="cust-comment.html">고객의소리</a></li>
+	 					<li><a href="call-center.html">콜센터</a>
+	 						<ul class="submenu">
+								<li><a href="call-center.html?tabNo=A">매출통계</a> </li>
+								<li><a href="call-center.html?tabNo=B">배달시간관리</a></li>
+								<li><a href="call-center.html?tabNo=C">판매상품관리</a></li>
+							</ul>
+	 					</li>
+	 					<li class="disable"><a href="#">상품권</a></li>
+	 				</ul>
+	 			</nav> -->
+	 		</header>
+	 		</div>
+	 		
+	 		<!-- <div id="info-bg">
+		 		<div id="info">
+		 			<div id="account">
+		 				<span>스쿨푸드 유니타스 1호점</span>
+		 				<span id="btn"><input type="button" id="mody-btn" class="nv-bord-btn" value="정보변경" class="button" onclick="fnShowPanel();"></span>
+		 			</div>
+		 			<div id="account-info">
+		 				<span id="ph-no">전화번호 : 02-1234-5678 /</span> 
+		 				<span id="mb-no">휴대전화 : 010-1234-5678 /</span> 
+		 				<span id="charge-man">담당SV : 홍길동(010-5678-1234)</span>
+		 			</div>
+		 		</div>info end
+	 		</div> -->
+	 	</section>
+	 	
+	 	<!-- 정보 변경 패널 -->
+<!-- 	 	<section id="info-panel">
+	 		<div id="mody-pw">
+	 			<header class="nv-bord-tit">비밀번호 변경</header>
+	 			<div><p>현재 비밀번호 </p> <input type="password" value="unitas0917"></div>
+	 			<div><p>새 비밀번호 </p> <input type="password" ></div>
+	 			<div><p>새 비밀번호 확인 </p> <input type="password" ></div>
+	 		</div>
+	 		<div id="mody-ph-no">
+	 			<header class="nv-bord-tit">전화번호 변경</header>
+	 			<div><p>현재 전화번호 </p> <input type="text" value="02-786-7838"></div>
+	 			<div><p>새 전화번호 </p> 
+	 					<input type="tel" class="ph-no first" maxlength="3">-
+	 					<input type="tel" class="ph-no" maxlength="4">-
+	 					<input type="tel"class="ph-no" maxlength="4">
+	 			</div>
+	 		</div>
+	 	</section> 
+-->
+	 	
+	 	
+ 		  <section class="contents admin">
+ 		 	<header>
+ 		 		<h1>◎ <span>admistrator service &gt; 교육자료 관리</span></h1>
+ 		 	
+	        	<div class="search-d">
+		    		<label for="start_search" > ▶ 게시 기간 : </label>
+		    		<input class="big_0" name="sDate" type="text" value="전체"/> ~ 
+					<input class="big_0" name="eDate" type="text" value=""/> 
+		    		<span><button class="searchDateBtn" onclick="search_list();">조회</button></span>
+		    		<span><button class="newSubmitBtn" onclick="fnNewWriting('manual');">신규</button></span>
+		  		</div>
+ 		 	</header>
+ 		 	
+ 		 	<div id="cont-admin">
+ 		 		<div class="cont-nav">
+ 		 			<ul class="admin-menu">
+ 		 				<li><a href="admin-main.html">공지사항관리</a></li>
+ 		 				<li class="active"><a href="#">교육자료관리</a></li>
+ 		 				<li><a href="maintain-proposal.html  ">건의사항관리</a></li>
+ 		 				<li><a href="maintain-request.html ">요청사항관리</a></li>
+ 		 				<li><a href="maintain-faq.html ">FAQ관리</a></li>
+ 		 				<li><a href="maintain-comment.html">댓글관리</a></li>
+ 		 			</ul>
+ 		 		</div>
+ 		 		<!-- <img alt="ex" src="assets/images/admin-ex.png" width="960" height="500" align="middle"> -->
+ 		 		<div id="cont-list" class="list list-wide">
+ 		 			<p>▶ 검색 된 게시물 <span>20</span>개</p>
+ 		 			<table>
+			  			<col width="6%" />
+			    		<col width="*"/>
+			    		<col width="13%"/>
+			    		<col width="12%"/>
+			    		<col width="8%"/>
+			    		<col width="11%"/>
+			    		<thead>
+			    			<tr>
+			      				<th>번호</th>
+			        			<th>제목</th>
+			        			<th>작성자</th>
+			        			<th>등록일</th>
+			        			<th>조회수</th>
+			        			<th>편집</th>
+			      			</tr>
+			    		</thead>
+			    		<tbody>
+			    			<tr>
+			      				<td>398</td>       
+			        			<td  class="subject"><a href="JavaScript:goView('1');">글제목 1... </a></td>
+			        			<td>unitas</td>
+			        			<td>2015-02-14</td>
+			        			<td>59</td>
+			        			<td>
+			        				<button class="deleteBtn" onclick="">삭제</button>
+			        				<button class="modifyBtn" onclick="fnModiWriting('manual');">수정</button>
+			        			</td>
+			      			</tr>
+				  			<tr>
+			      				<td>387</td>       
+			        			<td  class="subject"><a href="JavaScript:goView('2');">글제목 2... </a></td>
+			        			<td>unitas</td>
+			        			<td>2015-02-10</td>
+			        			<td>22</td>
+			        			<td>
+			        				<button class="deleteBtn" onclick="">삭제</button>
+			        				<button class="modifyBtn" onclick="fnModiWriting('manual');">수정</button>
+			        			</td>
+			      			</tr>
+			      			<tr><td colspan="5">-</td><td></td></tr>
+			      			<tr><td colspan="5">-</td><td></td></tr>
+			      			<tr><td colspan="5">-</td><td></td></tr>
+			      			<tr><td colspan="5">-</td><td></td></tr>
+			      			<tr><td colspan="5">-</td><td></td></tr>
+			      			<tr><td colspan="5">-</td><td></td></tr>
+			      			<tr><td colspan="5">-</td><td></td></tr>
+			      			<tr><td colspan="5">-</td><td></td></tr>
+			    		</tbody>
+			    	</table>
+			    	<!-- 페이징 표시 -->
+			  		<div class="paging">
+					    <ul class="numbering">
+					        <li class="f"><a href="#">◁</a></li>
+					        <li class="p"><a href="#">PREV</a></li>
+					        <li><a class="now" href="#">1</a></li>
+					        <li><a href="#">2</a></li>
+					        <li><a href="#">3</a></li>
+					        <li><a href="#">4</a></li>
+					        <li><a href="#">5</a></li>
+					        <li><a href="#">6</a></li>
+					        <li><a href="#">7</a></li>
+					        <li class="last"><a href="#">8</a></li>
+					        <li class="n"><a href="#">NEXT</a></li>
+					        <li class="l"><a href="#">▷</a></li>
+					   	</ul>
+					</div>
+			  		<!-- 페이징 표시 끝 -->
+			  		
+			  		<!-- 글검색 -->
+			  		<div id="search-option">
+			    		<label for="select_search" class="hidden">검색구분</label>
+			    		<select id="select_search" name="select_search" style="height:20px; width:80px;">
+			    			<option value="">전체</option>
+			    			<option value="title">제목</option>
+			    			<option value="content">내용</option>
+			    			<option value="content">작성자</option>
+			    		</select>
+			    		<label for="search_word" class="hidden">검색어</label>
+			    		<input type="text" id="search_word" name="search_word" value="" style="width:180px;" />
+			    		<span><button class="searchBtn" onclick="search_list();">검색</button></span>
+			  		</div>
+ 		 		</div>
+ 		 	</div><!-- end of cont-admin -->
+ 		 	
+ 		</section>
+ 	
+ 		<!-- modal popup -->
+	 	<div class="overlay-bg-half">
+	 			 	<!-- 정보 변경 패널 -->
+	 	<!-- <section id="info-panel">
+	 		<div id="mody-pw">
+	 			<header class="nv-bord-tit">비밀번호 변경</header>
+	 			<div><p>현재 비밀번호 </p> <input type="password" value="unitas0917"></div>
+	 			<div><p>새 비밀번호 </p> <input type="password" ></div>
+	 			<div><p>새 비밀번호 확인 </p> <input type="password" ></div>
+	 		</div>
+	 		<div id="mody-ph-no">
+	 			<header class="nv-bord-tit">전화번호 변경</header>
+	 			<div><p>현재 전화번호 </p> <input type="text" value="02-786-7838"></div>
+	 			<div><p>새 전화번호 </p> 
+	 					<input type="tel" class="ph-no first" maxlength="3">-
+	 					<input type="tel" class="ph-no" maxlength="4">-
+	 					<input type="tel"class="ph-no" maxlength="4">
+	 			</div>
+	 		</div>
+	 	</section>
+	 	 -->
+	 	
+	 	</div>
+	 	<div class="overlay-bg">
+	 		<img id="loadingImage" src="http://i1.daumcdn.net/cfs.tistory/resource/315/blog/plugins/lightbox/images/loading.gif" style="position: relative; cursor: pointer; top: 340px; left: 477px;display: none; ">
+	 	</div>
+ 	</div><!-- wrap end -->
+ 
+</body>
+</html>

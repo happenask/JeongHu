@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="b1001">
+
+<select id="getList점포일매입" parameterType="HashMap" resultType="HashMap">
+    SELECT  a.기업코드                                           
+	       ,a.법인코드                                          
+	       ,ISNULL(a.가맹점코드,'')    AS  가맹점코드           
+		   ,ISNULL(b.가맹점명,'')      AS  가맹점명             
+	       ,ISNULL(a.매입일자,'')      AS  매입일자             
+	       ,ISNULL(a.지사코드,'')      AS  지사코드 
+	       ,ISNULL(c.거점명,'')        AS  지사명             
+	       ,ISNULL(a.품목01,0)         AS  품목01               
+	       ,ISNULL(a.품목02,0)         AS  품목02               
+	       ,ISNULL(a.품목03,0)         AS  품목03               
+	       ,ISNULL(a.품목04,0)         AS  품목04               
+	       ,ISNULL(a.품목05,0)         AS  품목05               
+	       ,ISNULL(a.품목06,0)         AS  품목06               
+	       ,ISNULL(a.품목07,0)         AS  품목07               
+	       ,ISNULL(a.품목08,0)         AS  품목08               
+	       ,ISNULL(a.품목09,0)         AS  품목09               
+	       ,ISNULL(a.품목10,0)         AS  품목10               
+	       ,ISNULL(a.품목11,0)         AS  품목11               
+	       ,ISNULL(a.품목12,0)         AS  품목12               
+	       ,ISNULL(a.품목13,0)         AS  품목13               
+	       ,ISNULL(a.품목14,0)         AS  품목14               
+	       ,ISNULL(a.품목15,0)         AS  품목15               
+	       ,ISNULL(a.품목16,0)         AS  품목16               
+	       ,ISNULL(a.품목17,0)         AS  품목17               
+	       ,ISNULL(a.품목18,0)         AS  품목18    
+	       ,ISNULL(a.품목01,0) + ISNULL(a.품목02,0) + ISNULL(a.품목03,0) + ISNULL(a.품목04,0) + ISNULL(a.품목05,0)
+		    + ISNULL(a.품목06,0) + ISNULL(a.품목07,0) + ISNULL(a.품목08,0)+ ISNULL(a.품목09,0) +  ISNULL(a.품목10,0)
+			+ ISNULL(a.품목11,0) + ISNULL(a.품목12,0)+ ISNULL(a.품목13,0) + ISNULL(a.품목14,0)+ ISNULL(a.품목15,0) + ISNULL(a.품목16,0)
+			+ ISNULL(a.품목17,0) + ISNULL(a.품목18,0)  AS 합계       
+	  FROM 점포일별매입집계 a left outer join 가맹점 b with(nolock)    ON a.기업코드   = b.기업코드
+				  											          AND a.법인코드   = b.법인코드 
+															          AND a.가맹점코드 = b.가맹점코드 
+							 left outer join 물류거점 c with(nolock) ON   a.기업코드   = c.기업코드
+				  											          AND a.법인코드     = c.법인코드 
+															          AND a.지사코드     = c.거점코드	
+															          AND c.거점형태     = '2'
+																      AND c.창고재고상태 = '1'
+		WHERE 1=1
+		    AND a.기업코드 = 'KYOCHON'
+			AND a.법인코드 = '1001'
+			AND
+				a.지사코드 = '50027'
+			AND a.매입일자 BETWEEN REPLACE('2013-09-03','-','') AND REPLACE('2015-09-24','-','')
+			AND a.사용여부 = 'Y'
+			AND a.삭제여부 = 'N'
+</select>
+
+</mapper>

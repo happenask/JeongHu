@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+
+	<!-- TEST UNIFOS 192.168.200.232 -->	
+	<Resource name="jdbc/SFPRM" 
+              auth="Container" 
+              type="oracle.jdbc.pool.OracleDataSource" 
+              driverClassName="oracle.jdbc.driver.OracleDriver" 
+              factory="oracle.jdbc.pool.OracleDataSourceFactory" 
+              url="jdbc:oracle:thin:@192.168.200.232:1521:UNIFOS" 
+              user="sd_usr" 
+              password="sd_dbwj" 
+              maxActive="20" 
+              maxIdle="10" 
+              maxWait="-1"
+    />
+	     
+     	
+     	
+	
+ </Context>

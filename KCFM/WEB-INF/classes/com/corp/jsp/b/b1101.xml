@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="b1101">
+
+<select id="getList" parameterType="HashMap" resultType="HashMap">
+	    SELECT	
+				 ISNULL(M.거점명,'')			    AS 지사명
+				,SUM(case when S.가맹점유형 = '1' then 1 else 0 end)			
+												 	AS 직영점
+				,SUM(case when S.가맹점유형 = '1' then 0 else 1 end)			
+												 	AS 가맹점
+				,COUNT(*)      				        AS 점합계				
+          FROM  가맹점 S with(nolock) 
+                         LEFT OUTER JOIN 물류거점 M with(nolock)              ON M.기업코드   = S.기업코드
+                                                      		   			     AND M.법인코드   = S.법인코드
+                                                    			   			 AND M.거점코드   = S.지사코드  
+                                                    			  			 AND M.창고재고상태 = '1'                                                      			  			          
+	     WHERE 	1 = 1
+           AND  S.기업코드   = #{group_cd}
+           AND  S.법인코드   = #{corp_cd}
+		   AND  S.현재상태  != '90'                         
+	       AND  S.삭제여부   = 'N'
+		GROUP BY M.거점명	       
+	    ORDER BY M.거점명      
+</select>
+
+<select id="getList_location" parameterType="HashMap" resultType="HashMap">
+	    SELECT	
+				 ISNULL(C.세부코드명,'')			AS 지역명
+        		,ISNULL(C.표시순서,0)			    AS 표시순서					 
+				,SUM(case when S.가맹점유형 = '1' then 1 else 0 end)			
+												 	AS 직영점
+				,SUM(case when S.가맹점유형 = '1' then 0 else 1 end)			
+												 	AS 가맹점
+				,COUNT(*)      				        AS 점합계				
+          FROM  가맹점 S with(nolock) 
+                         LEFT OUTER JOIN 가맹점부가정보 M with(nolock)        ON M.기업코드   = S.기업코드
+                                                      		   			     AND M.법인코드   = S.법인코드
+                                                    			   			 AND M.가맹점코드 = S.가맹점코드
+                         LEFT OUTER JOIN 공통코드 C with(nolock)              ON C.기업코드   = S.기업코드
+                                                      		   			     AND C.법인코드   = S.법인코드
+                                                    			   			 AND C.분류코드   = 'REGION'
+                                                    			   			 AND C.세부코드   = M.지역코드                                                 			   			                                                         			  			          
+	     WHERE 	1 = 1
+           AND  S.기업코드   = #{group_cd}
+           AND  S.법인코드   = #{corp_cd}
+		   AND  S.현재상태  != '90'                        
+	       AND  S.삭제여부   = 'N'
+		GROUP BY C.세부코드명, C.표시순서	       
+	    ORDER BY C.표시순서   
+
+</select>
+
+
+    <select id="getList_year" parameterType="HashMap" resultType="HashMap">
+		 SELECT	 aa.년도				      		AS 회계년도		
+				,max(aa.직영개점) 					AS 직영개점
+				,max(aa.가맹개점)	 				AS 가맹개점
+				,max(aa.개점합계)      	  			AS 개점합계					 
+				,max(aa.직영폐점)	   				AS 직영폐점
+				,max(aa.가맹폐점)	   				AS 가맹폐점
+				,max(aa.폐점합계)      				AS 폐점합계	
+				,max(aa.개점합계)-max(aa.폐점합계)	AS 증감매장
+		   FROM
+				(	
+					SELECT	 ISNULL(SUBSTRING(S.오픈일,1,4),'')			 		 	AS 년도				 
+							,SUM(case when S.가맹점유형 = '1' then 1 else 0 end)	AS 직영개점
+							,SUM(case when S.가맹점유형 = '1' then 0 else 1 end)	AS 가맹개점
+							,COUNT(*)      				                            AS 개점합계
+							,0	   													AS 직영폐점
+							,0	   													AS 가맹폐점
+							,0      				                            	AS 폐점합계								
+					  FROM  가맹점 S with(nolock)                                                			   			                                                         			  			          
+					 WHERE 	1 = 1
+					   AND  S.기업코드   = #{group_cd}
+					   AND  S.법인코드   = #{corp_cd}   
+<!-- 					   AND  S.현재상태  != '90'		              -->
+					   AND  S.삭제여부   = 'N'
+					GROUP BY SUBSTRING(S.오픈일,1,4)
+				 UNION
+					SELECT	 ISNULL(SUBSTRING(S.폐점일자,1,4),'')			 		AS 년도		
+							,0	   													AS 직영개점
+							,0	   													AS 가맹개점
+							,0      				                            	AS 개점합계					 
+							,SUM(case when S.가맹점유형 = '1' then 1 else 0 end)	AS 직영폐점
+							,SUM(case when S.가맹점유형 = '1' then 0 else 1 end)	AS 가맹폐점
+							,COUNT(*)      				                            AS 폐점합계				
+					  FROM  가맹점 S with(nolock)                                                			   			                                                         			  			          
+					 WHERE 	1 = 1
+					   AND  S.기업코드   = #{group_cd}
+					   AND  S.법인코드   = #{corp_cd}    
+					   AND  S.현재상태   = '90'		             
+					   AND  S.삭제여부   = 'N'
+					GROUP BY SUBSTRING(S.폐점일자,1,4)
+				) aa	
+			GROUP BY aa.년도
+			ORDER BY aa.년도 desc          
+    </select> 
+
+</mapper>

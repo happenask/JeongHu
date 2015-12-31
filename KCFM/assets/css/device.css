@@ -1,0 +1,10 @@
+/* 모바일 스타일 */
+@charset "utf-8";
+
+@media (min-width:320px) and (max-width:767px)
+{
+	body {
+		background: black;
+	}
+	
+}

@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=9" /> <!-- 문서모드 IE9 표준 호환 / content="IE=edge" 최신으로 렌덩링-->
+ 	<meta name="keywords" content="" /><!-- 검색용 키워드 -->
+ 	<meta name="description" content="스쿨푸드 PRM 서비스입니다." /><!-- 페이지 설명 -->
+	<title>세금계산서</title>  
+	
+	<link href="assets/css/common.css" rel="stylesheet" type="text/css" />
+	<link href="assets/css/style.css" rel="stylesheet" type="text/css" />
+	
+	<!-- IE8 이하에서 미디어 쿼리(Media Query) 사용 지원 -->
+	<!--[if lt IE 9]><script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+    <!-- IE 8 이하에서 HTML5 태그 지원하도록 스크립트 링크 -->
+    <!-- 참고 글 : http://www.cmsfactory.net/node -->
+    <!--[if lt IE 9]><script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script><![endif]-->
+     <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="assets/js/style.js"></script>
+     
+    <script type="text/javascript">
+    $(document).ready(function(){
+
+    	var tabNo = getParameter("tabNo");
+    	if(tabNo == "empty"){
+    		tabNo="A"
+    	} 
+		$("#tab-"+tabNo).addClass("on"); 
+		$(".tab-pages").find("#tab-"+tabNo+"-data").removeClass("hidden").addClass("show");
+    });
+    
+	///////////////////////////// 계산서 출력  /////////////////////////////// 
+    function printOut(){
+    //window.open("파일명","팝업이름","옵션설정")
+    	$("#bill-box").find("img").eq(0).hide();	//닫기 버튼 가림
+    	
+    	var pWin = window.open("","","width=780,height=600,scrollbars=1");
+    	wdata ="<HTML><body>";  
+    	wdata = "<div style='background:url(assets/images/unifos-logo.png) no-repeat left center; width:480px; height:50px; position:absolute; left:90px;'></div>";
+    	wdata +="<div style='width:500px; position:relative; top:60px; left:80px; margin:0;'>" + document.getElementById('bill-box').innerHTML +"</div>";
+    	//wdata +="<div style='width:480px; position:relative; top:80px; margin:auto;background:url(assets/images/tax-bill.png) no-repeat center center;'></div>";
+    	wdata += "</body></HTML>";
+    	pWin.document.write(wdata); 
+    	
+    	pWin.window.print();
+    	pWin.document.close();
+    	//pWin.window.location.reload(); 
+    	pWin.window.close(); 
+    }
+    </script>
+</head>
+
+<body>
+ 	<div id="wrap" >
+	 	<section class="header-bg">
+	 	<div id="header">
+	 		<header>
+	 			<h1>헤더-타이틀</h1>
+	 			<span id="logo">유니포스-로고</span>
+	 			<span id="btns">
+	 				<input type="button" id="logout-btn" class="rd-bord-btn" value="로그아웃" class="button" onclick="location.href='index.jsp'">
+	 				<input type="button" id="main-btn" class="nv-bord-btn" value="MAIN" class="button" onclick="location.href='main.jsp';">
+	 				</span>
+	 			
+	 			<nav class="gnb">
+	 				<ul class="topmenu">
+	 					<li class="disable"><a href="#">전자계약</a></li>
+	 					<li><a href="transactional-info.html">거래내역</a>
+	 						<ul class="submenu">
+								<li><a href="transactional-info.html?tabNo=1">매입 현황</a></li>
+								<li><a href="transactional-info.html?tabNo=2">여신 현황</a></li>
+								<li><a href="transactional-info.html?tabNo=3">재고 현황</a></li>
+								<li><a href="transactional-info.html?tabNo=4">카드 승인 내역</a></li>
+								<li><a href="transactional-info.html?tabNo=5">매출 현황</a></li>
+							</ul>
+						</li>
+	 					<li><a href="prom-material.html">홍보물신청</a>
+	 						<!-- <ul class="submenu">
+								<li><a href="prom-material.html?tabNo=1">인쇄사용문구</a></li>
+								<li><a href="prom-material.html?tabNo=2">전단지종류</a></li>
+								<li><a href="prom-material.html?tabNo=3">전단지선택</a></li>
+							</ul> -->
+	 					</li>
+	 					<li class="disable"><a href="#">메세지전송</a></li>
+	 					<li class="active"><a href="tax-bill.html ">세금계산서</a>
+	 						<ul class="submenu">
+								<li><a href="tax-bill.html?tabNo=A">스쿨푸드</a></li>
+								<li><a href="tax-bill.html?tabNo=B">Z.POS</a></li>
+							</ul>
+	 					</li>
+	 					<li><a href="cust-comment.html">고객의소리</a></li>
+	 					<li><a href="call-center.html">콜센터</a>
+	 						<ul class="submenu">
+								<li><a href="call-center.html?tabNo=A">매출통계</a> </li>
+								<li><a href="call-center.html?tabNo=B">배달시간관리</a></li>
+								<li><a href="call-center.html?tabNo=C">판매상품관리</a></li>
+							</ul>
+	 					</li>
+	 					<li class="disable"><a href="#">상품권</a></li>
+	 				</ul>
+	 			</nav>
+	 		</header>
+	 		</div>
+	 		
+	 		<div id="info-bg">
+		 		<div id="info">
+		 			<div id="account">
+		 				<span>스쿨푸드 유니타스 1호점</span>
+		 				<span id="btn"><input type="button" id="mody-btn" class="nv-bord-btn" value="정보변경" class="button" onclick="fnShowPanel();"></span>
+		 			</div>
+		 			<div id="account-info">
+		 				<span id="ph-no">전화번호 : 02-1234-5678 /</span> 
+		 				<span id="mb-no">휴대전화 : 010-1234-5678 /</span> 
+		 				<span id="charge-man">담당SV : 홍길동(010-5678-1234)</span>
+		 			</div>
+		 		</div><!-- info end -->
+	 		</div>
+	 	</section>
+	 	
+	 	<!-- 정보 변경 패널 -->
+	 	<section id="info-panel">
+	 		<div id="mody-pw">
+	 			<header class="nv-bord-tit">비밀번호 변경</header>
+	 			<div><p>현재 비밀번호 </p> <input type="password" value="unitas0917"></div>
+	 			<div><p>새 비밀번호 </p> <input type="password" ></div>
+	 			<div><p>새 비밀번호 확인 </p> <input type="password" ></div>
+	 		</div>
+	 		<div id="mody-ph-no">
+	 			<header class="nv-bord-tit">전화번호 변경</header>
+	 			<div><p>현재 전화번호 </p> <input type="text" value="02-786-7838"></div>
+	 			<div><p>새 전화번호 </p> 
+	 					<input type="tel" class="ph-no first" maxlength="3">-
+	 					<input type="tel" class="ph-no" maxlength="4">-
+	 					<input type="tel"class="ph-no" maxlength="4">
+	 			</div>
+	 		</div>
+	 	</section>
+	 	
+	 	
+ 		 <section class="contents">
+ 		 	<header> 
+ 		 		<h1>◎ <span>세금계산서</span></h1>
+ 		 	</header>
+ 		 	
+			 <article class="tabs" id="call-center-menus">
+		        <div id="tab-nav">
+				    <nav>
+						<ul id="tabMenu2" class="topmenu">
+							<li class="topfirst" id="tab-A"><a href="tax-bill.html?tabNo=A" onclick="fnResetTab2($(this));">스쿨푸드</a></li>
+							<li class="toplast" id="tab-B"><a href="tax-bill.html?tabNo=B" onclick="fnResetTab2($(this));">Z.POS</a></li>
+							<!-- <li class="toplast" id="tabC"><a href="#" onclick="fnResetTab($(this));">스마트로</a> --></li>
+						</ul>
+					</nav>
+		        </div>
+
+		         <div class="tab-pages">
+		        	<div id="search-option">
+			    		<label for="select_search" > ▶ 기간 : </label>
+			    		<select id="select_search" name="select_search" style="height:20px; width:100px;">
+			    			<option value=" 2015-02-10 ">2015-02-10</option>
+			    		</select>
+			    		~ 
+			    		<select id="select_search" name="select_search" style="height:20px; width:100px;">
+			    			<option value=" 2015-02-20 "> 2015-02-20 </option>
+			    		</select>
+			    		<!-- 
+			    		<label for="search_word" class="hidden">검색어</label>
+			    		<input type="text" id="search_word" name="search_word" value="" style="width:180px;" /> -->
+			    		<span>
+			    			<button class="searchDateBtn" onclick="search_list();">조회</button>
+			    			<button class="printBtn" onclick="printOut();">출력</button>
+			    		</span>
+			  		</div>
+			  		
+			  		<!-- 1. 세금계산서 목록-->
+			  		<div id="tab-A-data" class="table hidden" style="margin-top:5px;">
+			  			<!-- <img alt="세금계산서" src="assets/images/tax-bill.png" width="800" height="496" align="middle"> -->
+		        		<div class="tax-list" style="margin-top:10px;">
+			        		<table>
+			        			<col width="14%"/>
+					    		<col width="20%"/>
+					  			<col width="14%"/>
+					    		<col width="20%"/>
+					  			<col width="14%"/>
+					    		<col width="18%"/>
+					    		<thead>
+					    			<tr>
+					      				<th>총 합계 금액</th>
+					        			<td align="right">1,661,600</td>
+					      				<th>총 공급 가액</th>
+					        			<td align="right">1,520,107</td>
+					      				<th>총 세액</th>
+					        			<td align="right">320,190</td>
+					      			</tr>
+					    			<tr align="left">
+					        			<td colspan="4" style="padding-left:5px; color:#2d3f52; font-size:12px;"><b> ▷ [스쿨푸드] 검색결과 총 11건</b></td>
+					        	 		<td colspan="2" style="text-align: right; color:#df4949; font-size:10px;">※ 항목을 선택하면 해당 세금계산서를 자세히 보실 수 있습니다.</td>
+					      			</tr>
+				      			</thead>
+				      		</table>
+			      		</div>
+			      		
+		        		<table id="data-t-list" width="900" height="360" bgcolor="#c6c6c6" border="0" cellpadding="1" cellspacing="1" style="float: left; font-size: 11px;"> 
+			  				<tr bgcolor="#b2b19c" align="center">
+								<th style="border-bottom: 1px solid #797979;" width="50"><font color="#ffffff">선택</font></th>
+								<th style="border-bottom: 1px solid #797979;" width="100"><font color="#ffffff"><b>작성일자</b></font></th>
+								<th style="border-bottom: 1px solid #797979;" width="220"><font color="#ffffff"><b>승인번호</b></font></th>
+								<th style="border-bottom: 1px solid #797979;" width="100"><font color="#ffffff"><b>발행일자</b></font></th>
+								<th style="border-bottom: 1px solid #797979;" width="100"><font color="#ffffff"><b>전송일자</b></font></th>
+								<th style="border-bottom: 1px solid #797979;" width="200"><font color="#ffffff"><b>공급받는 자 등록번호</b></font></th>
+								<th style="border-bottom: 1px solid #797979;" width="210"><font color="#ffffff"><b>상호</b></font></th>
+							</tr>
+
+							<tr class="data" align="center" bgcolor="#ffffff">
+								<td><input type="checkbox" alt="세금계산서 선택" name="" value="" onclick="fnShowBill($(this))"></td>
+								<td>2015-02-12</td>
+								<td>100000000-9977562-30096580</td>
+								<td>2015-02-12</td>
+								<td>2015-02-14</td>
+								<td>540-198-8962418</td>
+								<td>(주)유니포스 연구원</td>
+							</tr>
+							<tr class="data" align="center" bgcolor="#ffffff">
+								<td><input type="checkbox" alt="세금계산서 선택" name="" value="" onclick="fnShowBill($(this))"></td>
+								<td>2015-02-12</td>
+								<td>100000000-9977562-30096580</td>
+								<td>2015-02-12</td>
+								<td>2015-02-14</td>
+								<td>540-198-8962418</td>
+								<td>(주)유니포스 연구원</td>
+							</tr>
+							<tr class="data" align="center" bgcolor="#ffffff">
+								<td><input type="checkbox" alt="세금계산서 선택" name="" value="" onclick="fnShowBill($(this))"></td>
+								<td>2015-02-12</td>
+								<td>100000000-9977562-30096580</td>
+								<td>2015-02-12</td>
+								<td>2015-02-14</td>
+								<td>540-198-8962418</td>
+								<td>(주)유니포스 연구원</td>
+							</tr>
+							<tr class="data" align="center" bgcolor="#ffffff">
+								<td><input type="checkbox" alt="세금계산서 선택" name="" value="" onclick="fnShowBill($(this))"></td>
+								<td>2015-02-12</td>
+								<td>100000000-9977562-30096580</td>
+								<td>2015-02-12</td>
+								<td>2015-02-14</td>
+								<td>540-198-8962418</td>
+								<td>(주)유니포스 연구원</td>
+							</tr>
+							<tr class="data" align="center" bgcolor="#ffffff">
+								<td><input type="checkbox" alt="세금계산서 선택" name="" value="" onclick="fnShowBill($(this))"></td>
+								<td>2015-02-12</td>
+								<td>100000000-9977562-30096580</td>
+								<td>2015-02-12</td>
+								<td>2015-02-14</td>
+								<td>540-198-8962418</td>
+								<td>(주)유니포스 연구원</td>
+							</tr>
+							<tr class="data" align="center" bgcolor="#ffffff">
+								<td><input type="checkbox" alt="세금계산서 선택" name="" value="" onclick="fnShowBill($(this))"></td>
+								<td>2015-02-12</td>
+								<td>100000000-9977562-30096580</td>
+								<td>2015-02-12</td>
+								<td>2015-02-14</td>
+								<td>540-198-8962418</td>
+								<td>(주)유니포스 연구원</td>
+							</tr>
+							<tr class="data" align="center" bgcolor="#ffffff">
+								<td><input type="checkbox" alt="세금계산서 선택" name="" value="" onclick="fnShowBill($(this))"></td>
+								<td>2015-02-12</td>
+								<td>100000000-9977562-30096580</td>
+								<td>2015-02-12</td>
+								<td>2015-02-14</td>
+								<td>540-198-8962418</td>
+								<td>(주)유니포스 연구원</td>
+							</tr>
+							<tr class="data" align="center" bgcolor="#ffffff">
+								<td><input type="checkbox" alt="세금계산서 선택" name="" value="" onclick="fnShowBill($(this))"></td>
+								<td>2015-02-12</td>
+								<td>100000000-9977562-30096580</td>
+								<td>2015-02-12</td>
+								<td>2015-02-14</td>
+								<td>540-198-8962418</td>
+								<td>(주)유니포스 연구원</td>
+							</tr>
+							<tr class="data" align="center" bgcolor="#ffffff">
+								<td><input type="checkbox" alt="세금계산서 선택" name="" value="" onclick="fnShowBill($(this))"></td>
+								<td>2015-02-12</td>
+								<td>100000000-9977562-30096580</td>
+								<td>2015-02-12</td>
+								<td>2015-02-14</td>
+								<td>540-198-8962418</td>
+								<td>(주)유니포스 연구원</td>
+							</tr>
+							<tr class="data" align="center" bgcolor="#ffffff">
+								<td><input type="checkbox" alt="세금계산서 선택" name="" value="" onclick="fnShowBill($(this))"></td>
+								<td>2015-02-12</td>
+								<td>100000000-9977562-30096580</td>
+								<td>2015-02-12</td>
+								<td>2015-02-14</td>
+								<td>540-198-8962418</td>
+								<td>(주)유니포스 연구원</td>
+							</tr>
+							<tr class="data" align="center" bgcolor="#ffffff">
+								<td><input type="checkbox" alt="세금계산서 선택" name="" value="" onclick="fnShowBill($(this))"></td>
+								<td>2015-02-12</td>
+								<td>100000000-9977562-30096580</td>
+								<td>2015-02-12</td>
+								<td>2015-02-14</td>
+								<td>540-198-8962418</td>
+								<td>(주)유니포스 연구원</td>
+							</tr>
+						</table>
+		        	</div>
+		        	
+		        	<!-- 2 -->
+		        	<div id="tab-B-data" class="table hidden" style="margin-top:5px;">
+			  			<!-- <img alt="세금계산서" src="assets/images/tax-bill.png" width="800" height="496" align="middle"> -->
+		        		<div class="tax-list" style="margin-top:10px;">
+			        		<table>
+			        			<col width="14%"/>
+					    		<col width="20%"/>
+					  			<col width="14%"/>
+					    		<col width="20%"/>
+					  			<col width="14%"/>
+					    		<col width="18%"/>
+					    		<thead>
+					    			<tr>
+					      				<th>총 합계 금액</th>
+					        			<td align="right">1,661,600</td>
+					      				<th>총 공급 가액</th>
+					        			<td align="right">1,520,107</td>
+					      				<th>총 세액</th>
+					        			<td align="right">320,190</td>
+					      			</tr>
+					    			<tr align="left">
+					        			<td colspan="4" style="padding-left:5px; color:#2d3f52; font-size:12px;"><b> ▷ [Z.POS] 검색결과 총 8건</b></td>
+					        	 		<td colspan="2" style="text-align: right; color:#df4949; font-size:10px;">※ 항목을 선택하면 해당 세금계산서를 자세히 보실 수 있습니다.</td>
+					      			</tr>
+				      			</thead>
+				      		</table>
+			      		</div>
+			      		
+		        		<table id="data-t-list" width="900" height="280" bgcolor="#c6c6c6" border="0" cellpadding="1" cellspacing="1" style="float: left; font-size: 11px;"> 
+			  				<tr bgcolor="#b2b19c" align="center">
+								<th style="border-bottom: 1px solid #797979;" width="50"><font color="#ffffff">선택</font></th>
+								<th style="border-bottom: 1px solid #797979;" width="100"><font color="#ffffff"><b>작성일자</b></font></th>
+								<th style="border-bottom: 1px solid #797979;" width="220"><font color="#ffffff"><b>승인번호</b></font></th>
+								<th style="border-bottom: 1px solid #797979;" width="100"><font color="#ffffff"><b>발행일자</b></font></th>
+								<th style="border-bottom: 1px solid #797979;" width="100"><font color="#ffffff"><b>전송일자</b></font></th>
+								<th style="border-bottom: 1px solid #797979;" width="200"><font color="#ffffff"><b>공급받는 자 등록번호</b></font></th>
+								<th style="border-bottom: 1px solid #797979;" width="210"><font color="#ffffff"><b>상호</b></font></th>
+							</tr>
+
+							<tr class="data" align="center" bgcolor="#ffffff">
+								<td><input type="checkbox" alt="세금계산서 선택" name="" value="" onclick="fnShowBill($(this))"></td>
+								<td>2015-02-12</td>
+								<td>100000000-9977562-30096580</td>
+								<td>2015-02-12</td>
+								<td>2015-02-14</td>
+								<td>540-198-8962418</td>
+								<td>(주)유니포스 연구원</td>
+							</tr>
+							
+							<tr class="data" align="center" bgcolor="#ffffff">
+								<td><input type="checkbox" alt="세금계산서 선택" name="" value="" onclick="fnShowBill($(this))"></td>
+								<td>2015-02-12</td>
+								<td>100000000-9977562-30096580</td>
+								<td>2015-02-12</td>
+								<td>2015-02-14</td>
+								<td>540-198-8962418</td>
+								<td>(주)유니포스 연구원</td>
+							</tr>
+							<tr class="data" align="center" bgcolor="#ffffff">
+								<td><input type="checkbox" alt="세금계산서 선택" name="" value="" onclick="fnShowBill($(this))"></td>
+								<td>2015-02-12</td>
+								<td>100000000-9977562-30096580</td>
+								<td>2015-02-12</td>
+								<td>2015-02-14</td>
+								<td>540-198-8962418</td>
+								<td>(주)유니포스 연구원</td>
+							</tr>
+							<tr class="data" align="center" bgcolor="#ffffff">
+								<td><input type="checkbox" alt="세금계산서 선택" name="" value="" onclick="fnShowBill($(this))"></td>
+								<td>2015-02-12</td>
+								<td>100000000-9977562-30096580</td>
+								<td>2015-02-12</td>
+								<td>2015-02-14</td>
+								<td>540-198-8962418</td>
+								<td>(주)유니포스 연구원</td>
+							</tr>
+							<tr class="data" align="center" bgcolor="#ffffff">
+								<td><input type="checkbox" alt="세금계산서 선택" name="" value="" onclick="fnShowBill($(this))"></td>
+								<td>2015-02-12</td>
+								<td>100000000-9977562-30096580</td>
+								<td>2015-02-12</td>
+								<td>2015-02-14</td>
+								<td>540-198-8962418</td>
+								<td>(주)유니포스 연구원</td>
+							</tr>
+							<tr class="data" align="center" bgcolor="#ffffff">
+								<td><input type="checkbox" alt="세금계산서 선택" name="" value="" onclick="fnShowBill($(this))"></td>
+								<td>2015-02-12</td>
+								<td>100000000-9977562-30096580</td>
+								<td>2015-02-12</td>
+								<td>2015-02-14</td>
+								<td>540-198-8962418</td>
+								<td>(주)유니포스 연구원</td>
+							</tr>
+							<tr class="data" align="center" bgcolor="#ffffff">
+								<td><input type="checkbox" alt="세금계산서 선택" name="" value="" onclick="fnShowBill($(this))"></td>
+								<td>2015-02-12</td>
+								<td>100000000-9977562-30096580</td>
+								<td>2015-02-12</td>
+								<td>2015-02-14</td>
+								<td>540-198-8962418</td>
+								<td>(주)유니포스 연구원</td>
+							</tr>
+							<tr class="data" align="center" bgcolor="#ffffff">
+								<td><input type="checkbox" alt="세금계산서 선택" name="" value="" onclick="fnShowBill($(this))"></td>
+								<td>2015-02-12</td>
+								<td>100000000-9977562-30096580</td>
+								<td>2015-02-12</td>
+								<td>2015-02-14</td>
+								<td>540-198-8962418</td>
+								<td>(주)유니포스 연구원</td>
+							</tr>
+							
+						</table>
+		        	</div>
+			  	</div>
+        	</article>
+
+ 		 </section>
+ 		 
+ 		 <!-- modal popup -->
+	 	<div id="bill-box" class="">
+	 		<img src="assets/images/close.png" id="btnCloseLayer" 
+										style="cursor:pointer;position:absolute;right:-1px;top:-1px; z-index: 1000;" onclick="$('#bill-box').hide();" alt="닫기 버튼">
+								
+	 		<img id="billImg" alt="세금계산서" src="assets/images/tax-bill.png" width="800" height="496" align="middle">
+	 	</div>
+ 		 
+ 		<!-- modal popup -->
+	 	<div class="overlay-bg-half"></div>
+	</div><!-- end of wrap -->
+</body>
+</html>

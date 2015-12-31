@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=9" /> <!-- 문서모드 IE9 표준 호환 / content="IE=edge" 최신으로 렌덩링-->
+ 	<meta name="keywords" content="" /><!-- 검색용 키워드 -->
+ 	<meta name="description" content="스쿨푸드 PRM 서비스입니다." /><!-- 페이지 설명 -->
+	<title>홍보물신청</title>  
+	
+	<link href="assets/css/common.css" rel="stylesheet" type="text/css" />
+	<link href="assets/css/style.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+	
+	<!-- IE8 이하에서 미디어 쿼리(Media Query) 사용 지원 -->
+	<!--[if lt IE 9]><script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+    <!-- IE 8 이하에서 HTML5 태그 지원하도록 스크립트 링크 -->
+    <!-- 참고 글 : http://www.cmsfactory.net/node -->
+    <!--[if lt IE 9]><script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script><![endif]-->
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+	<script type="text/javascript" src="assets/js/jquery.ui.datepicker-ko.js"></script>
+	<script type="text/javascript" src="assets/js/calendar2.js"></script>
+    <script type="text/javascript" src="assets/js/style.js"></script>
+     
+    <script type="text/javascript">
+    $(document).ready(function(){ 
+    	
+    	var tabNo = getParameter("tabNo");
+    	if(tabNo == "empty"){tabNo="1"}
+    	 
+		$("#tab"+tabNo).addClass("on"); 
+
+		$(".main-li").click(function(){
+			$(this).parent().find("li.main-li").each(function(){
+	  	    	$(this).removeClass("on");
+	  	    });
+			$(this).addClass("on");
+			//$(this).find("a").append("<span>▶</span>");
+			fnMenuSelect($(this));
+		});
+		
+		$(".sub-li").click(function(){
+
+			$(".sub-li").each(function(){
+	  	    	$(this).removeClass("on");
+	  	    	$(this).find("a .icon").addClass("hidden");
+	  	    });
+			
+			$(this).find("a .icon").removeClass("hidden");
+			$(this).addClass("on");
+			
+        	$("#ord-list-area").hide();
+        	$("#material-main").show();
+		});
+    });
+    
+
+    function fnShowAll(){
+	  //.slideToggle( [duration ] [, complete ] )
+		//$(".menu-nav-sub").slideToggle("slow");
+	  $(".menu-nav-sub").each(function(){
+	    	$(this).addClass("on");
+	    });
+  	$("#ord-list-area").hide();
+	$("#material-main").show();
+    }
+    function fnMenuSelect($this){
+  	  //.slideToggle( [duration ] [, complete ] )
+  		//$this.find(".menu-nav-sub").slideToggle("slow");
+  	    $this.parent().find(".menu-nav-sub").each(function(){
+  	    	$(this).removeClass("on"); 
+  	    });
+  		$this.find(".menu-nav-sub").addClass("on");
+    	$("#ord-list-area").hide();
+    	$("#material-main").show();
+      }
+    
+    function fnShowDetail(){
+
+		var browserHeight = document.documentElement.height;
+		var browserWidth = document.documentElement.offsetWidth;
+		
+		$(".overlay-bg8").height(browserHeight);
+		$(".dtl-pop").css("left",browserWidth/2 - 450);//image size = 40*40
+		$(".overlay-bg8").show();
+		$(".dtl-pop").show(); 
+    }
+    
+    function showOrdList($this){
+    	$("#material-main").hide();
+    	$("#ord-list-area").show();
+    }
+    </script>
+</head>
+
+<body>
+ 	<div id="wrap" >
+	 	<section class="header-bg">
+	 	<div id="header">
+	 		<header>
+	 			<h1>헤더-타이틀</h1>
+	 			<span id="logo">유니포스-로고</span>
+	 			<span id="btns">
+	 				<input type="button" id="logout-btn" class="rd-bord-btn" value="로그아웃" class="button" onclick="location.href='index.jsp'">
+	 				<input type="button" id="main-btn" class="nv-bord-btn" value="MAIN" class="button" onclick="location.href='main.jsp';">
+	 				</span>
+	 			
+	 			<nav class="gnb">
+	 				<ul class="topmenu">
+	 					<li class="disable"><a href="#">전자계약</a></li>
+	 					<li><a href="transactional-info.html">거래내역</a>
+	 						<ul class="submenu">
+								<li><a href="transactional-info.html?tabNo=1">매입 현황</a></li>
+								<li><a href="transactional-info.html?tabNo=2">여신 현황</a></li>
+								<li><a href="transactional-info.html?tabNo=3">재고 현황</a></li>
+								<li><a href="transactional-info.html?tabNo=4">카드 승인 내역</a></li>
+								<li><a href="transactional-info.html?tabNo=5">매출 현황</a></li>
+							</ul>
+						</li>
+	 					<li  class="active"><a href="prom-material.html">홍보물신청</a>
+<!-- 	 						<ul class="submenu">
+								<li><a href="prom-material.html?tabNo=1">인쇄사용문구</a></li>
+								<li><a href="prom-material.html?tabNo=2">전단지종류</a></li>
+								<li><a href="prom-material.html?tabNo=3">전단지선택</a></li>
+							</ul> -->
+	 					</li>
+	 					<li class="disable"><a href="#">메세지전송</a></li>
+	 					<li><a href="tax-bill.html ">세금계산서</a>
+	 						<ul class="submenu">
+								<li><a href="tax-bill.html?tabNo=A">스쿨푸드</a></li>
+								<li><a href="tax-bill.html?tabNo=B">Z.POS</a></li>
+								
+							</ul>
+	 					</li>
+	 					<li><a href="cust-comment.html">고객의소리</a></li>
+	 					<li><a href="call-center.html">콜센터</a>
+	 						<ul class="submenu">
+								<li><a href="call-center.html?tabNo=A">매출통계</a> </li>
+								<li><a href="call-center.html?tabNo=B">배달시간관리</a></li>
+								<li><a href="call-center.html?tabNo=C">판매상품관리</a></li>
+							</ul>
+	 					</li>
+	 					<li class="disable"><a href="#">상품권</a></li>
+	 				</ul>
+	 			</nav>
+	 		</header>
+	 		</div>
+	 		
+	 		<div id="info-bg">
+		 		<div id="info">
+		 			<div id="account">
+		 				<span>스쿨푸드 유니타스 1호점</span>
+		 				<span id="btn"><input type="button" id="mody-btn" class="nv-bord-btn" value="정보변경" class="button" onclick="fnShowPanel();"></span>
+		 			</div>
+		 			<div id="account-info">
+		 				<span id="ph-no">전화번호 : 02-1234-5678 /</span> 
+		 				<span id="mb-no">휴대전화 : 010-1234-5678 /</span> 
+		 				<span id="charge-man">담당SV : 홍길동(010-5678-1234)</span>
+		 			</div>
+		 		</div><!-- info end -->
+	 		</div>
+	 	</section>
+	 	
+	 	<!-- 정보 변경 패널 -->
+	 	<section id="info-panel">
+	 		<div id="mody-pw">
+	 			<header class="nv-bord-tit">비밀번호 변경</header>
+	 			<div><p>현재 비밀번호 </p> <input type="password" value="unitas0917"></div>
+	 			<div><p>새 비밀번호 </p> <input type="password" ></div>
+	 			<div><p>새 비밀번호 확인 </p> <input type="password" ></div>
+	 		</div>
+	 		<div id="mody-ph-no">
+	 			<header class="nv-bord-tit">전화번호 변경</header>
+	 			<div><p>현재 전화번호 </p> <input type="text" value="02-786-7838"></div>
+	 			<div><p>새 전화번호 </p> 
+	 					<input type="tel" class="ph-no first" maxlength="3">-
+	 					<input type="tel" class="ph-no" maxlength="4">-
+	 					<input type="tel"class="ph-no" maxlength="4">
+	 			</div>
+	 		</div>
+	 	</section>
+	 	
+	 	
+ 		 <section class="contents">
+ 		 	<header> 
+ 		 		<h1>◎ <span>홍보물신청</span></h1>
+ 		 	</header>
+ 		 	
+			 <article class="" id="material-menus">
+			 	<!-- 화면 왼쪽 메뉴 영역 -->
+		        <div id="menu-nav">
+					<h3>MENU</h3>
+					<p>
+						<button class="menu-all" onclick="fnShowAll()">전체보기</button><button class="my-ord-list" onclick="showOrdList($(this));">주문확인</button>
+					</p>
+					<ul class="menu-nav-main">
+						<li class="main-li"><a href="#" onclick="">POSTER</a>
+							<ul class="menu-nav-sub">
+								<li class="sub-li"><a href="#">BRAND POSTER<span class="hidden icon"> ▶</span></a></li>
+								<li class="sub-li"><a href="#">MENU POSTER<span class="hidden icon"> ▶</span></a></li>
+								<li class="sub-li"><a href="#">EVENT POSTER<span class="hidden icon"> ▶</span></a></li>
+							</ul>
+						</li>
+						<li class="main-li on"><a href="#">FLYER</a>
+							<ul class="menu-nav-sub on">
+								<li class="sub-li on"><a href="#">배달전단<span class="icon"> ▶</span></a></li>
+								<li class="sub-li"><a href="#">베스트메뉴 전단<span class="hidden icon"> ▶</span></a></li>
+								<li class="sub-li"><a href="#">자석 전단<span class="hidden icon"> ▶</span></a></li>
+								<li class="sub-li"><a href="#">이벤트 전단<span class="hidden icon"> ▶</span></a></li>
+								<li class="sub-li"><a href="#">테이블 매트<span class="hidden icon"> ▶</span></a></li>
+							</ul>
+						</li>
+						<li class="main-li"><a href="#">APPLICATION</a>
+							<ul class="menu-nav-sub">
+								<li class="sub-li"><a href="#">도장<span class="hidden icon"> ▶</span></a></li>
+								<li class="sub-li"><a href="#">스티커<span class="hidden icon"> ▶</span></a></li>
+								<li class="sub-li"><a href="#">안내<span class="hidden icon"> ▶</span></a></li>
+								<li class="sub-li"><a href="#">공지<span class="hidden icon"> ▶</span></a></li>
+								<li class="sub-li"><a href="#">명함<span class="hidden icon"> ▶</span></a></li>
+								<li class="sub-li"><a href="#">명찰<span class="hidden icon"> ▶</span></a></li>
+								<li class="sub-li"><a href="#">쿠폰<span class="hidden icon"> ▶</span></a></li>
+								<li class="sub-li"><a href="#">상품권<span class="hidden icon"> ▶</span></a></li>
+							</ul>
+						</li>
+						<li class="main-li"><a href="#">POP</a></li>
+						<li class="main-li"><a href="#">MENU BOARD</a>
+							<ul class="menu-nav-sub">
+								<li><a href="#">메뉴판 케이스<span class="hidden icon"> ▶</span></a></li>
+								<li><a href="#">메뉴판 속지<span class="hidden icon"> ▶</span></a></li>
+								<li><a href="#">메뉴판 나사<span class="hidden icon"> ▶</span></a></li>
+							</ul>
+						</li>
+					</ul>
+		        </div>
+		        
+		        <!-- 화면 오른쪽 페이지 영역 -->
+		        <div class="menu-dtl-page">
+		        	
+		        	<!-- 1. 주문 확인 화면 -->
+		        	<div id="ord-list-area">
+			        	▶ 주문 내역 확인
+			    		<span class="btns"><button class="excelBtn" onclick="">엑셀</button></span>
+			    		<span class="btns"><button class="excelAllBtn" onclick="">전체엑셀</button></span>
+						
+						<div id="search-condition">
+							<!-- 검색기간 -->
+							<div class="search-d">
+					    		<label for="start_search" > 검색 기간 : </label>
+					    		<input class="big_0" name="sDate" type="text" value="전체"/> ~ 
+								<input class="big_0" name="eDate" type="text" value=""/> 
+					  		</div>
+					  		<!-- 기타 검색 조건 -->
+					  		<div class="search-d">
+						  		<label for="conditions" > 진행 상황 : </label>
+					    		<select id="conditions" name="conditions">
+					    			<option>전체</option>
+					    			<option>대기중</option>
+					    			<option>접수완료</option>
+					    			<option>주문인쇄</option>
+					    			<option>배송중</option>
+					    			<option>배송완료</option>
+					    		</select>
+					
+					    		<label for="search-name" > 전단지명 : </label>
+					    		<input id="search-name" name="search-name" type="text" value=""/>
+								
+								<!-- 작업유형 -->
+								<label for="w-type" > 작업 유형 : </label>
+					    		<select id="w-type" name="w-type">	
+					    			<option>전체</option>
+					    			<option>권장형</option>
+					    			<option>맞춤형</option>
+					    		</select>    	
+					    		<span><button class="searchDateBtn" onclick="search_list();">검색</button></span>	
+					  		</div>
+						</div>		        	
+			        	<!-- 테이블 영역 -->
+				  		<div id="ord-list-table" class="table">
+				  		<table id="ord-list-data" width="690" height="320" bgcolor="#c6c6c6" border="0" cellpadding="1" cellspacing="1" style=""> 
+				  				
+								<tr bgcolor="#b2b19c" align="center">
+									<th style="border-bottom: 1px solid #797979;" width="50"><font color="#ffffff"><b>순번</b></font></th>
+									<th style="border-bottom: 1px solid #797979;" width="100"><font color="#ffffff"><b>가맹점명</b></font></th>
+									<th style="border-bottom: 1px solid #797979;" width="80"><font color="#ffffff"><b>전화번호</b></font></th>
+									<th style="border-bottom: 1px solid #797979;" width="90"><font color="#ffffff"><b>품목구분</b></font></th>
+									<th style="border-bottom: 1px solid #797979;" width="50"><font color="#ffffff"><b>수량</b></font></th>
+									<th style="border-bottom: 1px solid #797979;" width="80"><font color="#ffffff"><b>작업유형</b></font></th>
+									<th style="border-bottom: 1px solid #797979;" width="80"><font color="#ffffff"><b>주문상황</b></font></th>
+									<th style="border-bottom: 1px solid #797979;" width="80"><font color="#ffffff"><b>주문일시</b></font></th>
+									<th style="border-bottom: 1px solid #797979;" width="80"><font color="#ffffff"><b>상세내역</b></font></th>
+								</tr>
+	
+								<!-- 데이터 최대 8줄 -->
+								<tr class="data" align="center" bgcolor="#ffffff">
+									<td>1</td>
+									<td>유니타스1호점</td>
+									<td>02-786-7838</td>
+									<td>배달전단지</td>
+									<td>2 set</td>
+									<td>권장형</td>
+									<td>주문인쇄</td>
+									<td>2015-03-10</td>
+									<td><font color="#fb2a2a">시안확인</font></td>
+								</tr>
+								<tr class="data" align="center" bgcolor="#ffffff">
+									<td>2</td>
+									<td>유니타스1호점</td>
+									<td>02-786-7838</td>
+									<td>자석전단지</td>
+									<td>10 set</td>
+									<td>맞춤형</td>
+									<td>배송중</td>
+									<td>2015-03-10</td>
+									<td><font color="#fb2a2a">시안확인</font></td>
+								</tr>
+								<tr class="data" align="center" bgcolor="#ffffff">
+									<td>3</td>
+									<td>유니타스1호점</td>
+									<td>02-786-7838</td>
+									<td>명함</td>
+									<td>1 set</td>
+									<td>맞춤형</td>
+									<td>배송완료</td>
+									<td>2015-03-10</td>
+									<td><font color="#fb2a2a">시안확인</font></td>
+								</tr>
+								<tr class="data" align="center" bgcolor="#ffffff">
+									<td>4</td>
+									<td>유니타스1호점</td>
+									<td>02-786-7838</td>
+									<td>스티커</td>
+									<td>2 set</td>
+									<td>권장형</td>
+									<td>주문인쇄</td>
+									<td>2015-03-10</td>
+									<td><font color="#fb2a2a">시안확인</font></td>
+								</tr>
+								<tr class="data" align="center" bgcolor="#ffffff">
+									<td>5</td>
+									<td>유니타스1호점</td>
+									<td>02-786-7838</td>
+									<td>스티커</td>
+									<td>2 set</td>
+									<td>권장형</td>
+									<td>주문인쇄</td>
+									<td>2015-03-10</td>
+									<td><font color="#fb2a2a">시안확인</font></td>
+								</tr>
+								<tr class="data" align="center" bgcolor="#ffffff">
+									<td>6</td>
+									<td>유니타스1호점</td>
+									<td>02-786-7838</td>
+									<td>스티커</td>
+									<td>2 set</td>
+									<td>권장형</td>
+									<td>주문인쇄</td>
+									<td>2015-03-10</td>
+									<td><font color="#fb2a2a">시안확인</font></td>
+								</tr>
+								<tr class="data" align="center" bgcolor="#ffffff">
+									<td>7</td>
+									<td>유니타스1호점</td>
+									<td>02-786-7838</td>
+									<td>배달전단지</td>
+									<td>2 set</td>
+									<td>권장형</td>
+									<td>주문인쇄</td>
+									<td>2015-03-10</td>
+									<td><font color="#fb2a2a">시안확인</font></td>
+								</tr>
+								<tr class="data" align="center" bgcolor="#ffffff">
+									<td>8</td>
+									<td>유니타스1호점</td>
+									<td>02-786-7838</td>
+									<td>배달전단지</td>
+									<td>2 set</td>
+									<td>권장형</td>
+									<td>주문인쇄</td>
+									<td>2015-03-10</td>
+									<td><font color="#fb2a2a">시안확인</font></td>
+								</tr>
+				  			</table>	
+				  			<!-- 페이징 표시 -->
+					  		<div class="paging">
+							    <ul class="numbering">
+							        <li class="f"><a href="#">◁</a></li>
+							        <li class="p"><a href="#">PREV</a></li>
+							        <li><a class="now" href="#">1</a></li>
+							        <li><a href="#">2</a></li>
+							        <li><a href="#">3</a></li>
+							        <li><a href="#">4</a></li>
+							        <li class="last"><a href="#">5</a></li>
+							        <li class="n"><a href="#">NEXT</a></li>
+							        <li class="l"><a href="#">▷</a></li>
+							   	</ul>
+							</div>
+				  		</div>
+				  		<!-- 테이블 끝 -->
+			  		</div><!-- 1. 주문확인 끝 -->
+			  		
+			  		<!-- 2. 전단지 메인 -->
+			  		<div id="material-main">
+			  			<section>
+			  				<img src="assets/images/design/sample1.jpg" width="200" height="280" alt="전단지 이미지" align="middle">
+			  				<p class="p-title">[2015 new]전단지 타입 A</p>
+			  				<p>사이즈 : 18.2cm * 25.7cm</p>
+			  				<p>수량 : 800장</p>
+			  				<p>가격 : \84,700</p>
+			  				<button class="redBtn" type="button" onclick="fnShowDetail();" >상세보기</button>
+			  			</section>
+			  			<section>
+			  				<img src="assets/images/design/sample1.jpg" width="200" height="280" alt="전단지 이미지" align="middle">
+			  				<p class="p-title">[2015 new]전단지 타입 B</p>
+			  				<p>사이즈 : 18.2cm * 25.7cm</p>
+			  				<p>수량 : 800장</p>
+			  				<p>가격 : \84,700</p>
+			  				<button class="redBtn" type="button" onclick="fnShowDetail();" >상세보기</button>
+			  			</section>
+			  			<section>
+			  				<img src="assets/images/design/sample1.jpg" width="200" height="280" alt="전단지 이미지" align="middle">
+			  				<p class="p-title">[2015 new]전단지 타입 C</p>
+			  				<p>사이즈 : 18.2cm * 25.7cm</p>
+			  				<p>수량 : 800장</p>
+			  				<p>가격 : \84,700</p>
+			  				<button class="redBtn" type="button" onclick="fnShowDetail();" >상세보기</button>
+			  			</section>
+			  			<section>
+			  				<img src="assets/images/design/sample1.jpg" width="200" height="280" alt="전단지 이미지" align="middle">
+			  				<p class="p-title">[2015 new]전단지 타입 D</p>
+			  				<p>사이즈 : 18.2cm * 25.7cm</p>
+			  				<p>수량 : 800장</p>
+			  				<p>가격 : \84,700</p>
+			  				<button class="redBtn" type="button" onclick="fnShowDetail();" >상세보기</button>
+			  			</section>
+			  		</div>
+		        </div>
+	        </article>
+		 </section>
+ 		 
+ 		 
+ 		<!-- modal popup -->
+	 	<div class="overlay-bg8" >
+	 		<div class="dtl-pop" id="pop-order-dtl">
+	 			<div id="pop-order-dtl-tit">[2015 new] 전단지 타입 B 선택</div>
+				<section id="left-img">
+					<img src="assets/images/design/prom1.png" width="520" height="399" id="" onclick="" alt="전단지 앞뒤"/>
+					
+				</section>		
+				
+				<section id="right-info">
+	 			<img src="assets/images/close.png" id="btnCloseLayer" onclick="$('.overlay-bg8').hide()" alt="닫기 버튼">
+					<p>사이즈 : 18.2cm * 25.7cm</p>
+	  				<p>수량 : 800장 * 1set</p>
+	  				<p>가격 : \84,700</p>
+					<hr>
+					<p>▷ 인새사용문구</p>
+					<textarea rows="6" cols="40"></textarea>
+					<p>▷ 추가요청사항</p>
+					<textarea rows="4" cols="40"></textarea>
+					<hr><br>
+					<p style="font-weight: bold;">주문수량 : 
+						<select>
+						<option>1 set</option>
+						<option>2 set</option>
+						</select>
+						주문금액 : <span>169,400원</span>
+					</p>
+					<p style=" text-align: center; margin-top: 50px;"><button class="redBtn" id="btnOrd" type="button" onclick="location.href='flyer-cart.html'" >주문하기</button></p>
+			  			
+				</section>				
+	 		</div>
+	 	</div>
+	</div><!-- end of wrap -->
+</body>
+</html>

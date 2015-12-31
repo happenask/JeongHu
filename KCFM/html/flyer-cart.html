@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=9" /> <!-- 문서모드 IE9 표준 호환 / content="IE=edge" 최신으로 렌덩링-->
+ 	<meta name="keywords" content="" /><!-- 검색용 키워드 -->
+ 	<meta name="description" content="스쿨푸드 PRM 서비스입니다." /><!-- 페이지 설명 -->
+	<title>홍보물신청</title>  
+	
+	<link href="assets/css/common.css" rel="stylesheet" type="text/css" />
+	<link href="assets/css/style.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+	
+	<!-- IE8 이하에서 미디어 쿼리(Media Query) 사용 지원 -->
+	<!--[if lt IE 9]><script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+    <!-- IE 8 이하에서 HTML5 태그 지원하도록 스크립트 링크 -->
+    <!-- 참고 글 : http://www.cmsfactory.net/node -->
+    <!--[if lt IE 9]><script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script><![endif]-->
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+	<script type="text/javascript" src="assets/js/jquery.ui.datepicker-ko.js"></script>
+	<script type="text/javascript" src="assets/js/calendar2.js"></script>
+    <script type="text/javascript" src="assets/js/style.js"></script>
+     
+    <script type="text/javascript">
+    $(document).ready(function(){ 
+    
+    });
+    
+
+    function fnShowAll(){
+	  //.slideToggle( [duration ] [, complete ] )
+		//$(".menu-nav-sub").slideToggle("slow");
+	  $(".menu-nav-sub").each(function(){
+	    	$(this).addClass("on");
+	    });
+  	$("#ord-list-area").hide();
+	$("#material-main").show();
+    }
+    function fnMenuSelect($this){
+  	  //.slideToggle( [duration ] [, complete ] )
+  		//$this.find(".menu-nav-sub").slideToggle("slow");
+  	    $this.parent().find(".menu-nav-sub").each(function(){
+  	    	$(this).removeClass("on"); 
+  	    });
+  		$this.find(".menu-nav-sub").addClass("on");
+    	$("#ord-list-area").hide();
+    	$("#material-main").show();
+      }
+    
+    function fnShowDetail(){
+
+		var browserHeight = document.documentElement.height;
+		var browserWidth = document.documentElement.offsetWidth;
+		
+		$(".overlay-bg8").height(browserHeight);
+		$(".dtl-pop").css("left",browserWidth/2 - 450);//image size = 40*40
+		$(".overlay-bg8").show();
+		$(".dtl-pop").show(); 
+    }
+    
+    function showOrdList($this){
+    	$("#material-main").hide();
+    	$("#ord-list-area").show();
+    }
+    </script>
+</head>
+
+<body>
+ 	<div id="wrap" >
+	 	<section class="header-bg">
+	 	<div id="header">
+	 		<header>
+	 			<h1>헤더-타이틀</h1>
+	 			<span id="logo">유니포스-로고</span>
+	 			<span id="btns">
+	 				<input type="button" id="logout-btn" class="rd-bord-btn" value="로그아웃" class="button" onclick="location.href='index.html'">
+	 				<input type="button" id="main-btn" class="nv-bord-btn" value="MAIN" class="button" onclick="location.href='main.html';">
+	 				</span>
+	 			
+	 			<nav class="gnb">
+	 				<ul class="topmenu">
+	 					<li class="disable"><a href="#">전자계약</a></li>
+	 					<li><a href="transactional-info.html">거래내역</a>
+	 						<ul class="submenu">
+								<li><a href="transactional-info.html?tabNo=1">매입 현황</a></li>
+								<li><a href="transactional-info.html?tabNo=2">여신 현황</a></li>
+								<li><a href="transactional-info.html?tabNo=3">재고 현황</a></li>
+								<li><a href="transactional-info.html?tabNo=4">카드 승인 내역</a></li>
+								<li><a href="transactional-info.html?tabNo=5">매출 현황</a></li>
+							</ul>
+						</li>
+	 					<li  class="active"><a href="prom-material.html">홍보물신청</a>
+<!-- 	 						<ul class="submenu">
+								<li><a href="prom-material.html?tabNo=1">인쇄사용문구</a></li>
+								<li><a href="prom-material.html?tabNo=2">전단지종류</a></li>
+								<li><a href="prom-material.html?tabNo=3">전단지선택</a></li>
+							</ul> -->
+	 					</li>
+	 					<li class="disable"><a href="#">메세지전송</a></li>
+	 					<li><a href="tax-bill.html ">세금계산서</a>
+	 						<ul class="submenu">
+								<li><a href="tax-bill.html?tabNo=A">스쿨푸드</a></li>
+								<li><a href="tax-bill.html?tabNo=B">Z.POS</a></li>
+								
+							</ul>
+	 					</li>
+	 					<li><a href="cust-comment.html">고객의소리</a></li>
+	 					<li><a href="call-center.html">콜센터</a>
+	 						<ul class="submenu">
+								<li><a href="call-center.html?tabNo=A">매출통계</a> </li>
+								<li><a href="call-center.html?tabNo=B">배달시간관리</a></li>
+								<li><a href="call-center.html?tabNo=C">판매상품관리</a></li>
+							</ul>
+	 					</li>
+	 					<li class="disable"><a href="#">상품권</a></li>
+	 				</ul>
+	 			</nav>
+	 		</header>
+	 		</div>
+	 		
+	 		<div id="info-bg">
+		 		<div id="info">
+		 			<div id="account">
+		 				<span>스쿨푸드 유니타스 1호점</span>
+		 				<span id="btn"><input type="button" id="mody-btn" class="nv-bord-btn" value="정보변경" class="button" onclick="fnShowPanel();"></span>
+		 			</div>
+		 			<div id="account-info">
+		 				<span id="ph-no">전화번호 : 02-1234-5678 /</span> 
+		 				<span id="mb-no">휴대전화 : 010-1234-5678 /</span> 
+		 				<span id="charge-man">담당SV : 홍길동(010-5678-1234)</span>
+		 			</div>
+		 		</div><!-- info end -->
+	 		</div>
+	 	</section>
+	 	
+	 	<!-- 정보 변경 패널 -->
+	 	<section id="info-panel">
+	 		<div id="mody-pw">
+	 			<header class="nv-bord-tit">비밀번호 변경</header>
+	 			<div><p>현재 비밀번호 </p> <input type="password" value="unitas0917"></div>
+	 			<div><p>새 비밀번호 </p> <input type="password" ></div>
+	 			<div><p>새 비밀번호 확인 </p> <input type="password" ></div>
+	 		</div>
+	 		<div id="mody-ph-no">
+	 			<header class="nv-bord-tit">전화번호 변경</header>
+	 			<div><p>현재 전화번호 </p> <input type="text" value="02-786-7838"></div>
+	 			<div><p>새 전화번호 </p> 
+	 					<input type="tel" class="ph-no first" maxlength="3">-
+	 					<input type="tel" class="ph-no" maxlength="4">-
+	 					<input type="tel"class="ph-no" maxlength="4">
+	 			</div>
+	 		</div>
+	 	</section>
+	 	
+	 	
+ 		 <section class="contents">
+ 		 	<header> 
+ 		 		<h1>◎ <span>홍보물 신청  ☞  장바구니</span></h1>
+ 		 	</header>
+ 		 	
+			 <article class="" id="material-menus">
+			 	
+		        <!-- 화면 오른쪽 페이지 영역 -->
+		        <div class="cart-div">
+	        		<div id="cart-data" class="table">
+	        			<table id="order-list" width="900" bgcolor="#c6c6c6" border="0" cellpadding="1" cellspacing="1"> 
+			  				<tr bgcolor="#b2b19c" align="center">
+								<th width="40"><b>선택</b></th>
+								<th width="220"><b>상품명</b></th>
+								<th width="120"><b>판매가</b></th>
+								<th width="100"><b>옵션가</b></th>
+								<th width="100"><b>할인</b></th>
+								<th width="100"><b>수량</b></th> 
+								<th width="120"><b>합계</b></th>
+								<th width="100"><b>배송비</b></th>
+							</tr>
+
+							<tr class="data" align="center" bgcolor="#ffffff" height="100">
+								<td bgcolor="#E4F6FF"><input type="checkbox" class="check" alt="" value="" multiple="multiple" checked="checked"></td>
+								<td><a href="javascript:alert('해당 상품 페이지로 이동')">110-7788-0000<br><span>배달 전단지2 - ABCDE 타입</span><br><span><font color="#696969"> 80매 * 1세트</font></span></a></td>
+								<td>89,000</td>
+								<td><font color="#999999">없음</font></td>
+								<td><font color="#FF0000">- 10,000</font></td>
+								<td class="item-count">
+									<input type="number" value="2"> set
+									<button class="modifyBtn" onclick=" ">수정</button>
+								</td>
+								<td>267,000원</td>
+								<td rowspan="3">무료</td>
+							</tr>
+
+							<tr class="data" align="center" bgcolor="#ffffff" height="100">
+								<td bgcolor="#E4F6FF"><input type="checkbox" class="check" alt="" value="" multiple="multiple" checked="checked"></td>
+								<td><a href="javascript:alert('해당 상품 페이지로 이동')">110-7788-0000<br><span>배달 전단지1 - ABCDE 타입</span><br><span><font color="#696969"> 80매 * 1세트</font></span></a></td>
+								<td>89,000</td>
+								<td><font color="#999999">없음</font></td>
+								<td><font color="#999999">0</font></td>
+								<td class="item-count">
+									<input type="number" value="3"> set
+			        				<button class="modifyBtn" onclick=" ">수정</button>
+			        			</td>
+								<td>267,000원</td>
+							</tr>
+
+							<tr class="data" align="center" bgcolor="#ffffff" height="100">
+								<td bgcolor="#E4F6FF"><input type="checkbox" class="check" alt="" value="" multiple="multiple" checked="checked"></td>
+								<td><a href="javascript:alert('해당 상품 페이지로 이동')">110-7788-0000<br><span>배달 전단지5 - ABCDE 타입</span><br><span><font color="#696969"> 80매 * 1세트</font></span></a></td>
+								<td>89,000</td>
+								<td><font color="#999999">없음</font></td>
+								<td><font color="#FF0000">- 10,000</font></td>
+								<td class="item-count">
+									<input type="number" value="3"> set
+			        				<button class="modifyBtn" onclick=" ">수정</button>
+			        			</td>
+								<td>267,000원</td>
+							</tr>
+							
+							<tr class="bottom" bgcolor="#E3E6E6" align="center">
+								<td colspan="2" >
+									<input type="checkbox" class="check-all" name="check-all" alt="" value="all"checked="checked">
+									<label for="check-all">&nbsp;전체선택</label>
+						    		<span class="btns"><button class="deleteAllBtn" onclick="">전체삭제</button></span>
+						    		<span class="btns"><button class="deleteSelBtn" onclick="">선택삭제</button></span>
+								</td>
+								<td colspan="5" class="amount">TOTAL : <b> 801,000</b><span> - 20,000</span><font color="#474746"> + <span>0</span> (배송비)</font></td>
+								<td> &nbsp;</td>
+							</tr>
+						</table>
+	        			
+	        			
+	        			<table id="order-info" width="900" bgcolor="#c6c6c6" border="0" cellpadding="1" cellspacing="1" > 
+			  				<caption> ▶최종 주문 정보 확인</caption>
+							<tr bgcolor="#b2b19c" align="center">
+								<th width="225"><b>상품 가격</b> <font color="#474746">(선택상품 : <span class="cart-count">3</span>개)</font></th>
+								<th width="225"><b>총 할인 금액</b></th>
+								<th width="225"><b>총 배송비</b></th>
+								<th width="225"><b>총 결제 금액</b></th>
+							</tr>
+
+							<tr class="data" align="center" bgcolor="#ffffff" height="100">
+								<td><span> <font size="3"><b>801,000</b></font></span>원</td>
+								<td><span><font size="3" color="#D74040"><b>- 20,000</b></font></span>원</td>
+								<td><span><font size="3"><b>0</b></font></span>원</td>
+								<td bgcolor="#FCFBD9"><span><font size="4" color="#D74040"><b>781,000</b></font></span> 원</td>
+							</tr>
+							<tr height="25" bgcolor="#FFFFFF" align="center">
+								<td colspan="4" ></td>
+							</tr>
+							<tr height="40" bgcolor="#FFFFFF" align="center">
+								<th bgcolor="#b2b19c">배송정보 선택</th>
+								<td colspan="3"  class="addr-check"  align="left" >
+									<input type="checkbox" id="default-addr" name="default-addr"alt="" value="default"checked="checked">
+									<label for="default-addr">&nbsp;기본 배송지</label>
+									
+									<input type="checkbox"  id="new-addr" name="new-addr" alt="" value="new">
+									<label for="new-addr">&nbsp;신규 배송지</label>
+									
+									<input type="checkbox"  id="past-addr" name="past-addr" alt="" value="past">
+									<label for="past-addr">&nbsp;이전 배송지</label>
+								</td>
+							</tr>
+							<tr height="40" bgcolor="#FFFFFF" align="center">
+								<th bgcolor="#b2b19c">신청인</th>
+								<td colspan="3" align="left">
+									<input type="text" value="홍길동" readonly="readonly">
+								</td>
+							</tr>
+							<tr height="40" bgcolor="#FFFFFF" align="center">
+								<th bgcolor="#b2b19c">배송지</th>
+								<td colspan="3"  align="left">
+									<input type="text" id="addr" value="서울시 영등포구 양평동3가 15-1 유니타스 1호점"   readonly="readonly">
+								</td>
+							</tr>
+							<tr height="40" bgcolor="#FFFFFF" align="center">
+								<th bgcolor="#b2b19c">매장전화</th>
+								<td align="left">
+									<input type="text" value="02-786-7838" readonly="readonly">
+								</td>
+								<th bgcolor="#b2b19c">휴대전화</th>
+								<td align="left">
+									<input type="text" value=" 010-1234-5678" readonly="readonly">
+								</td>
+							</tr>
+							<tr height="90" bgcolor="#FFFFFF" align="center">
+								<td colspan="4" ><button class="redBtn" id="btnOrd" type="button" onclick="location.href='flyer-cart.html'" >최종 주문하기</button></td>
+							</tr>
+						</table>
+	        		</div>
+	        		
+	        	</div>
+	        	
+	        	
+	        </article>
+		 </section> 
+ 		 
+ 		 
+ 		<!-- modal popup -->
+	 	<div class="overlay-bg8" >
+	 	</div>
+	</div><!-- end of wrap -->
+</body>
+</html>

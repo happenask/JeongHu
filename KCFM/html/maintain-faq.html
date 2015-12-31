@@ -1,0 +1,264 @@
+
+<!-- 
+/** ############################################################### */
+/** Program ID   : maintain-faq.html                                       														 */
+/** Program Name : maintain-faq	       						                   													 */
+/** Program Desc :   자주하는 질문 관리																					 */
+/** Create Date  :   2015.04.06					              														 */
+/** Update Date  :                                                  															 */
+/** Programmer   :   s.h.e                                           														 */
+/** ############################################################### */
+ -->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=9" /> <!-- 문서모드 IE9 표준 호환 / content="IE=edge" 최신으로 렌덩링-->
+ 	<meta name="keywords" content="" /><!-- 검색용 키워드 -->
+ 	<meta name="description" content="스쿨푸드 PRM 서비스입니다." /><!-- 페이지 설명 -->
+    
+	<title>KCFM 관리자</title>  
+		
+	<link href="../assets/css/common.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+	
+	<!-- IE8 이하에서 미디어 쿼리(Media Query) 사용 지원 -->
+	<!--[if lt IE 9]><script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+    <!-- IE 8 이하에서 HTML5 태그 지원하도록 스크립트 링크 -->
+    <!--[if lt IE 9]><script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script><![endif]-->
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+	<script type="text/javascript" src="../assets/js/jquery.ui.datepicker-ko.js"></script>
+	<script type="text/javascript" src="../assets/js/calendar.js"></script><!-- 달력 시작일, 종료일 세팅 -->
+    <script type="text/javascript" src="../assets/js/style.js"></script>
+    
+    <script type="text/javascript">
+	$(document).ready(function()
+	{ 
+		getCurrent();
+		fnCalendar();
+	});
+	
+	$(function(){
+		$("#btn-left").hover(function(){
+			$("#ic-box-menu2-sub").stop().slideToggle();
+		},function(){
+			$("#ic-box-menu2-sub").stop().slideToggle();
+		});
+	});
+    
+	function fnWriteFaq(pageGb)
+	{
+		location.href= "admin-new-faq.jsp?pageGb="+ pageGb;
+	}
+	
+    </script>
+</head>
+
+<body>
+ 	<div id="wrap" >
+	 	<section class="header-bg">
+	 	<div id="header">
+	 		<header>
+	 			<h1>헤더-타이틀</h1>
+	 			<span id="logo">유니포스-로고</span>
+	 			<span id="btns">
+	 				<input type="button" id="logout-btn" class="rd-bord-btn" value="로그아웃" class="button" onclick="location.href='../index.html'">
+	 				<input type="button" id="main-btn" class="nv-bord-btn" value="메인으로 이동" class="button" onclick="location.href='../main.html'">
+	 				<input type="button" id="account" class="rd-bord-btn" value="정보수정 ▶" class="button" onclick="">
+	 				</span>
+	 			
+	 				<div class="gnb">
+	 					<div id="currentTime">현재 날짜<span> 현재 시간</span></div>
+	 				</div>
+	 		</header>
+	 		</div>
+	 	</section>
+	 	
+	 	<!-- 정보 변경 패널 -->
+<!-- 	 	<section id="info-panel">
+	 		<div id="mody-pw">
+	 			<header class="nv-bord-tit">비밀번호 변경</header>
+	 			<div><p>현재 비밀번호 </p> <input type="password" value="unitas0917"></div>
+	 			<div><p>새 비밀번호 </p> <input type="password" ></div>
+	 			<div><p>새 비밀번호 확인 </p> <input type="password" ></div>
+	 		</div>
+	 		<div id="mody-ph-no">
+	 			<header class="nv-bord-tit">전화번호 변경</header>
+	 			<div><p>현재 전화번호 </p> <input type="text" value="02-786-7838"></div>
+	 			<div><p>새 전화번호 </p> 
+	 					<input type="tel" class="ph-no first" maxlength="3">-
+	 					<input type="tel" class="ph-no" maxlength="4">-
+	 					<input type="tel"class="ph-no" maxlength="4">
+	 			</div>
+	 		</div>
+	 	</section> 
+-->
+	 	
+	 	
+ 		  <section class="contents admin">
+ 		 	<header>
+ 		 		<h1>◎ <span>admistrator service &gt; FAQ(자주하는 질문) 관리</span></h1>
+ 		 	
+	        	<div class="search-d">
+	        		
+		    		<label for="start_search" > ▶ 등록 기간 : </label>
+		    		<input class="big_0" name="sDate" type="text" value="전체"/> ~ 
+					<input class="big_0" name="eDate" type="text" value=""/> 
+		    		<span><button class="searchDateBtn" onclick="search_list();">조회</button></span>
+		    		
+		    		<span><button class="newSubmitBtn" onclick="fnWriteFaq('new');">신규</button></span>
+		  		</div>
+ 		 	</header>
+ 		 	
+ 		 	<div id="cont-admin">
+ 		 		<div class="cont-nav">
+ 		 			<ul class="admin-menu">
+ 		 				<li><a href="admin-main.html">공지사항관리</a></li>
+ 		 				<li><a href="maintain-manual.html">교육자료관리</a></li>
+ 		 				<li><a href="maintain-proposal.html  ">건의사항관리</a></li>
+ 		 				<li><a href="maintain-request.html ">요청사항관리</a></li>
+ 		 				<li class="active"><a href="#">FAQ관리</a></li>
+ 		 				<li><a href="maintain-comment.html">댓글관리</a></li>
+ 		 			</ul>
+ 		 		</div>
+ 		 		<!-- <img alt="ex" src="assets/images/admin-ex.png" width="960" height="500" align="middle"> -->
+ 		 		<div id="cont-list" class="list list-wide">
+ 		 			<p>▶ 검색 된 게시물 <span>10</span>개</p>
+ 		 			<table>
+			  			<col width="6%" />
+			    		<col width="*"/>
+			    		<col width="13%"/>
+			    		<col width="12%"/>
+			    		<col width="8%"/>
+			    		<col width="11%"/>
+			    		<thead>
+			    			<tr>
+			      				<th>번호</th>
+			        			<th>제목</th>
+			        			<th>작성자</th>
+			        			<th>등록일</th>
+			        			<th>조회수</th>
+			        			<th>편집</th>
+			      			</tr>
+			    		</thead>
+			    		<tbody>
+			    			<tr>
+			      				<td>010</td>       
+			        			<td  class="subject faq"><a href="JavaScript:goView('1');">Q: 매장에서 일하고 싶은데 어떻게 하면 되나요?<br><span id="faq-answer">A : 본사 교육 담당자에게 문의 또는 홈페이지 채용공고를 참조해 주세요. </span></a></td>
+			        			<td>admin</td>
+			        			<td>2015-02-14</td>
+			        			<td>59</td>
+			        			<td>
+			        				<button class="deleteBtn" onclick="search_list();">삭제</button>
+			        				<button class="modifyBtn" onclick="fnWriteFaq('modify');">수정</button>
+			        			</td>
+			      			</tr>
+				  			<tr>
+			      				<td>009</td>       
+			        			<td  class="subject faq"><a href="JavaScript:goView('1');">Q: 가맹점 관련 기타문의사항<br><span id="faq-answer">A :그 외 가맹개설과 관련하여 궁금하신 사항은 홈페이지를 통해 문의하시면 성심 성의껏 답변해 드리겠습니다.</span></a></td>
+			        			<td>admin</td>
+			        			<td>2015-02-10</td>
+			        			<td>98</td>
+			        			<td>
+			        				<button class="deleteBtn" onclick="search_list();">삭제</button>
+			        				<button class="modifyBtn" onclick="fnWriteFaq('modify');">수정</button>
+			        			</td>
+			      			</tr>
+			      			<tr>
+			      				<td>008</td>       
+			        			<td  class="subject faq"><a href="JavaScript:goView('1');">Q: 오픈 후 가맹점 사후관리는 어떻게 되나요?<br><span id="faq-answer">A : 본사 슈퍼바이저들의 정기적인 방문을 통해 각 점포의 매출향상과 안정적인 운영을 도와드리고 있습니다.</span></a></td>
+			        			<td>admin</td>
+			        			<td>2015-02-10</td>
+			        			<td>122</td>
+			        			<td>
+			        				<button class="deleteBtn" onclick="search_list();">삭제</button>
+			        				<button class="modifyBtn" onclick="fnWriteFaq('modify');">수정</button>
+			        			</td>
+			      			</tr>
+			      			<tr>
+			      				<td>007</td>       
+			        			<td  class="subject faq"><a href="JavaScript:goView('1');">Q: 가맹계약 후 오픈까지 기간은 얼마나 걸리나요?<br><span id="faq-answer">A : 가맹 계약 이 후 오픈까지는 인테리어 공사 3주~4주, 오픈 할 매장 현장 교육 2주를 포함하여 총 5주~6주 정도 소요됩니다.</span></a></td>
+			        			<td>admin</td>
+			        			<td>2015-02-10</td>
+			        			<td>122</td>
+			        			<td>
+			        				<button class="deleteBtn" onclick="search_list();">삭제</button>
+			        				<button class="modifyBtn" onclick="fnWriteFaq('modify');">수정</button>
+			        			</td>
+			      			</tr>
+			      			<tr>
+			      				<td>006</td>       
+			        			<td  class="subject faq"><a href="JavaScript:goView('1');">Q: 가맹점 관련하여 상담을 받고 싶은데 어떻게 해야 하나요?<br><span id="faq-answer">A : 가맹문의를 원하시면 홈페이지에서 가맹점모집을 클릭하신 후 상담신청하시면 됩니다. 또한, 이메일 dev@unitas.co.kr로 문의하셔도 됩니다.</span></a></td>
+			        			<td>admin</td>
+			        			<td>2015-02-10</td>
+			        			<td>122</td>
+			        			<td>
+			        				<button class="deleteBtn" onclick="search_list();">삭제</button>
+			        				<button class="modifyBtn" onclick="fnWriteFaq('modify');">수정</button>
+			        			</td>
+			      			</tr>
+			    		</tbody>
+			    	</table>
+			    	<!-- 페이징 표시 -->
+			  		<div class="paging">
+					    <ul class="numbering">
+					        <li class="f"><a href="#">◁</a></li>
+					        <li class="p"><a href="#">PREV</a></li>
+					        <li><a class="now" href="#">1</a></li>
+					        <li class="last"><a href="#">2</a></li>
+					        <li class="n"><a href="#">NEXT</a></li>
+					        <li class="l"><a href="#">▷</a></li>
+					   	</ul>
+					</div>
+			  		<!-- 페이징 표시 끝 -->
+			  		
+			  		<!-- 글검색 -->
+			  		<div id="search-option">
+			    		<label for="select_search" class="hidden">검색구분</label>
+			    		<select id="select_search" name="select_search" style="height:20px; width:80px;">
+			    			<option value="">전체</option>
+			    			<option value="title">제목</option>
+			    			<option value="content">내용</option>
+			    			<option value="content">작성자</option>
+			    		</select>
+			    		<label for="search_word" class="hidden">검색어</label>
+			    		<input type="text" id="search_word" name="search_word" value="" style="width:180px;" />
+			    		<span><button class="searchBtn" onclick="search_list();">검색</button></span>
+			  		</div>
+ 		 		</div>
+ 		 	</div><!-- end of cont-admin -->
+ 		 	
+ 		</section>
+ 	
+ 		<!-- modal popup -->
+	 	<div class="overlay-bg-half">
+	 			 	<!-- 정보 변경 패널 -->
+	 	<!-- <section id="info-panel">
+	 		<div id="mody-pw">
+	 			<header class="nv-bord-tit">비밀번호 변경</header>
+	 			<div><p>현재 비밀번호 </p> <input type="password" value="unitas0917"></div>
+	 			<div><p>새 비밀번호 </p> <input type="password" ></div>
+	 			<div><p>새 비밀번호 확인 </p> <input type="password" ></div>
+	 		</div>
+	 		<div id="mody-ph-no">
+	 			<header class="nv-bord-tit">전화번호 변경</header>
+	 			<div><p>현재 전화번호 </p> <input type="text" value="02-786-7838"></div>
+	 			<div><p>새 전화번호 </p> 
+	 					<input type="tel" class="ph-no first" maxlength="3">-
+	 					<input type="tel" class="ph-no" maxlength="4">-
+	 					<input type="tel"class="ph-no" maxlength="4">
+	 			</div>
+	 		</div>
+	 	</section>
+	 	 -->
+	 	
+	 	</div>
+	 	<div class="overlay-bg">
+	 		<img id="loadingImage" src="http://i1.daumcdn.net/cfs.tistory/resource/315/blog/plugins/lightbox/images/loading.gif" style="position: relative; cursor: pointer; top: 340px; left: 477px;display: none; ">
+	 	</div>
+ 	</div><!-- wrap end -->
+ 
+</body>
+</html>

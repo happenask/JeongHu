@@ -1,0 +1,56 @@
+### UbiGateway Configuration ###
+# Basic Info
+osCharset=KSC5601
+baseCharset=US7ASCII
+requestCharset=
+isDeflater=true
+isUnicode=false
+isBase64=true
+utfData=false
+colDim=^t
+rowDim=^n
+info=true
+admin=YWRtaW4=
+adminImgUri=/KHQ/ubireport/image
+# Db Info
+connType=lookup
+dbVendor=
+dbDriver=
+dbUrl=
+dbId=
+dbPw=
+# Path Info
+# licensePath=D:/WEB_ROOT/kyochon-HQ/ubireport/license
+# logPath=D:/WEB_ROOT/kyochon-HQ/ubireport/log
+# xslPath=D:/WEB_ROOT/kyochon-HQ/ubireport/xsl
+# cachePath=D:/WEB_ROOT/kyochon-HQ/ubireport/cache
+
+# Path Info
+# 본인PC의 절대경로로 수정
+licensePath=D:/5.Java/WorkSpace_ROOT/HQSystem/KHQ/WebContent/ubireport/license
+logPath=D:/5.Java/WorkSpace_ROOT/HQSystem/KHQ/WebContent/ubireport/log
+xslPath=D:/5.Java/WorkSpace_ROOT/HQSystem/KHQ/WebContent/ubireport/xsl
+cachePath=D:/5.Java/WorkSpace_ROOT/HQSystem/KHQ/WebContent/ubireport/cache
+
+schedulePath=
+# Log Info
+timeZone=GMT+9
+rowSize=0
+backupStyle=date
+backupPattern=yyyy-MM-dd
+backupSize=0
+debug=true
+# Drm Info
+drmLoadType=nonCache
+drmConfigFilePath=
+# UbiDaemon Info
+ubidaemonIp=localhost
+ubidaemonPort=6996
+# UbiSchedule Info
+fileUrl=
+formUrl=
+dataUrl=
+scheduleUrl=
+email=
+smtp=
+FontRevision=

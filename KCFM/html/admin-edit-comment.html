@@ -1,0 +1,237 @@
+
+<!-- 
+/** ############################################################### */
+/** Program ID   : admin-edit-comment.html                                        														 */
+/** Program Name : admin-edit-comment	       						                   													 */
+/** Program Desc :  관리자 - 덧글 관리 상세																						 */
+/** Create Date  :   2015.04.10						              														 */
+/** Update Date  :                                                  															 */
+/** Programmer   :   s.h.e                                           														 */
+/** ############################################################### */
+ -->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=9" /> <!-- 문서모드 IE9 표준 호환 / content="IE=edge" 최신으로 렌덩링-->
+ 	<meta name="keywords" content="" /><!-- 검색용 키워드 -->
+ 	<meta name="description" content="스쿨푸드 PRM 서비스입니다." /><!-- 페이지 설명 -->
+    
+	<title>KCFM 관리자</title>  
+		
+	<link href="../assets/css/common.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+	
+	<!-- IE8 이하에서 미디어 쿼리(Media Query) 사용 지원 -->
+	<!--[if lt IE 9]><script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+    <!-- IE 8 이하에서 HTML5 태그 지원하도록 스크립트 링크 -->
+    <!--[if lt IE 9]><script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script><![endif]-->
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+	<script type="text/javascript" src="../assets/js/jquery.ui.datepicker-ko.js"></script>
+	<script type="text/javascript" src="../assets/js/calendar.js"></script><!-- 달력 시작일, 종료일 세팅 -->
+    <script type="text/javascript" src="../assets/js/style.js"></script>
+    
+    <script type="text/javascript">
+	$(document).ready(function()
+	{ 
+		getCurrent();
+		fnCalendar();
+		
+		//리스트에서 선택한 글 넘버 
+		var no = getParameter("No");
+		//var gb = getParameter("Gb");
+		console.log(no);
+		
+		$(".no").text(no);
+	});
+	
+	$(function(){
+		$("#btn-left").hover(function(){
+			$("#ic-box-menu2-sub").stop().slideToggle();
+		},function(){
+			$("#ic-box-menu2-sub").stop().slideToggle();
+		});
+	});
+    
+	//html 파라미터 전달
+	getNo = function(no){
+		
+	}
+    </script>
+</head>
+
+<body>
+ 	<div id="wrap" >
+	 	<section class="header-bg">
+	 	<div id="header">
+	 		<header>
+	 			<h1>헤더-타이틀</h1>
+	 			<span id="logo">유니포스-로고</span>
+	 			<span id="btns">
+	 				<input type="button" id="logout-btn" class="rd-bord-btn" value="로그아웃" class="button" onclick="location.href='../index.html'">
+	 				<input type="button" id="main-btn" class="nv-bord-btn" value="메인으로 이동" class="button" onclick="location.href='../main.html'">
+	 				<input type="button" id="account" class="rd-bord-btn" value="정보수정 ▶" class="button" onclick="">
+	 				</span>
+	 			
+	 				<div class="gnb">
+	 					<div id="currentTime">현재 날짜<span> 현재 시간</span></div>
+	 				</div>
+	 		</header>
+	 		</div>
+	 	</section>
+	 	
+ 		  <section class="contents admin">
+ 		 	<header>
+ 		 		<h1>◎ <span>admistrator service &gt; 댓글 관리</span></h1>
+ 		 	
+<!-- 	        	<div class="search-d">
+		    		<label for="condition" > ▶ 구분 : </label>
+		    		<select id="condition" name="condition" style="height:20px; width:100px;">
+		    			<option>전체</option>
+		    			<option>공지사항</option>
+		    			<option>교육자료</option>
+		    			<option>건의사항</option>
+		    		</select>
+		    		
+		    		<label for="start_search" > ▶ 등록 기간 : </label>
+		    		<input class="big_0" name="sDate" type="text" value="전체"/> ~ 
+					<input class="big_0" name="eDate" type="text" value=""/> 
+		    		<span><button class="searchDateBtn" onclick="search_list();">조회</button></span>
+		  		</div> -->
+ 		 	</header>
+ 		 	
+ 		 	<div id="cont-admin">
+ 		 		<div class="cont-nav">
+ 		 			<ul class="admin-menu">
+ 		 				<li><a href="admin-main.html">공지사항관리</a></li>
+ 		 				<li><a href="maintain-manual.html">교육자료관리</a></li>
+ 		 				<li><a href="maintain-proposal.html  ">건의사항관리</a></li>
+ 		 				<li><a href="maintain-request.html ">요청사항관리</a></li>
+ 		 				<li><a href="maintain-faq.html ">FAQ관리</a></li>
+ 		 				<li class="active"><a href="#">댓글관리</a></li>
+ 		 			</ul>
+ 		 		</div>
+ 		 		<!-- <img alt="ex" src="assets/images/admin-ex.png" width="960" height="500" align="middle"> -->
+ 		 		<div id="cont-list" class="list list-wide">
+ 		 			<p>▶ <span class="no"></span>번 <span style="font-weight: bold;">"게시된 원문의 제목입니다!! "</span> 글에 대한 댓글 총 6건<span style="float: right;"><button class="originalBtn" onclick="alert('해당 원문 조회하여 보여주기');">원문조회</button></span></p>
+ 		 			<table>
+			  			<col width="15%"/>
+			    		<col width="*"/>
+			    		<col width="14%"/>
+			    		<col width="12%"/>
+			    		<thead>
+			    			<tr>
+			        			<th>작성자</th>
+			        			<th>댓글</th>
+			        			<th>등록일</th>
+			        			<th>편집</th>
+			      			</tr>
+			    		</thead>
+			    		<tbody>
+			    			<tr>
+			      				<td>홍길동</td>       
+			      				<td  class="subject">고객이 작성한 댓글입니다. 편집이 불가능합니다..고객이 작성한 댓글입니다. 편집이 불가능합니다..고객이 작성한 댓글입니다. 편집이 불가능합니다.. </td>
+			        			<td>2015-03-31</td>
+			        			<td>
+			        				<button class=deleteBtn onclick="search_list();">삭제</button>
+			        			</td>
+			      			</tr>
+			    			<tr>
+			      				<td>관리자</td>       
+			      				<td  class="subject"><textarea name="" class="edit admin-text">관리자가 작성한 댓글입니다. 편집이 가능합니다!! 관리자가 작성한 댓글입니다. 편집이 가능합니다!!관리자가 작성한 댓글입니다.</textarea></td>
+			        			<td>2015-03-31</td>
+			        			<td>
+			        				<button class=deleteBtn onclick="search_list();">삭제</button>
+			        				<button class="modifyBtn" onclick="search_list();">수정</button>
+			        			</td>
+			      			</tr>
+				  			<tr>
+			      				<td>홍길동</td>       
+			      				<td  class="subject">고객이 작성한 댓글입니다. 편집이 불가능합니다..</td>
+			        			<td>2015-03-29</td>
+			        			<td>
+			        				<button class=deleteBtn onclick="search_list();">삭제</button>
+			        			</td>
+			      			</tr>
+				  			<tr>
+			      				<td>고길동</td>       
+			      				<td  class="subject">고객이 작성한 댓글입니다. 편집이 불가능합니다..고객이 작성한 댓글입니다. 편집이 불가능합니다..</td>
+			        			<td>2015-03-28</td>
+			        			<td>
+			        				<button class=deleteBtn onclick="search_list();">삭제</button>
+			        			</td>
+			      			</tr>
+				  			<tr>
+			      				<td>관리자</td>       
+			      				<td  class="subject"><textarea name="" class="edit admin-text">관리자가 작성한 댓글입니다. 편집이 가능합니다!! 관리자가 작성한 댓글입니다. 편집이 가능합니다!!관리자가 작성한 댓글입니다.</textarea></td>
+			        			<td>2015-03-26</td>
+			        			<td>
+			        				<button class=deleteBtn onclick="search_list();">삭제</button>
+			        				<button class="modifyBtn" onclick="search_list();">수정</button>
+			        			</td>
+			      			</tr>
+				  			<tr>
+			      				<td>홍길동</td>       
+			      				<td  class="subject">고객이 작성한 댓글입니다. 편집이 불가능합니다..고객이 작성한 댓글입니다. 편집이 불가능합니다..고객이 작성한 댓글입니다. 편집이 불가능합니다..고객이 작성한 댓글입니다. 편집이 불가능합니다..고객이 작성한 댓글입니다. 편집이 불가능합니다..</td>
+			        			<td>2015-03-25</td> 
+			        			<td>
+			        				<button class=deleteBtn onclick="search_list();">삭제</button>
+			        			</td>
+			      			</tr>
+			    		</tbody>
+			    	</table>
+			    	<!-- 페이징 표시 -->
+			  		<div class="paging">
+					    <ul class="numbering">
+					        <li class="f"><a href="#">◁</a></li>
+					        <li class="p"><a href="#">PREV</a></li>
+					        <li><a class="now" href="#">1</a></li>
+					        <li class="last"><a href="#">2</a></li>
+					        <li class="n"><a href="#">NEXT</a></li>
+					        <li class="l"><a href="#">▷</a></li>
+					   	</ul>
+					</div>
+			  		<!-- 페이징 표시 끝 -->
+			  		
+					   	
+				 		<p class="btn">
+				 			<button type="button" class="golistBtn" onclick="location.href='maintain-comment.html'">목록</button>
+				 			<button type="button" class="saveBtn" onclick=";">저장</button>
+				 		</p>
+ 		 		</div>
+ 		 	</div><!-- end of cont-admin -->
+ 		 	
+ 		</section>
+ 	
+ 		<!-- modal popup -->
+	 	<div class="overlay-bg-half">
+	 			 	<!-- 정보 변경 패널 -->
+	 	<!-- <section id="info-panel">
+	 		<div id="mody-pw">
+	 			<header class="nv-bord-tit">비밀번호 변경</header>
+	 			<div><p>현재 비밀번호 </p> <input type="password" value="unitas0917"></div>
+	 			<div><p>새 비밀번호 </p> <input type="password" ></div>
+	 			<div><p>새 비밀번호 확인 </p> <input type="password" ></div>
+	 		</div>
+	 		<div id="mody-ph-no">
+	 			<header class="nv-bord-tit">전화번호 변경</header>
+	 			<div><p>현재 전화번호 </p> <input type="text" value="02-786-7838"></div>
+	 			<div><p>새 전화번호 </p> 
+	 					<input type="tel" class="ph-no first" maxlength="3">-
+	 					<input type="tel" class="ph-no" maxlength="4">-
+	 					<input type="tel"class="ph-no" maxlength="4">
+	 			</div>
+	 		</div>
+	 	</section>
+	 	 -->
+	 	
+	 	</div>
+	 	<div class="overlay-bg">
+	 		<img id="loadingImage" src="http://i1.daumcdn.net/cfs.tistory/resource/315/blog/plugins/lightbox/images/loading.gif" style="position: relative; cursor: pointer; top: 340px; left: 477px;display: none; ">
+	 	</div>
+ 	</div><!-- wrap end -->
+ 
+</body>
+</html>

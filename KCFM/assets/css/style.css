@@ -1,0 +1,78 @@
+/******************************************************************************** 
+	탭 네비게이션 메뉴 스타일
+********************************************************************************/
+	@font-face{
+		font-family:NanumGothic;
+		src:url('../font/NanumGothic.ttf');
+	}
+	
+ul#tabMenu2,ul#tabMenu2 ul{
+	margin:0;list-style:none;padding:0;/* background-color:#dedede;border-width:1px;border-style:solid;border-color:#5f5f5f;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px; */}
+ul#tabMenu2 ul{
+	display:none;position:absolute;right:0;top:100%;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=85)";opacity:0.85;-moz-box-shadow:-3.5px 3.5px 5px #000000;-webkit-box-shadow:-3.5px 3.5px 5px #000000;box-shadow:-3.5px 3.5px 5px #000000;background-color:#3474ff;border-radius:6px;-moz-border-radius:6px;-webkit-border-radius:6px;border-color:#d4d4d4;padding:0 10px 10px;filter:alpha(opacity=85)}
+ul#tabMenu2 li:hover>*{
+	display:block;}
+ul#tabMenu2 li{
+	position:relative;display:block;white-space:nowrap;font-size:0;float:left;}
+ul#tabMenu2 li:hover{
+	z-index:1;}
+ul#tabMenu2 ul ul{
+	opacity:1;}
+
+/* 탭이 3칸인 경우 */
+ul#tabMenu2{
+	font-size:0;width:40%;z-index:180;position:relative;display:inline-block;zoom:1;padding:0 0%;margin:0 0%;
+	*display:inline;*padding-right:1.56%;}
+* html ul#tabMenu2 li a{/* height:16px;line-height:16px; */
+	display:inline-block;}
+ul#tabMenu2>li{
+	margin:0; width:32%;}
+ul#tabMenu2 li.toplast{
+	width:33%;}
+	
+ul#tabMenu2.reqmenu{	width:54%;}
+/* 탭이 4칸인 경우 너비 조절 ul#tabMenu2.reqmenu>li{margin:0; width:24%;}*/	
+/* 탭이 5칸인 경우 너비 조절*/
+ul#tabMenu2.reqmenu>li{margin:0; width:20%;}
+ul#tabMenu2.reqmenu li.toplast{width:20%;}
+
+body:first-of-type ul#tabMenu2{
+	display:inline-table;border-spacing:0px 0;}
+body:first-of-type ul#tabMenu2>li{
+	display:table-cell;float:none;} 
+ul#tabMenu2 a{
+	display:block;vertical-align:middle;text-align:center;text-decoration:none;
+	font:normal 13px NanumGothic;color:white;/* text-shadow:#FFF 0 0 1px; */
+	cursor:pointer;padding:8px 6px; background-color:#2d3f52; border-width:0 0 0 1px;border-style:solid;border-color:#C0C0C0;
+	border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;
+}
+	
+ul#tabMenu2 ul li{
+	float:none;margin:10px 0 0;}
+ul#tabMenu2 a:hover,ul#tabMenu2 .on a{ /* , ul#tabMenu2 li a.pressed,ul#tabMenu2 a:active, ul#tabMenu2 a:focus */
+	 color:#fd685a; font-weight: bold;
+    -webkit-box-shadow: 0px 0px 4px #666666 inset;  outline-style:none;
+    
+} ul#tabMenu2 .on a{background-color:white; border:1px solid #adadad; color:#b81b38;}
+
+
+/* ul#tabMenu2 ul a{
+	text-align:left;padding:4px;background-color:#3474ff;background-image:none;border-width:0;border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;font:bold 14px Arial,Helvetica,sans-serif;color:#ffffff;text-decoration:none;}
+
+ul#tabMenu2 li:hover>a,ul#tabMenu2 li a.pressed{
+	background-color:#e5e5e5;border-color:#C0C0C0;border-style:solid;color:#a1253c;text-shadow:#FFF 0 0 1px;background-image:url("mainbk.png");background-position:0 100px;text-decoration:none;}
+
+ul#tabMenu2 span{
+	display:block;overflow:visible;background-position:left center;background-repeat:no-repeat;padding-left:0px;}
+ul#tabMenu2 ul li:hover>a,ul#tabMenu2 ul li a.pressed{
+	background-color:#FFFFFF;background-image:none;color:#0978b3;text-decoration:none;}
+ul#tabMenu2 li.topfirst>a{
+	border-radius:8px 0 0 8px;-moz-border-radius:8px 0 0 8px;-webkit-border-radius:8px;-webkit-border-top-right-radius:0;-webkit-border-bottom-right-radius:0;-moz-transition:all 0.5s;-webkit-transition:all 0.5s;-o-transition:all 0.5s;}
+ul#tabMenu2 li.topmenu>a{
+	-moz-transition:all 0.5s;-webkit-transition:all 0.5s;-o-transition:all 0.5s;}
+ul#tabMenu2 li.toplast>a{
+	border-radius:0 8px 8px 0;-moz-border-radius:0 8px 8px 0;-webkit-border-radius:0;-webkit-border-top-right-radius:8px;-webkit-border-bottom-right-radius:8px;-moz-transition:all 0.5s;-webkit-transition:all 0.5s;-o-transition:all 0.5s;}
+ */
+@-moz-document url-prefix(){body:first-of-type ul#tabMenu2{display:inline-block}
+body:first-of-type ul#tabMenu2>li{display:block;float:left !important;}}
+

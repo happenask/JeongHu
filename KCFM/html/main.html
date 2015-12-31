@@ -1,0 +1,232 @@
+
+<!-- 
+/** ############################################################### */
+/** Program ID   : main.jsp                                         														 */
+/** Program Name :  home	       						                   													 */
+/** Program Desc :  프로그램 메인 																						 */
+/** Create Date  :   2015.02.10						              														 */
+/** Update Date  :                                                  															 */
+/** Programmer   :   s.h.e                                           														 */
+/** ############################################################### */
+ -->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=9" /> <!-- 문서모드 IE9 표준 호환 / content="IE=edge" 최신으로 렌덩링-->
+	<meta name=”viewport” content=”width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no” />
+ 	<meta name="keywords" content="" /><!-- 검색용 키워드 -->
+ 	<meta name="description" content="스쿨푸드 PRM 서비스입니다." /><!-- 페이지 설명 -->
+    
+	<title>KCFM</title>  
+		
+	<link href="assets/css/common.css" rel="stylesheet" type="text/css" />
+	<!-- IE8 이하에서 미디어 쿼리(Media Query) 사용 지원 -->
+	<!--[if lt IE 9]><script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+    <!-- IE 8 이하에서 HTML5 태그 지원하도록 스크립트 링크 -->
+    <!--[if lt IE 9]><script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script><![endif]-->
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="assets/js/style.js"></script>
+    
+    <script type="text/javascript">
+	$(document).ready(function()
+	{ 
+	});
+	
+	$(function(){
+		$("#btn-left").hover(function(){
+			$("#ic-box-menu2-sub").stop().slideToggle();
+		},function(){
+			$("#ic-box-menu2-sub").stop().slideToggle();
+		});
+	});
+    
+	function goWrite(pageGb)
+	{
+		var inCurPage  = $("#inCurPage").val();
+		var inCurBlock = $("#inCurBlock").val();
+		
+		var f = document.form1;
+		location.href= "proposal-write.jsp?pageGb="+ pageGb;
+	}
+	
+	function goAdmin()
+	{
+		alert("관리자 계정 접속 또는 별도 비밀번호 입력 후 이동합니다!!");
+		
+		location.href= "admin-page/admin-main.html";
+		//alert("!");
+	}
+    </script>
+</head>
+
+<body>
+ 	<div id="wrap" >
+	 	<section class="header-bg">
+  			<!-- header include-->
+	 		<script type="text/javascript">	$(".header-bg").load("include/header.html"); </script> 
+	 	</section>
+	 	
+	 	<!-- 정보 변경 패널 -->
+	 	<section id="info-panel">
+  			<!-- info-panel include-->
+	 		<script type="text/javascript">	$("#info-panel").load("include/edit-info.html"); </script> 
+	 	</section>
+	 	 
+	 	
+ 		 <section id="main">
+ 		 	<div class="up-stairs">
+	         	<article class="left">
+	         		<header id="h-menu-1">공지 사항
+	         			<input type="button" id="" class="nv-bord-btn more-btn" value="more" class="button" onclick="location.href='notice.html'">
+	 				</header>
+	         		<div>
+						<ol>
+							<li>
+								<span class="title"><a href="detail-view.jsp?pageGb=notice&no=1">[title1]</a></span><br>
+								<span class="summary">description</span>
+								<span class="date">[2015년 1월 30일]</span>
+							</li>
+							<li>
+								<span class="title"><a href="detail-view.jsp?pageGb=notice&no=2">[title2]</a></span><br>
+								<span class="summary">description</span>
+								<span class="date">[2015년 1월 30일]</span>
+							</li>
+							<li>
+								<span class="title"><a href="detail-view.jsp?pageGb=notice&no=3">[title3]</a></span><br>
+								<span class="summary">description</span>
+								<span class="date">[2015년 1월 30일]</span>
+							</li>
+							<li>
+								<span class="title"><a href="detail-view.jsp?pageGb=notice&no=4">[title4]</a></span><br>
+								<span class="summary">description</span>
+								<span class="date">[2015년 1월 30일]</span>
+							</li>
+							<li>
+								<span class="title"><a href="detail-view.jsp?pageGb=notice&no=5">[title5]</a></span><br>
+								<span class="summary">description</span>
+								<span class="date">[2015년 1월 30일]</span>
+							</li>
+						</ol>
+	         		</div>
+	 			</article>
+	 			
+	         	<article class="right">
+	         		<header id="h-menu-2">교육 자료
+	         			<input type="button" id="" class="nv-bord-btn more-btn" value="more" class="button" onclick="location.href='training-manual.html'">
+	         		</header>
+	         		<div>
+						<ul>
+					<li><span class="title">교육자료 A</span>&nbsp;<a href="detail-view.jsp?pageGb=video&no=A video"><img src="assets/images/view.gif" width="56" height="24" align="bottom" alt="영상보기"/></a></li>
+					<li><span class="title">교육자료 B</span>&nbsp;<a href="detail-view.jsp?pageGb=video&no=B video"><img src="assets/images/view.gif" width="56" height="24" align="bottom" alt="영상보기"/></a></li>
+					<li><span class="title">교육자료 C</span>&nbsp;<a href="detail-view.jsp?pageGb=video&no=C video"><img src="assets/images/view.gif" width="56" height="24" align="bottom"  alt="영상보기"/></a></li>
+					<li><span class="title">교육자료 D</span>&nbsp;<a href="detail-view.jsp?pageGb=video&no=D video"><img src="assets/images/view.gif" width="56" height="24" align="bottom" alt="영상보기"/></a></li>
+					<!-- <li><span class="title">교육자료 4편</span>&nbsp;<a href="http://videofarm.daum.net/controller/video/viewer/Video.html?vid=vaef3fdFdfJJJjjZDlSABqA&play_loc=undefined" target="mv2" onclick="$('#public_tv').show();"><img src="assets/images/view.gif" width="56" height="24" align="bottom" alt="영상보기"/></a></li> -->
+				</ul>
+	         		</div>
+	 			</article>
+			 	<!-- 동영상재생
+			  	<div id="public_tv" class="overlay-player">
+	 				<img src="assets/images/close.png" id="btnCloseLayer" 
+										style="cursor:pointer;position:absolute;right:-1px;top:-1px; z-index: 1000;" onclick="$('#public_tv').hide();" alt="닫기 버튼">
+					<iframe name="mv2" title='ppj1' width='352px' height='265px' src='http://videofarm.daum.net/controller/video/viewer/Video.html?vid=veeaaIh2i6sDTQQIsspphs2&play_loc=undefined' frameborder='0' scrolling='no' allowfullscreen></iframe>
+				</div> -->
+	
+ 			</div>
+ 		 	<div class="dw-stairs">
+	         	<article class="left">
+	         		<header id="h-menu-3">매장 건의 사항
+	         			<input type="button" id="" class="nv-bord-btn more-btn" value="more" class="button" onclick="location.href='proposal-list.html'">
+	         			<input type="button" id="" class="nv-bord-btn write-btn" value="write" class="button" onclick="goWrite('매장 건의')">
+	         		</header>
+	         		<div>
+	         			<ol>
+							<li class="first">
+								<span class="title lager"><a href="detail-view.jsp?pageGb=proposal&no=1">[title1]</a></span><br>
+								<span class="summary">description</span>
+								<span class="date">[2015년 1월 30일]</span>
+							</li>
+							<li>
+								<span class="title"><a href="detail-view.jsp?pageGb=proposal&no=2">[title2]</a></span><br>
+								<span class="summary">description</span>
+								<span class="date">[2015년 1월 30일]</span>
+							</li>
+							<li>
+								<span class="title"><a href="detail-view.jsp?pageGb=proposal&no=3">[title3]</a></span><br>
+								<span class="summary">description</span>
+								<span class="date">[2015년 1월 30일]</span>
+							</li>
+							<li>
+								<span class="title"><a href="detail-view.jsp?pageGb=proposal&no=4">[title4]</a></span><br>
+								<span class="summary">description</span>
+								<span class="date">[2015년 1월 30일]</span>
+							</li>
+						</ol>
+	         		</div>
+	 			</article>
+	 			
+	         	<article class="right">
+	         		<header id="h-menu-4">매장 요청 사항 & FAQ</header>
+	         		<ul id="ic-box-menu2">
+	         			<li id="btn-left">
+	         				<ul id="ic-box-menu2-sub" class="hidden bd1">
+								<li><button type="button" id="btn-1" value="tab1" onclick="location.href='request-write.jsp?pageGb=request&no=1'"></button></li>
+								<li><button type="button" id="btn-2" value="tab2" onclick="location.href='request-write.jsp?pageGb=request&no=2'"></button></li>
+								<li><button type="button" id="btn-3" value="tab3" onclick="location.href='request-write.jsp?pageGb=request&no=3'"></button></li>
+							</ul>
+	         				<button type="button" id="btn-r" value="tab1" onclick="location.href='request-list.jsp?tabNo=1'"></button>
+	         			</li>
+	         			<li>
+	         				<button type="button" id="btn-f" value="tab2" onclick="location.href='faq-list.html'"></button>
+	         			</li>
+	         		</ul>
+	         		
+	         		<!-- <div id="ic-box-menu">
+	         			<div class="r-border">
+	         				<button type="button" id="btn-1" value="tab1" onclick="location.href='request-list.jsp?tabNo=1'"></button>
+	         			</div>
+	         			<div>
+	         				<button type="button" id="btn-2" value="tab2" onclick="location.href='request-list.jsp?tabNo=2'"></button>
+	         			</div>
+	         			<div class="r-border t-border">
+	         				<button type="button" id="btn-3" value="tab3" onclick="location.href='request-list.jsp?tabNo=3'"></button>
+	         			</div>
+	         			<div class="t-border">
+	         				<button type="button" id="btn-4" value="tab4" onclick="location.href='request-list.jsp?tabNo=4'"></button>
+	         			</div>
+	         		</div> -->
+	 			</article>
+ 			</div>
+ 		</section>
+ 	
+ 		<!-- modal popup -->
+	 	<div class="overlay-bg-half">
+	 			 	<!-- 정보 변경 패널 -->
+	 	<!-- <section id="info-panel">
+	 		<div id="mody-pw">
+	 			<header class="nv-bord-tit">비밀번호 변경</header>
+	 			<div><p>현재 비밀번호 </p> <input type="password" value="unitas0917"></div>
+	 			<div><p>새 비밀번호 </p> <input type="password" ></div>
+	 			<div><p>새 비밀번호 확인 </p> <input type="password" ></div>
+	 		</div>
+	 		<div id="mody-ph-no">
+	 			<header class="nv-bord-tit">전화번호 변경</header>
+	 			<div><p>현재 전화번호 </p> <input type="text" value="02-786-7838"></div>
+	 			<div><p>새 전화번호 </p> 
+	 					<input type="tel" class="ph-no first" maxlength="3">-
+	 					<input type="tel" class="ph-no" maxlength="4">-
+	 					<input type="tel"class="ph-no" maxlength="4">
+	 			</div>
+	 		</div>
+	 	</section>
+	 	 -->
+	 	
+	 	</div>
+	 	<div class="overlay-bg">
+	 		<img id="loadingImage" src="http://i1.daumcdn.net/cfs.tistory/resource/315/blog/plugins/lightbox/images/loading.gif" style="position: relative; cursor: pointer; top: 340px; left: 477px;display: none; ">
+	 	</div>
+ 	</div><!-- wrap end -->
+ 
+</body>
+</html>

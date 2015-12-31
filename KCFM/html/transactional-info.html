@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=9" /> <!-- 문서모드 IE9 표준 호환 / content="IE=edge" 최신으로 렌덩링-->
+ 	<meta name="keywords" content="" /><!-- 검색용 키워드 -->
+ 	<meta name="description" content="스쿨푸드 PRM 서비스입니다." /><!-- 페이지 설명 -->
+	<title>거래내역</title>  
+	
+	<link href="assets/css/common.css" rel="stylesheet" type="text/css" />
+	<link href="assets/css/style.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+	<!-- IE8 이하에서 미디어 쿼리(Media Query) 사용 지원 -->
+	<!--[if lt IE 9]><script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+    <!-- IE 8 이하에서 HTML5 태그 지원하도록 스크립트 링크 -->
+    <!-- 참고 글 : http://www.cmsfactory.net/node -->
+    <!--[if lt IE 9]><script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script><![endif]-->
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+	<script type="text/javascript" src="assets/js/jquery.ui.datepicker-ko.js"></script>
+	<script type="text/javascript" src="assets/js/calendar2.js"></script>
+    <script type="text/javascript" src="assets/js/style.js"></script>
+     
+    <script type="text/javascript">
+
+    $(document).ready(function(){
+
+    	var tabNo = getParameter("tabNo");
+    	if(tabNo == "empty"){
+    		tabNo="1"
+    	} 
+		$("#tab-"+tabNo).addClass("on"); 
+		$(".tab-pages").find("#tab-"+tabNo+"-data").removeClass("hidden").addClass("show");
+
+		
+		$("#sDate").append("<option>2015-03-02</option>");
+		$("#eDate").append("<option>2015-03-08</option>");
+		
+		if(tabNo == "4" || tabNo == "5"){
+			//alert(tabNo);
+			$("#sDate").children().each(function(){
+				$(this).remove();
+			});
+			$("#eDate").children().each(function(){
+				$(this).remove();
+			});
+			$("#sDate").append("<option>2015-01</option>");
+			$("#eDate").append("<option>2015-06</option>");
+		} 
+
+    });
+    
+    $(function(){
+	    $("#data-t1").find(".data").hover(function(){
+			$(this).css("background","#fdfbc9");
+		},function(){
+			$(this).css("background","#ffffff");
+		});
+    });
+    
+
+    </script>
+</head>
+
+<body>
+ 	<div id="wrap" >
+	 	<section class="header-bg">
+	 	<div id="header">
+	 		<header>
+	 			<h1>헤더-타이틀</h1>
+	 			<span id="logo">유니포스-로고</span>
+	 			<span id="btns">
+	 				<input type="button" id="logout-btn" class="rd-bord-btn" value="로그아웃" class="button" onclick="location.href='index.jsp'">
+	 				<input type="button" id="main-btn" class="nv-bord-btn" value="MAIN" class="button" onclick="location.href='main.jsp';">
+	 				</span>
+	 			
+	 			<nav class="gnb">
+	 				<ul class="topmenu">
+	 					<li class="disable"><a href="#">전자계약</a></li>
+	 					<li class="active"><a href="transactional-info.html">거래내역</a>
+	 						<ul class="submenu">
+								<li><a href="transactional-info.html?tabNo=1">매입 현황</a></li>
+								<li><a href="transactional-info.html?tabNo=2">여신 현황</a></li>
+								<li><a href="transactional-info.html?tabNo=3">재고 현황</a></li>
+								<li><a href="transactional-info.html?tabNo=4">카드 승인 내역</a></li>
+								<li><a href="transactional-info.html?tabNo=5">매출 현황</a></li>
+							</ul>
+						</li>
+	 					<li><a href="prom-material.html">홍보물신청</a>
+	 						<!-- <ul class="submenu">
+								<li><a href="prom-material.html?tabNo=1">인쇄사용문구</a></li>
+								<li><a href="prom-material.html?tabNo=2">전단지종류</a></li>
+								<li><a href="prom-material.html?tabNo=3">전단지선택</a></li>
+							</ul> -->
+	 					</li>
+	 					<li class="disable"><a href="#">메세지전송</a></li>
+	 					<li><a href="tax-bill.html ">세금계산서</a>
+	 						<ul class="submenu">
+								<li><a href="tax-bill.html?tabNo=A">스쿨푸드</a></li>
+								<li><a href="tax-bill.html?tabNo=B">Z.POS</a></li>
+								
+							</ul>
+	 					</li>
+	 					<li><a href="cust-comment.html">고객의소리</a></li>
+	 					<li><a href="call-center.html">콜센터</a>
+	 						<ul class="submenu">
+								<li><a href="call-center.html?tabNo=A">매출통계</a> </li>
+								<li><a href="call-center.html?tabNo=B">배달시간관리</a></li>
+								<li><a href="call-center.html?tabNo=C">판매상품관리</a></li>
+							</ul>
+	 					</li>
+	 					<li class="disable"><a href="#">상품권</a></li>
+	 				</ul>
+	 			</nav>
+	 		</header>
+	 		</div>
+	 		
+	 		<div id="info-bg">
+		 		<div id="info">
+		 			<div id="account">
+		 				<span>스쿨푸드 유니타스 1호점</span>
+		 				<span id="btn"><input type="button" id="mody-btn" class="nv-bord-btn" value="정보변경" class="button" onclick="fnShowPanel();"></span>
+		 			</div>
+		 			<div id="account-info">
+		 				<span id="ph-no">전화번호 : 02-1234-5678 /</span> 
+		 				<span id="mb-no">휴대전화 : 010-1234-5678 /</span> 
+		 				<span id="charge-man">담당SV : 홍길동(010-5678-1234)</span>
+		 			</div>
+		 		</div><!-- info end -->
+	 		</div>
+	 	</section>
+	 	
+	 	<!-- 정보 변경 패널 -->
+	 	<section id="info-panel">
+	 		<div id="mody-pw">
+	 			<header class="nv-bord-tit">비밀번호 변경</header>
+	 			<div><p>현재 비밀번호 </p> <input type="password" value="unitas0917"></div>
+	 			<div><p>새 비밀번호 </p> <input type="password" ></div>
+	 			<div><p>새 비밀번호 확인 </p> <input type="password" ></div>
+	 		</div>
+	 		<div id="mody-ph-no">
+	 			<header class="nv-bord-tit">전화번호 변경</header>
+	 			<div><p>현재 전화번호 </p> <input type="text" value="02-786-7838"></div>
+	 			<div><p>새 전화번호 </p> 
+	 					<input type="tel" class="ph-no first" maxlength="3">-
+	 					<input type="tel" class="ph-no" maxlength="4">-
+	 					<input type="tel"class="ph-no" maxlength="4">
+	 			</div>
+	 		</div>
+	 	</section>
+	 	
+	 	
+ 		 <section class="contents">
+ 		 	<header> 
+ 		 		<h1>◎ <span>거래내역</span></h1>
+ 		 	</header>
+ 		 	
+			 <article class="tabs" id="transactional-menus">
+		        <div id="tab-nav">
+				    <nav>
+						<ul id="tabMenu2" class="topmenu reqmenu">
+							<li class="topfirst transactional" id="tab-1"><a href="transactional-info.html?tabNo=1" onclick="fnResetTab2($(this));">매입현황</a></li>
+							<li class="transactional" id="tab-2"><a href="transactional-info.html?tabNo=2" onclick="fnResetTab2($(this));">여신현황</a></li>
+							<li class="transactional" id="tab-3"><a href="transactional-info.html?tabNo=3" onclick="fnResetTab2($(this));">재고현황</a></li>
+							<li class="transactional" id="tab-4"><a href="transactional-info.html?tabNo=4" onclick="fnResetTab2($(this));">카드승인내역</a></li>
+							<li class="toplast transactional" id="tab-5"><a href="transactional-info.html?tabNo=5" onclick="fnResetTab2($(this));">매출현황</a></li>
+						</ul>
+					</nav>
+		        </div>
+		        <div class="tab-pages">
+		        	<div id="search-option">
+			    		<label for="sDate" > ▶ 기간 : </label>
+			    		<select id="sDate" name="sDate" style="height:20px; width:100px;">
+			    		</select>
+			    		~ 
+			    		<select id="eDate" name="eDate" style="height:20px; width:100px;">
+			    		</select>
+
+			    		<span><button class="searchDateBtn" onclick="search_list();">조회</button></span>
+			  		
+<!-- 			  			<input class="big_0" name="sDate" type="text" value="${param.sDate}"/> ~ 
+							<input class="big_0" name="eDate" type="text" value="${param.eDate}"/> 
+-->
+			  		
+			  		</div>
+			  		
+			  		<!-- 1. 매입현황-->
+			  		<div id="tab-1-data" class="table hidden" style="margin-top:5px;">
+				  		<table width="100" height="240"  bgcolor="#c6c6c6" border="0" cellpadding="1" cellspacing="1" style="float: left; font-size: 11px; margin-right: 5px;">
+			  				<caption style="text-align: right;">&nbsp;</caption>
+				  			<tr bgcolor="#b2b19c" align="center" style="border-bottom: 1px solid #797979;">
+						         <th style="border-bottom: 1px solid #797979;"><font color="#ffffff"><b>NO</b></font></th>
+						         <th style="border-bottom: 1px solid #797979;"><font color="#ffffff"><b>매입일자</b></font></th>
+						    </tr>
+						   <tr align="center" bgcolor="#fdfbc9">
+						         <td bgcolor="#daf1fd"><font color="#474747"><b>1</b></font></td>
+						         <td><font color="#474747"><b>2015-03-02</b></font></td>
+						    </tr>
+						   <tr align="center" bgcolor="#ffffff">
+						         <td bgcolor="#daf1fd">2</td>
+						         <td>2015-03-03</td>
+						    </tr>
+						   <tr align="center" bgcolor="#ffffff">
+						         <td bgcolor="#daf1fd">3</td>
+						         <td>2015-03-04</td>
+						    </tr>
+						   <tr align="center" bgcolor="#ffffff">
+						         <td bgcolor="#daf1fd">4</td>
+						         <td>2015-03-05</td>
+						    </tr>
+						   <tr align="center" bgcolor="#ffffff">
+						         <td bgcolor="#daf1fd">5</td>
+						         <td>2015-03-06</td>
+						    </tr>
+						   <tr align="center" bgcolor="#ffffff">
+						         <td bgcolor="#daf1fd">6</td>
+						         <td>2015-03-07</td>
+						    </tr>
+						   <tr align="center" bgcolor="#ffffff">
+						         <td bgcolor="#daf1fd">7</td>
+						         <td>2015-03-08</td>
+						    </tr>
+						</table>
+			  		
+			  			<table id="data-t1" width="795" height="420" bgcolor="#c6c6c6" border="0" cellpadding="1" cellspacing="1" style="float: left; font-size: 11px;"> 
+			  				<caption style="text-align: right;">금액 : 원</caption>
+							<tr bgcolor="#b2b19c" align="center">
+								<th style="border-bottom: 1px solid #797979;" width="20"><font color="#ffffff"><b>NO</b></font></th>
+								<th style="border-bottom: 1px solid #797979;" width="70"><font color="#ffffff"><b>매입번호</b></font></th>
+								<th style="border-bottom: 1px solid #797979;" width="60"><font color="#ffffff"><b>매입구분</b></font></th>
+								<th style="border-bottom: 1px solid #797979;" width="60"><font color="#ffffff"><b>품목코드</b></font></th>
+								<th style="border-bottom: 1px solid #797979;" width="120"><font color="#ffffff"><b>품목명</b></font></th>
+								<th style="border-bottom: 1px solid #797979;" width="50"><font color="#ffffff"><b>규격</b></font></th>
+								<th style="border-bottom: 1px solid #797979;" width="30"><font color="#ffffff"><b>단위</b></font></th>
+								<th style="border-bottom: 1px solid #797979;" width="60"><font color="#ffffff"><b>과세여부</b></font></th>
+								<th style="border-bottom: 1px solid #797979;" width="50"><font color="#ffffff"><b>단가</b></font></th>
+								<th style="border-bottom: 1px solid #797979;" width="30"><font color="#ffffff"><b>수량</b></font></th>
+								<th style="border-bottom: 1px solid #797979;" width="60"><font color="#ffffff"><b>공급가</b></font></th>
+								<th style="border-bottom: 1px solid #797979;" width="50"><font color="#ffffff"><b>부가세</b></font></th>
+								<th style="border-bottom: 1px solid #797979;" width="60"><font color="#ffffff"><b>매입금액</b></font></th>
+								<th style="border-bottom: 1px solid #797979;" width="80"><font color="#ffffff"><b>발주일자</b></font></th>
+							</tr>
+
+							<tr class="data" align="center" bgcolor="#ffffff">
+							<td bgcolor="#daf1fd">1</td>
+							<td>110-7788</td>
+							<td>입고</td>
+							<td><font color="#999999">58123</font></td>
+							<td>품목명</td>
+							<td >110*20g</td>
+							<td>BX</td>
+							<td>과세</td>
+							<td><font color="#999999">12,000</font></td>
+							<td>1 </td>
+							 <td align="right">77,000</td>
+							<td align="right">2,500</td>
+							<td align="right"><font color="#fb2a2a">15,000</font></td>
+							<td>2015-02-20</td>
+							</tr>
+
+							 <tr class="data" align="center" bgcolor="#ffffff">
+							 <td bgcolor="#daf1fd">2</td>
+							<td>1111-111</td>
+							<td>입고</td>
+							<td>79111</td>
+							<td>품목명</td>
+							<td >110*20g</td>
+							<td>BX</td>
+							<td>과세</td>
+							<td><font color="#999999">12,000</font></td>
+							<td>1 </td>
+							 <td align="right">77,000</td>
+							<td align="right">2,500</td>
+							<td align="right"><font color="#fb2a2a">15,000</font></td>
+							<td>2015-02-20</td>
+							 </tr >
+
+							<tr class="data" align="center" bgcolor="#ffffff">
+							 <td bgcolor="#daf1fd">3</td>
+							<td>1111-222</td>
+							<td>입고</td>
+							<td>51456</td> 
+							<td>품목명</td>
+							<td >110*20g</td>
+							<td>BX</td>
+							<td>과세</td>
+							<td><font color="#999999">12,000</font></td>
+							<td>1 </td>
+							 <td align="right">77,000</td>
+							<td align="right">2,500</td>
+							<td align="right"><font color="#fb2a2a">15,000</font></td>
+							<td>2015-02-20</td>
+							  </tr>
+
+							<tr class="data" align="center" bgcolor="#ffffff">
+							 <td bgcolor="#daf1fd">4</td>
+							<td>1111-119</td>
+							<td>입고</td>
+							<td><font color="#999999">없음</font></td> 
+							<td>품목명</td>
+							<td >110*20g</td>
+							<td>BX</td>
+							<td>과세</td>
+							<td><font color="#999999">12,000</font></td>
+							<td>1 </td>
+							 <td align="right">77,000</td>
+							<td align="right">2,500</td>
+							<td align="right"><font color="#fb2a2a">15,000</font></td>
+							<td>2015-02-20</td>
+							 </tr>
+
+							<tr class="data" align="center" bgcolor="#ffffff">
+							<td bgcolor="#daf1fd">5</td>
+							<td>1111-200</td>
+							<td ><font color="#6ba7c7">출고</font></td>
+							 <td>12345</td>
+							<td>품목명</td>
+							<td >110*20g</td>
+							<td>BX</td>
+							<td>과세</td>
+							<td><font color="#999999">12,000</font></td>
+							<td>1 </td>
+							 <td align="right">77,000</td>
+							<td align="right">2,500</td>
+							<td align="right"><font color="#fb2a2a">15,000</font></td>
+							<td>2015-02-20</td>
+							  </tr>   
+							   
+							<tr class="data" align="center" bgcolor="#ffffff">
+							<td bgcolor="#daf1fd">6</td>
+							<td>7700-111</td>
+							<td ><font color="#6ba7c7">출고</font></td>
+							<td><font color="#999999">없음</font></td>
+							<td>품목명</td>
+							<td >110*20g</td>
+							<td>BX</td>
+							<td>과세</td>
+							<td><font color="#999999">12,000</font></td>
+							<td>1 </td>
+							 <td align="right">77,000</td>
+							<td align="right">2,500</td>
+							<td align="right"><font color="#fb2a2a">15,000</font></td>
+							<td>2015-02-20</td>
+							 </tr>
+
+							<tr class="data" align="center" bgcolor="#ffffff">
+							 <td bgcolor="#daf1fd">7</td>
+							<td>1111-111</td>
+							<td>입고</td>
+							<td>99841</td>
+							<td>품목명</td>
+							<td >110*20g</td>
+							<td>BX</td>
+							<td>과세</td>
+							<td><font color="#999999">12,000</font></td>
+							<td>1 </td>
+							 <td align="right">77,000</td>
+							<td align="right">2,500</td>
+							<td align="right"><font color="#fb2a2a">15,000</font></td>
+							<td>2015-02-20</td>
+							 </tr >
+
+							<tr class="data" align="center" bgcolor="#ffffff">
+							 <td bgcolor="#daf1fd">8</td>
+							<td>7711-201</td>
+							<td ><font color="#6ba7c7">출고</font></td>
+							<td>55129</td> 
+							<td>품목명</td>
+							<td >110*20g</td>
+							<td>BX</td>
+							<td>과세</td>
+							<td><font color="#999999">12,000</font></td>
+							<td>1 </td>
+							 <td align="right">77,000</td>
+							<td align="right">2,500</td>
+							<td align="right"><font color="#fb2a2a">15,000</font></td>
+							<td>2015-02-20</td>
+							  </tr>
+
+							<tr class="data" align="center" bgcolor="#ffffff">
+							 <td bgcolor="#daf1fd">9</td>
+							<td>1111-111</td>
+							<td>입고</td>
+							<td><font color="#999999">없음</font></td> 
+							<td>품목명</td>
+							<td >110*20g</td>
+							<td>BX</td>
+							<td>과세</td>
+							<td><font color="#999999">12,000</font></td>
+							<td>1 </td>
+							 <td align="right">77,000</td>
+							<td align="right">2,500</td>
+							<td align="right"><font color="#fb2a2a">15,000</font></td>
+							<td>2015-02-20</td>
+							 </tr>
+
+							<tr class="data" align="center" bgcolor="#ffffff">
+							 <td bgcolor="#daf1fd">10</td>
+							<td>1111-111</td>
+							<td>입고</td>
+							<td><font color="#999999">없음</font></td> 
+							<td>품목명</td>
+							<td >110*20g</td>
+							<td>BX</td>
+							<td>과세</td>
+							<td><font color="#999999">12,000</font></td>
+							<td>1 </td>
+							 <td align="right">77,000</td>
+							<td align="right">2,500</td>
+							<td align="right"><font color="#fb2a2a">15,000</font></td>
+							<td>2015-02-20</td>
+							 </tr>
+     
+							<tr align="center" bgcolor="#fcb8b8">
+								<td  style="border-top: 1px solid #797979;" ></td>
+								<td  style="border-top: 1px solid #797979;" ></td>
+								<td  style="border-top: 1px solid #797979;" ><font color="#999999"></font></td>
+								<td  style="border-top: 1px solid #797979;" ></td>
+								<td  style="border-top: 1px solid #797979;" ></td>
+								<td  style="border-top: 1px solid #797979;" ></td>
+								<td  style="border-top: 1px solid #797979;" ></td>
+								<td  style="border-top: 1px solid #797979;" ></td>
+								<td  style="border-top: 1px solid #797979;" ><font color="#999999"></font></td>
+								<td  style="border-top: 1px solid #797979;" ></td>
+								<td  style="border-top: 1px solid #797979;" align="right">975,782</td>
+								<td  style="border-top: 1px solid #797979;" align="right">83,694</td>
+								<td  style="border-top: 1px solid #797979;" align="right"><font color="#ff0000"><b>1,204,690</b></font></td>
+								<td  style="border-top: 1px solid #797979;" ></td>
+						    </tr>  
+						</table>
+			  		</div>
+			  		<!-- 탭1 화면 끝 -->
+			  		
+			  		<!-- 2. 여신현황 -->
+			  		<div id="tab-2-data" class="table hidden" style="margin-top:5px;">
+			  		<table id="data-t2" width="900" height="320" bgcolor="#c6c6c6" border="0" cellpadding="1" cellspacing="1" style="float: left; font-size: 11px;"> 
+			  				<caption style="text-align: right;">금액 : 원</caption>
+							<tr bgcolor="#b2b19c" align="center">
+								<th style="border-bottom: 1px solid #797979;" width="90"><font color="#ffffff"><b>거래일자</b></font></th>
+								<th style="border-bottom: 1px solid #797979;" width="100"><font color="#ffffff"><b>전미수금액</b></font></th>
+								<th style="border-bottom: 1px solid #797979;" width="100"><font color="#ffffff"><b>면세금액</b></font></th>
+								<th style="border-bottom: 1px solid #797979;" width="100"><font color="#ffffff"><b>과세금액</b></font></th>
+								<th style="border-bottom: 1px solid #797979;" width="100"><font color="#ffffff"><b>부가세액</b></font></th>
+								<th style="border-bottom: 1px solid #797979;" width="110"><font color="#ffffff"><b>합계금액</b></font></th>
+								<th style="border-bottom: 1px solid #797979;" width="100"><font color="#ffffff"><b>수금금액</b></font></th>
+								<th style="border-bottom: 1px solid #797979;" width="100"><font color="#ffffff"><b>미수잔고</b></font></th>
+							</tr>
+
+							<tr class="data" align="center" bgcolor="#ffffff">
+								<td>2015-03-02</td>
+								<td align="right">77,000</td>
+								<td align="right">2,500</td>
+								<td align="right">77,000</td>
+								<td align="right">2,500</td>
+								<td align="right">77,000</td>
+								<td align="right">2,500</td>
+								<td align="right"><font color="#fb2a2a">15,000</font></td>
+							</tr>
+							<tr class="data" align="center" bgcolor="#ffffff">
+								<td>2015-03-03</td>
+								<td align="right">77,000</td>
+								<td align="right">2,500</td>
+								<td align="right">77,000</td>
+								<td align="right">2,500</td>
+								<td align="right">77,000</td>
+								<td align="right">2,500</td>
+								<td align="right"><font color="#fb2a2a">15,000</font></td>
+							</tr>
+							<tr class="data" align="center" bgcolor="#ffffff">
+								<td>2015-03-04</td>
+								<td align="right">77,000</td>
+								<td align="right">2,500</td>
+								<td align="right">77,000</td>
+								<td align="right">2,500</td>
+								<td align="right">77,000</td>
+								<td align="right">2,500</td>
+								<td align="right"><font color="#fb2a2a">15,000</font></td>
+							</tr>
+							<tr class="data" align="center" bgcolor="#ffffff">
+								<td>2015-03-05</td>
+								<td align="right">77,000</td>
+								<td align="right">2,500</td>
+								<td align="right">77,000</td>
+								<td align="right">2,500</td>
+								<td align="right">77,000</td>
+								<td align="right">2,500</td>
+								<td align="right"><font color="#fb2a2a">15,000</font></td>
+							</tr>
+							<tr class="data" align="center" bgcolor="#ffffff">
+								<td>2015-03-06</td>
+								<td align="right">77,000</td>
+								<td align="right">2,500</td>
+								<td align="right">77,000</td>
+								<td align="right">2,500</td>
+								<td align="right">77,000</td>
+								<td align="right">2,500</td>
+								<td align="right"><font color="#fb2a2a">15,000</font></td>
+							</tr>
+							<tr class="data" align="center" bgcolor="#ffffff">
+								<td>2015-03-07</td>
+								<td align="right">77,000</td>
+								<td align="right">2,500</td>
+								<td align="right">77,000</td>
+								<td align="right">2,500</td>
+								<td align="right">77,000</td>
+								<td align="right">2,500</td>
+								<td align="right"><font color="#fb2a2a">15,000</font></td>
+							</tr>
+							<tr class="data" align="center" bgcolor="#ffffff">
+								<td>2015-03-08</td>
+								<td align="right">77,000</td>
+								<td align="right">2,500</td>
+								<td align="right">77,000</td>
+								<td align="right">2,500</td>
+								<td align="right">77,000</td>
+								<td align="right">2,500</td>
+								<td align="right"><font color="#fb2a2a">15,000</font></td>
+							</tr>
+							<tr class="data" align="center" bgcolor="#fcb8b8">
+								<td style="border-top: 1px solid #797979;"><b>합계</b></td>
+								<td align="right" style="border-top: 1px solid #797979;">77,000</td>
+								<td align="right" style="border-top: 1px solid #797979;">2,500</td>
+								<td align="right" style="border-top: 1px solid #797979;">77,000</td>
+								<td align="right" style="border-top: 1px solid #797979;">2,500</td>
+								<td align="right" style="border-top: 1px solid #797979;">77,000</td>
+								<td align="right" style="border-top: 1px solid #797979;">2,500</td>
+								<td align="right" style="border-top: 1px solid #797979;"><font color="#fb2a2a"><b>15,000</b></font></td>
+							</tr>
+			  			</table>	
+			  		</div>
+			  		<!-- 탭2 화면 끝 -->
+			  		
+			  		<!-- 3. 재고현황 -->
+			  		<div id="tab-3-data" class="table hidden" style="margin-top:5px;">
+			  		<table id="data-t3" width="900" height="420" bgcolor="#c6c6c6" border="0" cellpadding="1" cellspacing="1" style="float: left; font-size: 11px;"> 
+			  				<caption style="text-align: right;">금액 : 원</caption>
+							<tr bgcolor="#b2b19c" align="center">
+								<th style="border-bottom: 1px solid #797979;" width="110"><font color="#ffffff"><b>품목코드</b></font></th>
+								<th style="border-bottom: 1px solid #797979;" width="220"><font color="#ffffff"><b>품목명</b></font></th>
+								<th style="border-bottom: 1px solid #797979;" width="100"><font color="#ffffff"><b>규격</b></font></th>
+								<th style="border-bottom: 1px solid #797979;" width="80"><font color="#ffffff"><b>단위</b></font></th>
+								<th style="border-bottom: 1px solid #797979;" width="90"><font color="#ffffff"><b>BOX입수</b></font></th>
+								<th style="border-bottom: 1px solid #797979;" width="80"><font color="#ffffff"><b>과세</b></font></th>
+								<th style="border-bottom: 1px solid #797979;" width="120"><font color="#ffffff"><b>표준임고단가</b></font></th>
+								<th style="border-bottom: 1px solid #797979;" width="100"><font color="#ffffff"><b>현재고수량</b></font></th>
+							</tr>
+
+							<tr class="data" align="center" bgcolor="#ffffff">
+								<td>50071</td>
+								<td align="left">키친타올</td>
+								<td>1kg*10</td>
+								<td>ea</td>
+								<td>100</td>
+								<td>Y</td>
+								<td align="right">2,500</td>
+								<td align="right"><b>95</b></td>
+							</tr>
+							
+							<tr class="data" align="center" bgcolor="#ffffff">
+								<td>50071</td>
+								<td align="left">키친타올</td>
+								<td>1kg*10</td>
+								<td>ea</td>
+								<td>100</td>
+								<td>Y</td>
+								<td align="right">2,500</td>
+								<td align="right"><b>95</b></td>
+							</tr>
+							<tr class="data" align="center" bgcolor="#ffffff">
+								<td>50071</td>
+								<td align="left">키친타올</td>
+								<td>1kg*10</td>
+								<td>ea</td>
+								<td>100</td>
+								<td>Y</td>
+								<td align="right">2,500</td>
+								<td align="right"><b>95</b></td>
+							</tr>
+							<tr class="data" align="center" bgcolor="#ffffff">
+								<td>50071</td>
+								<td align="left">키친타올</td>
+								<td>1kg*10</td>
+								<td>ea</td>
+								<td>100</td>
+								<td>Y</td>
+								<td align="right">2,500</td>
+								<td align="right"><b>95</b></td>
+							</tr>
+							<tr class="data" align="center" bgcolor="#ffffff">
+								<td>50071</td>
+								<td align="left">키친타올</td>
+								<td>1kg*10</td>
+								<td>ea</td>
+								<td>100</td>
+								<td>Y</td>
+								<td align="right">2,500</td>
+								<td align="right"><b>95</b></td>
+							</tr>
+							<tr class="data" align="center" bgcolor="#ffffff">
+								<td>50071</td>
+								<td align="left">키친타올</td>
+								<td>1kg*10</td>
+								<td>ea</td>
+								<td>100</td>
+								<td>Y</td>
+								<td align="right">2,500</td>
+								<td align="right"><b>95</b></td>
+							</tr>
+							<tr class="data" align="center" bgcolor="#ffffff">
+								<td>50071</td>
+								<td align="left">키친타올</td>
+								<td>1kg*10</td>
+								<td>ea</td>
+								<td>100</td>
+								<td>Y</td>
+								<td align="right">2,500</td>
+								<td align="right"><b>95</b></td>
+							</tr>
+							<tr class="data" align="center" bgcolor="#ffffff">
+								<td>50071</td>
+								<td align="left">키친타올</td>
+								<td>1kg*10</td>
+								<td>ea</td>
+								<td>100</td>
+								<td>Y</td>
+								<td align="right">2,500</td>
+								<td align="right"><b>95</b></td>
+							</tr>
+							<tr class="data" align="center" bgcolor="#ffffff">
+								<td>50071</td>
+								<td align="left">키친타올</td>
+								<td>1kg*10</td>
+								<td>ea</td>
+								<td>100</td>
+								<td>Y</td>
+								<td align="right">2,500</td>
+								<td align="right"><b>95</b></td>
+							</tr>
+							<tr class="data" align="center" bgcolor="#ffffff">
+								<td>50071</td>
+								<td align="left">키친타올</td>
+								<td>1kg*10</td>
+								<td>ea</td>
+								<td>100</td>
+								<td>Y</td>
+								<td align="right">2,500</td>
+								<td align="right"><b>95</b></td>
+							</tr>
+							<tr class="data" align="center" bgcolor="#ffffff">
+								<td>50071</td>
+								<td align="left">키친타올</td>
+								<td>1kg*10</td>
+								<td>ea</td>
+								<td>100</td>
+								<td>Y</td>
+								<td align="right">2,500</td>
+								<td align="right"><b>95</b></td>
+							</tr>
+							<tr class="data" align="center" bgcolor="#ffffff">
+								<td>50071</td>
+								<td align="left">키친타올</td>
+								<td>1kg*10</td>
+								<td>ea</td>
+								<td>100</td>
+								<td>Y</td>
+								<td align="right">2,500</td>
+								<td align="right"><b>95</b></td>
+							</tr>
+							
+							<tr class="data" align="center" bgcolor="#fcb8b8">
+								<td style="border-top: 1px solid #797979;"><b>합계</b></td>
+								<td align="right" style="border-top: 1px solid #797979;"></td>
+								<td align="right" style="border-top: 1px solid #797979;"></td>
+								<td align="right" style="border-top: 1px solid #797979;"></td>
+								<td align="right" style="border-top: 1px solid #797979;"></td>
+								<td align="right" style="border-top: 1px solid #797979;"></td>
+								<td align="right" style="border-top: 1px solid #797979;"><font color="#fb2a2a"><b>2,500</b></font></td>
+								<td align="right" style="border-top: 1px solid #797979;"><font color="#fb2a2a"><b>15,000</b></font></td>
+							</tr>
+			  			</table>	
+			  		</div>
+			  		<!-- 탭3 화면 끝 -->
+			  		
+			  		<!-- 4. 카드내역-->
+			  		<div id="tab-4-data" class="table hidden" style="margin-top:5px;">
+				  		<table width="110" height="220"  bgcolor="#c6c6c6" border="0" cellpadding="1" cellspacing="1" style="float: left; font-size: 11px; margin-right: 5px;">
+			  				<caption style="text-align: right;">&nbsp;</caption>
+				  			<tr bgcolor="#b2b19c" align="center" style="border-bottom: 1px solid #797979;">
+						         <th style="border-bottom: 1px solid #797979;"><font color="#ffffff"><b>NO</b></font></th>
+						         <th style="border-bottom: 1px solid #797979;"><font color="#ffffff"><b>거래년월</b></font></th>
+						    </tr>
+						   <tr align="center" bgcolor="#fdfbc9">
+						         <td bgcolor="#daf1fd"><font color="#474747"><b>1</b></font></td>
+						         <td><font color="#474747"><b>2015년 1월</b></font></td>
+						    </tr>
+						   <tr align="center" bgcolor="#ffffff">
+						         <td bgcolor="#daf1fd">2</td>
+						         <td>2015년 2월</td>
+						    </tr>
+						   <tr align="center" bgcolor="#ffffff">
+						         <td bgcolor="#daf1fd">3</td>
+						         <td>2015년 3월</td>
+						    </tr>
+						   <tr align="center" bgcolor="#ffffff">
+						         <td bgcolor="#daf1fd">4</td>
+						         <td>2015년 4월</td>
+						    </tr>
+						   <tr align="center" bgcolor="#ffffff">
+						         <td bgcolor="#daf1fd">5</td>
+						         <td>2015년 5월</td>
+						    </tr>
+						   <tr align="center" bgcolor="#ffffff">
+						         <td bgcolor="#daf1fd">6</td>
+						         <td>2015년 6월</td>
+						    </tr>
+						</table>
+						
+						<table id="data-t4" width="780" height="420" bgcolor="#c6c6c6" border="0" cellpadding="1" cellspacing="1" style="float: left; font-size: 11px;">
+			  				<caption style="text-align: right;">단위 : 건,원</caption> 
+							<tr bgcolor="#b2b19c" align="center">
+								<th style="border-bottom: 1px solid #797979;" width="100"><font color="#ffffff"><b>구분</b></font></th>
+								<th style="border-bottom: 1px solid #797979;" width="100"><font color="#ffffff"><b>카드사</b></font></th>
+								<th style="border-bottom: 1px solid #797979;" width="100"><font color="#ffffff"><b>건수</b></font></th>
+								<th style="border-bottom: 1px solid #797979;" width="120"><font color="#ffffff"><b>공급가액</b></font></th>
+								<th style="border-bottom: 1px solid #797979;" width="120"><font color="#ffffff"><b>세액</b></font></th>
+								<th style="border-bottom: 1px solid #797979;" width="120"><font color="#ffffff"><b>봉사료</b></font></th>
+								<th style="border-bottom: 1px solid #797979;" width="120"><font color="#ffffff"><b>매출액</b></font></th>
+							</tr>
+							<tr class="data" align="center" bgcolor="#ffffff">
+								<td rowspan="9"><b>[카드]</b></td>
+								<td>국민</td>
+								<td align="right">99,999,000</td>
+								<td align="right">99,999,000</td>
+								<td align="right">99,999,000</td>
+								<td align="right">99,999,000</td>
+								<td align="right">99,999,000</td>
+							</tr>
+							<tr class="data" align="center" bgcolor="#ffffff">
+								<td>신한</td>
+								<td align="right">99,999,000</td>
+								<td align="right">99,999,000</td>
+								<td align="right">99,999,000</td>
+								<td align="right">99,999,000</td>
+								<td align="right">99,999,000</td>
+							</tr>
+							<tr class="data" align="center" bgcolor="#ffffff">
+								<td>비씨</td>
+								<td align="right">99,999,000</td>
+								<td align="right">99,999,000</td>
+								<td align="right">99,999,000</td>
+								<td align="right">99,999,000</td>
+								<td align="right">99,999,000</td>
+							</tr>
+							<tr class="data" align="center" bgcolor="#ffffff">
+								<td>삼성</td>
+								<td align="right">99,999,000</td>
+								<td align="right">99,999,000</td>
+								<td align="right">99,999,000</td>
+								<td align="right">99,999,000</td>
+								<td align="right">99,999,000</td>
+							</tr>
+							<tr class="data" align="center" bgcolor="#ffffff">
+								<td>롯데</td>
+								<td align="right">99,999,000</td>
+								<td align="right">99,999,000</td>
+								<td align="right">99,999,000</td>
+								<td align="right">99,999,000</td>
+								<td align="right">99,999,000</td>
+							</tr>
+							<tr class="data" align="center" bgcolor="#ffffff">
+								<td>외환</td>
+								<td align="right">99,999,000</td>
+								<td align="right">99,999,000</td>
+								<td align="right">99,999,000</td>
+								<td align="right">99,999,000</td>
+								<td align="right">99,999,000</td>
+							</tr>
+							<tr class="data" align="center" bgcolor="#ffffff">
+								<td>현대</td>
+								<td align="right">99,999,000</td>
+								<td align="right">99,999,000</td>
+								<td align="right">99,999,000</td>
+								<td align="right">99,999,000</td>
+								<td align="right">99,999,000</td>
+							</tr>
+							<tr class="data" align="center" bgcolor="#ffffff">
+								<td>기타</td>
+								<td align="right">99,999,000</td>
+								<td align="right">99,999,000</td>
+								<td align="right">99,999,000</td>
+								<td align="right">99,999,000</td>
+								<td align="right">99,999,000</td>
+							</tr>
+							<tr class="data" align="center" bgcolor="#ffffff">
+								<td>-</td>
+								<td align="right">-</td>
+								<td align="right">-</td>
+								<td align="right">-</td>
+								<td align="right">-</td>
+								<td align="right">-</td>
+							</tr>
+							<tr class="data" align="center" bgcolor="#daf1fd">
+								<td><b>[현금]</b></td>
+								<td></td>
+								<td align="right">99,999,000</td>
+								<td align="right">99,999,000</td>
+								<td align="right">99,999,000</td>
+								<td align="right">99,999,000</td>
+								<td align="right">99,999,000</td>
+							</tr>
+							<tr class="data" align="center" bgcolor="#daf1fd">
+								<td><b>[현금영수증]</b></td>
+								<td></td>
+								<td align="right">99,999,000</td>
+								<td align="right">99,999,000</td>
+								<td align="right">99,999,000</td>
+								<td align="right">99,999,000</td>
+								<td align="right">99,999,000</td>
+							</tr>
+							<tr class="data" align="center" bgcolor="#fcb8b8">
+								<td  style="border-top: 1px solid #797979;"><b>[합계]</b></td>
+								<td style="border-top: 1px solid #797979;"></td>
+								<td align="right" style="border-top: 1px solid #797979;"><font color="#fb2a2a"><b>320,000</b></font></td>
+								<td align="right" style="border-top: 1px solid #797979;"><font color="#fb2a2a"><b>15,000,000</b></font></td>
+								<td align="right" style="border-top: 1px solid #797979;"><font color="#fb2a2a"><b>2,500,500</b></font></td>
+								<td align="right" style="border-top: 1px solid #797979;"><font color="#fb2a2a"><b>15,000,000</b></font></td>
+								<td align="right" style="border-top: 1px solid #797979;"><font color="#fb2a2a"><b>2,500,000</b></font></td>
+							</tr>
+						</table>
+			  		</div>
+			  		<!-- 탭4 화면 끝 -->
+			  		
+		        </div>
+	        </article>
+		 </section>
+ 		 
+ 		 
+ 		<!-- modal popup -->
+	 	<div class="overlay-bg-half"></div>
+	</div><!-- end of wrap -->
+</body>
+</html>
