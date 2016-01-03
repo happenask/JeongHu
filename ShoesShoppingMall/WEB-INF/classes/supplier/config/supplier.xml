@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap>
+	<typeAlias alias="sto" type="supplier.to.SupplierTO"/>
+	<sql id="selectSupplier">
+		select 	supplier_name, 
+					supplier_address, 
+					supplier_tel, 
+					supplier_message
+		from 	supplier
+	</sql>
+	<resultMap class="sto" id="supplierRM">
+		<result property="name" columnIndex="1"/>
+		<result property="address" columnIndex="2"/>
+		<result property="tel" columnIndex="3"/>
+		<result property="message" columnIndex="4"/>
+	</resultMap>
+	<!-- select 쿼리 처리 태그들 -->
+	
+	<select id="selectSupplierByName" resultMap="supplierRM">
+		<include refid="selectSupplier"/>
+		where supplier_name=#value#
+	</select>
+	<select id="selectAllSupplier" resultMap="supplierRM">
+	   <include refid="selectSupplier"/>
+	</select>
+	<select id="selectSupplierName" resultMap="supplierRM">
+	   select * from supplier
+	</select>
+	<!-- DML 쿼리 태그들 -->
+	<insert id="insertSupplier" parameterClass="sto">
+		insert into supplier values (
+			#name#, #address#, #tel#, #message#	)
+	</insert>
+	<delete id="deleteSupplierByName">
+		delete from supplier where supplier_name=#name#
+	</delete>
+	<update id="updateSupplier" parameterClass="sto">
+        update  supplier
+            set     supplier_address=#address#, 
+                    supplier_tel=#tel#,
+                    supplier_message=#message#
+        where  supplier_name=#name#
+    </update>
+	
+</sqlMap>
+
+
+
+
+
+
+
+
+
+

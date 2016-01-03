@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <script type="text/javascript">
+        function GetShape () {
+            var shapeTestObj = document.getElementById ("shapeTest");
+            var message = "";
+            if (shapeTestObj.getClientRects) {        // Internet Explorer, Firefox 3+, Google Chrome, Opera 9.5+, Safari 4+
+                var rects = shapeTestObj.getClientRects ();
+                for (i = 0; i < rects.length; i++) {
+                    var rect = rects[i];
+                    message += "top: " + rect.top + 
+                               ", bottom: " + rect.bottom + 
+                               ", left: " + rect.left + 
+                               ", right: " + rect.right + "<br />";
+                }
+            }
+            else {
+                message = "Your browser does not support this example!";
+            }
+
+            var info = document.getElementById ("info");
+            info.innerHTML = message;
+        }
+    </script>
+</head>
+<body onload="GetShape ()">
+    <span id="shapeTest">
+        You can see the exact shape of this element in the green field below.<br />
+        This line is represented by two TextRectangle object in Internet Explorer.
+    </span>
+    <br /><br /><br />
+    <div id="info" style="background-color:#c0e0b0;"></div>
+</body>
+</html>

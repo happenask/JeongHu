@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap>
+	<typeAlias alias="fto" type="force.to.ForceTO"/>
+	<sql id="selectSQL">
+		select 		name, 
+					price, 
+					tableNum, 
+					foodNum,
+					foodDate
+		from 		food
+		
+	
+				
+	</sql>
+	
+	
+	<!-- select 쿼리 처리 태그들 -->
+	<select id="getAllOrder" resultClass="force.to.ForceTO">
+		<include refid="selectSQL"/>
+		where foodDate like #foodDate#||'%' order by tableNum
+	</select>
+	
+	<select id="getTotalSum" resultClass="int">
+		select sum(price) from FOOD where foodDate like #foodDate#||'%'
+	</select>
+	
+	<select id="getTableOrder" resultClass="force.to.ForceTO">
+		<include refid="selectSQL"/>
+		where tableNum=#tableNum#
+	</select>
+	<select id="selectFoodByName" resultClass="force.to.ForceTO">
+		<include refid="selectSQL"/>
+		where name = #name# and tableNum=#tableNum#
+	</select>
+	<insert id="insertFood" parameterClass="fto">
+		insert into food values (
+			#name#, #price#, #tableNum#, #foodNum#, #foodDate#) 
+	</insert>
+
+	
+
+	<update id="updateFood">
+		update food set name=#name#, price=#price#, foodNum=#foodNum# where name = #name# and tableNum=#tableNum#
+	</update>
+	
+	
+	<select id="selectAllFood" resultClass="force.to.ForceTO">
+		<include refid="selectSQL"/>
+	</select>
+	
+</sqlMap>
+
+
+
+
+
+
+
+
+
+

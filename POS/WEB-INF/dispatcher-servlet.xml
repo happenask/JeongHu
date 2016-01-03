@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+	
+	<!-- 
+MemberController->
+MemberService->MemberDAO->SqlMapClientTemplate->SqlMapClientFactoryBean->DataSource->/WEB-INF/SqlMapConfig.xml위치
+ -->
+ 	<bean name = "dataSource" class="org.apache.tomcat.dbcp.dbcp.BasicDataSource">
+ 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+ 		<property name = "url" value = "jdbc:oracle:thin:@tg-PC:1521:XE"/>
+ 		<property name="username" value="ask"/>
+		<property name="password" value="1111"/>
+ 	</bean>
+	
+	
+	<bean name="sqlMapClientFactory" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean" p:configLocation="/WEB-INF/SqlMapConfig.xml" p:dataSource-ref="dataSource"/>
+	
+	<bean name="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientTemplate" p:sqlMapClient-ref="sqlMapClientFactory"/>
+	
+	<bean name="ForceDAO" class="force.dao.ForceDAO">
+		<constructor-arg ref="sqlMapClient"/>
+	</bean>
+	
+	<bean name ="ForceService" class="force.service.ForceService">
+		<constructor-arg ref="ForceDAO"/>
+	</bean>
+	
+	<bean name ="ForceController" class="force.controller.ForceController">
+		<constructor-arg ref="ForceService"/>
+	</bean>
+	
+	
+	
+	<bean name = "viewResolver2" class = "org.springframework.web.servlet.view.InternalResourceViewResolver" >
+		<property name = "order" value = "2"/>
+	</bean>
+	<bean name = "viewResolver1" class = "org.springframework.web.servlet.view.BeanNameViewResolver">
+		<property name = "order" value = "1"/>
+	</bean>
+	
+	
+	
+	<bean name = "jsonView" class= "org.springframework.web.servlet.view.json.MappingJacksonJsonView"/>
+	
+	
+	<!-- 이현규 beans  -->
+	<bean name="this_product_info" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/jsp/this_product_info.jsp"/>
+	</bean>
+	<bean name="getMaterialById" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/material/getMaterialById.do"/>
+	</bean>
+	
+	
+	
+	
+	
+	
+	<!-- view 등록  -->
+	
+	<bean name = "yourjsp" class = "org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value = "jsp/yourjsp.jsp"/>
+	</bean>
+</beans>

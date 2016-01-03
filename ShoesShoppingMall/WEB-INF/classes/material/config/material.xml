@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap>
+	<typeAlias alias="materialTO" type="material.to.MaterialTO"/>
+	<sql id="selectMaterial">
+		select 		material_id, 
+					material_name, 
+					material_type, 
+					material_spec,
+					material_supply,
+					material_price,
+					material_quantity
+		from 		material
+	</sql>
+    
+	<resultMap class="materialTO" id="materialRM">
+		<result property="materialId" columnIndex="1"/>
+		<result property="name" columnIndex="2"/>
+		<result property="type" columnIndex="3"/>
+		<result property="spec" columnIndex="4"/>
+		<result property="supplier" columnIndex="5"/>
+		<result property="price" columnIndex="6"/>
+		<result property="quantity" columnIndex="7"/>
+	</resultMap>
+	
+	
+	<!-- select 쿼리 처리 태그들 -->
+	<select id="selectMaterialByType" resultMap="materialRM">
+		<include refid="selectMaterial"/>
+		where material_type = #type#
+	</select>
+	<select id="selectMaterialById" resultMap="materialRM">
+		<include refid="selectMaterial"/>
+		where material_id=#materialId#
+	</select>
+	<select id="selectAllMaterial" resultMap="materialRM">
+		<include refid="selectMaterial"/>
+	</select>
+	<insert id="insertMaterial" parameterClass="materialTO">
+		insert into material values (
+			#materialId#, #name#, #type#, #spec#, #supplier#, #price#, #quantity#
+		)
+	</insert>
+	<update id="updateMaterial" parameterClass="materialTO">
+		update 	material
+			set 	material_name=#name#, 
+					material_type=#type#, 
+					material_spec=#spec#,
+					material_supply=#supplier#,
+					material_price=#price#,
+					material_quantity=#quantity#
+		where 	material_id=#materialId#
+	</update>
+	<update id="updateMaterial2">
+        update  material
+            set material_quantity=(material_quantity-1)
+        where   material_id=#materialId#
+    </update>
+	<delete id="deleteMaterialById">
+		delete from material where material_id=#materialId#
+	</delete>
+
+</sqlMap>
+
+
+
+
+
+
+
+
+
+

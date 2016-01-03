@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap>
+	<typeAlias alias="pto" type="product.to.ProductTO"/>
+	<sql id="selectProduct">
+		select 	product_id, 
+					product_price, 
+					product_heel, 
+					product_leather,
+					product_acc1,
+					product_acc2,
+					product_size,
+					product_message 
+		from 	product
+	</sql>
+
+	<resultMap class="pto" id="productRM">
+		<result property="productId" columnIndex="1"/>
+		<result property="price" columnIndex="2" nullValue="0"/>
+		<result property="heel" columnIndex="3"/>
+		<result property="leather" columnIndex="4"/>
+		<result property="acc1" columnIndex="5"/>
+		<result property="acc2" columnIndex="6"/>
+		<result property="size" columnIndex="7"/>
+		<result property="message" columnIndex="8"/>
+	</resultMap>
+	
+	<!-- select 쿼리 처리 태그들 -->
+	<select id="selectProductNumber" resultClass="int">
+		select product_number.nextval from dual
+	</select>
+	
+	<select id="selectProductById" resultMap="productRM">
+		<include refid="selectProduct"/>
+		where product_id=#productId#
+	</select>
+	
+
+	<select id="selectProductById2" resultMap="productRM" parameterClass="hashmap">
+		<include refid="selectProduct"/>
+		where 	product_id!=#product_id#
+		 and		product_message=#registerNumber2#
+	</select>
+	
+	<select id="selectProductById3" resultMap="productRM" parameterClass="hashmap">
+		<include refid="selectProduct"/>
+		where 	product_id!=#product_id#
+
+	</select>
+	<select id="selectProductById4" resultMap="productRM">
+		<include refid="selectProduct"/>
+	</select>
+	<select id="selectProductById5" resultMap="productRM" parameterClass="hashmap">
+		<include refid="selectProduct"/>
+
+	</select>
+	<select id="selectProductById6" resultMap="productRM">
+		<include refid="selectProduct"/>
+		where product_message like '%'||#value#||'%'
+	</select>	
+		
+	<!-- DML 쿼리 태그들 -->
+	<insert id="insertProduct" parameterClass="pto">
+		insert into product values (
+			#productId#, #price#, #heel#, #leather#, #acc1#, #acc2#, #size#, #message#
+		)
+	</insert>
+	<update id="updateProduct" parameterClass="pto">
+		update 	product 
+			set 	product_price=#price#, 
+					product_heel=#heel#, 
+					product_leather=#leather#,
+					product_acc1=#acc1#
+					product_acc2=#acc2#
+					product_size=#size#
+					product_message=#message#
+		where 	product_id=#productId#
+	</update>
+	<delete id="deleteProductById">
+		delete from product where productId=#value#
+	</delete>
+	
+</sqlMap>
+
+
+
+
+
+
+
+
+
+

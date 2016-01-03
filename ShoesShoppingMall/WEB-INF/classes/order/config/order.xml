@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap>
+	<typeAlias alias="oto" type="order.to.OrderTO"/>
+	<sql id="selectOrder">
+		select 	order_id,
+				order_member,
+				order_product,
+				order_date,
+				order_zipcode,
+				order_address,
+				order_level,
+				order_msg
+		from 	pdorder
+	</sql>
+	<resultMap class="oto" id="orderRM">
+		<result property="orderId" columnIndex="1"/>
+		<result property="orderMember" columnIndex="2"/>
+		<result property="orderProduct" columnIndex="3"/>
+		<result property="orderDate" columnIndex="4"/>
+		<result property="orderZipcode" columnIndex="5"/>
+		<result property="orderAddress" columnIndex="6"/>
+		<result property="orderLevel" columnIndex="7"/>
+		<result property="orderMessage" columnIndex="8"/>
+	</resultMap>
+	<!-- select 쿼리 처리 태그들 -->
+	<select id="selectOrderList" resultMap="orderRM">
+		<include refid="selectOrder"/>
+	</select>
+	
+	<select id="selectOrderListByIng" resultMap="orderRM">
+		<include refid="selectOrder"/>
+		where order_level between 0 and 4
+	</select>
+		<select id="selectOrderByDate" resultMap="orderRM" parameterClass="hashmap">
+		<include refid="selectOrder"/>
+		where order_date between #sDate# and #eDate#
+	</select>
+	<select id="selectOrderByMemberNum" resultMap="orderRM">
+		<include refid="selectOrder"/>
+		where order_member=#memberNum#
+	</select>
+	<select id="selectOrderByOrderId" resultMap="orderRM">
+		<include refid="selectOrder"/>
+		where order_id=#orderId#
+	</select>
+	<select id="selectOrderNumber" resultClass="int" >
+		select order_number.nextval from dual
+	</select>
+	<select id="selectSumPrice" resultClass="int" parameterClass="hashMap">
+	select nvl(sum(product_price),0) from product p, pdorder o
+		where p.product_id = o.order_product
+		and o.order_level = 5
+		and o.order_date between #sDate# and #eDate#
+	</select>
+	<select id="selectCountPrice" resultClass="int" parameterClass="hashMap">
+	select nvl(count(product_price),0) from product p, pdorder o
+		where p.product_id = o.order_product
+		and o.order_level = 5
+		and o.order_date between #sDate# and #eDate#
+	</select>	
+	<insert id="insertOrder" parameterClass="oto">
+		insert into pdorder values (
+			#orderId#, #orderMember#, #orderProduct#, #orderDate#, #orderZipcode#, #orderAddress#, #orderLevel#, #orderMessage#
+		)
+	</insert>
+	<update id="updateOrder" parameterClass="oto">
+		update 	pdorder 
+			select 	order_member=#orderMember#,
+					order_product=#orderProduct#,
+					order_date=#orderDate#,
+					order_zipcode=#orderZipcode#,
+					order_address=#orderAddress#,
+					order_level=#orderLevel#,
+					order_msg=#orderMessage#
+		where 	order_id=#orderId#,
+	</update>
+	<update id="updateOrderLevelDown">
+		update 	pdorder 
+			set order_level=(order_level-1)
+		where 	order_id=#orderId#
+	</update>
+	<update id="updateOrderLevelUp">
+		update 	pdorder 
+			set order_level=(order_level+1)
+		where 	order_id=#orderId#
+	</update>
+	<update id="updateOrderLevel">
+		update 	pdorder 
+			set order_level=-1
+		where 	order_id=#orderId#
+	</update>
+	
+	<delete id="deleteOrderById">
+		delete from pdorder where order_id=#orderId#
+	</delete>
+
+</sqlMap>
+
+
+
+
+
+
+
+
+
+

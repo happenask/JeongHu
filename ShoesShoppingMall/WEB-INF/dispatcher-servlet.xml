@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+	
+	<!-- 
+MemberController->
+MemberService->MemberDAO->SqlMapClientTemplate->SqlMapClientFactoryBean->DataSource->/WEB-INF/SqlMapConfig.xml위치
+ -->
+ 	<bean name = "dataSource" class="org.apache.tomcat.dbcp.dbcp.BasicDataSource">
+ 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+ 		<property name = "url" value = "jdbc:oracle:thin:@tg-PC:1521:XE"/>
+ 		<property name="username" value="ask"/>
+		<property name="password" value="1111"/>
+ 	</bean>
+	
+	
+	<bean name="sqlMapClientFactory" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean" p:configLocation="/WEB-INF/SqlMapConfig.xml" p:dataSource-ref="dataSource"/>
+	
+	<bean name="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientTemplate" p:sqlMapClient-ref="sqlMapClientFactory"/>
+	
+	<bean name = "memberDAO" class="member.model.dao.MemberDAO">
+		<constructor-arg ref="sqlMapClient"/>
+	</bean>
+	
+	<bean name = "memberService" class="member.model.service.MemberService">
+		<constructor-arg ref="memberDAO"/>
+	</bean>
+	
+	<bean name = "ctr" class="member.controller.TilesTestController">
+		<constructor-arg ref="memberService"/>
+	</bean>
+	
+	
+		
+	
+	
+	
+	
+	
+	<!-- 
+		TilesConfigurer bean으로 등록: tiles 설정 파일의 위치와 이름을 등록하는 bean.
+	 -->
+	 
+	<bean name = "tilesConfigurer" class = "org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+		<property name="definitions">
+			<list>
+				<value>/WEB-INF/tiles-defs.xml</value>
+			</list>
+		</property>
+	</bean>
+
+	<!--
+		Tiles 처리할 TilesView를 찾아주는 ViewResolver 등록
+		-UrlBasedViewResolver 사용 - property로 TilesView를 등록
+	  -->
+	  <bean name = "tileViewResolver" class = "org.springframework.web.servlet.view.UrlBasedViewResolver">
+	  	<property name = "viewClass" value = "org.springframework.web.servlet.view.tiles2.TilesView"/>
+		<property name = "order" value = "1"/>
+	  </bean>
+	<!--
+		Tiles를 적용하지 않을 View들을 위해 BeanNameViewResolver를 등록
+		UrlBaseViewResolver는 InternalResourceViewResolver와 함께 사용 할 수 없다.(하나가 실행되면 다른 하는 실행 될 확률이 0프로다.
+	  -->
+	<bean name = "viewResolver" class = "org.springframework.web.servlet.view.BeanNameViewResolver">
+		<property name = "order" value = "2"/>
+	</bean>
+	
+	
+	
+	
+	
+	<!--  제이슨 뷰 -->
+	<bean name = "jsonView" class= "org.springframework.web.servlet.view.json.MappingJacksonJsonView"/>
+	
+	
+	<!-- 이현규 beans  -->
+	<bean name="this_product_info" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/jsp/this_product_info.jsp"/>
+	</bean>
+	<bean name="getMaterialsByType" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/material/getMaterialsByType.do"/>
+	</bean>
+	<bean name="getMaterialById" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/material/getMaterialById.do"/>
+	</bean>
+	<bean name="cate_list.do" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/model/cate_list.do"/>
+	</bean>
+	
+	<!-- product -->		   
+	<!-- material -->
+	<!-- order -->
+	<bean name = "orderDAO" class="order.model.OrderDAO">
+		<constructor-arg ref="sqlMapClient"/>
+	</bean>
+	<bean name = "orderService" class="order.model.OrderService">
+		<constructor-arg ref="orderDAO"/>
+	</bean>
+	<!-- model -->
+	<bean name = "modelDAO" class="model.model.ModelDAO">
+		<constructor-arg ref="sqlMapClient"/>
+	</bean>
+	<bean name = "modelService" class="model.model.ModelService">
+		<constructor-arg ref="modelDAO"/>
+	</bean>
+	<!-- Controller bean으로 등록 
+		<-Service, MethodNameResovler(ParameterMethodNameResolver - paramName : method)
+	-->
+	
+	<!-- Bean으로 Controller 등록 -->
+	<!-- ProductController -->
+	<!--  MaterialController -->
+	<!-- OrderController -->
+	<bean name="orderCtr" class="order.controller.TilesOrderController">
+		<constructor-arg ref="productService"/>
+		<constructor-arg ref="orderService"/>
+	</bean>	
+	<!-- ModelController -->
+	<bean name="modelCtr" class="model.controller.TilesModelController">
+		<constructor-arg ref="modelService"/>
+	</bean>	
+	<!-- 여기 까지 이현규 bean 객체 등록 XML    -->
+	
+	
+	
+	
+							<!-- board객체 등록  -->
+	
+	
+	<bean name="dao" class="board.model.dao.BoardDAO">
+		<constructor-arg ref="sqlMapClient"/>
+	</bean>
+	<!-- BoardService등록 - BoardDAO주입 -->
+	<bean name="service" class="board.model.service.BoardService">
+		<constructor-arg ref='dao'/>
+	</bean>
+	<!-- Controller 등록 -->
+	<bean name="boardCtn" class="board.controller.BoardController">
+		<constructor-arg ref="service"/>
+		<property name="uploadDir"
+	 			  value="C:\Users\tg\Downloads\자바프로그램\apache-tomcat-6.0.37\apache-tomcat-6.0.37\webapps\kostaWebS\upload"/>
+	</bean>
+	<!-- 로직 처리 필요없이 뷰페이지로 바로 이동하는 컨트롤러 -->
+	<!-- bean name="/write_form.do" class="org.springframework.web.servlet.mvc.ParameterizableViewController">
+		<property name="viewName" value="write_form.jsp"></property>
+	</bean> -->
+	<!--  여기까지 board bean객체 등록 XML -->
+	
+	
+	
+	
+	
+	
+	
+	
+			<!--      파일 업로드 bean 객체 등록  -->	
+	
+	<!-- ViewResolver -->
+<bean name="vr" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	 <property name="order" value="2"/>
+</bean>
+
+<bean name="vr2" class="org.springframework.web.servlet.view.BeanNameViewResolver">
+	<property name="order" value="1"/>
+</bean>
+
+<!-- multipartResolver : 파일업로드를 처리 (Controller메소드 호출 전에 실행 되어 업로드 처리.) -->
+<bean name="multipartResolver"
+	  class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+	  
+	 <!-- Controller -->
+	 
+	 <!-- View를 Bean으로 등록 -->
+	 <bean name="downView" class="upload.view.DownloadView"/>
+	
+	
+	<bean name = "upload" class = "org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value = "WEB-INF/fileuploadjsp/single_res.jsp"/>
+	</bean>
+<!--  여기까지 파일 업로드  XML  -->	
+	
+	
+	<!-- view 등록  -->
+	
+	<bean name = "yourjsp" class = "org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value = "jsp/yourjsp.jsp"/>
+	</bean>
+	
+	
+				<!-- 김진혁 XML -->
+	<bean name="productDAO" class="product.model.ProductDAO">
+		<constructor-arg ref="sqlMapClient"/>
+	</bean>
+	<bean name="productService" class="product.model.ProductService">
+		<constructor-arg ref="productDAO"/>
+	</bean>
+	<!-- material -->
+	
+	<bean name="materialDAO" class="material.model.MaterialDAO">
+		<constructor-arg ref="sqlMapClient"/>
+	</bean>
+	<bean name="materialService" class="material.model.MaterialService">
+		<constructor-arg ref="materialDAO"/>
+	</bean>
+	<!-- category -->
+	
+	<bean name="categoryDAO" class="category.model.CategoryDAO">
+	   <constructor-arg ref="sqlMapClient"/>
+	</bean>
+	<bean name="categoryService" class="category.model.CategoryService">
+	   <constructor-arg ref="categoryDAO"/>
+	</bean>
+	<!-- supplier -->
+	
+	<bean name="supplierDAO" class="supplier.model.SupplierDAO">
+	   <constructor-arg ref="sqlMapClient"/>
+	</bean>
+	<bean name="supplierService" class="supplier.model.SupplierService">
+	   <constructor-arg ref="supplierDAO" />
+	</bean>
+	<!-- Controller bean으로 등록 
+		<-Service, MethodNameResovler(ParameterMethodNameResolver - paramName : method)
+	-->
+	
+	<!-- Bean으로 Controller 등록 -->
+	<!-- ProductController -->
+	<bean name="productCtr" class="product.controller.TilesProductController">
+		<constructor-arg ref="productService"/>
+	</bean>
+	<!--  MaterialController -->
+	<bean name="materialCtr" class="material.controller.TilesMaterialController">
+		<constructor-arg ref="materialService"/>
+	</bean>
+	<!-- CategoryController -->
+	<bean name="categoryCtr" class="category.controller.TilesCategoryController">
+	   <constructor-arg ref="categoryService"/>
+	</bean>
+	<!-- SupplierController -->
+	<bean name="supplierCtr" class="supplier.controller.TilesSupplierController">
+	   <constructor-arg ref="supplierService"/>
+	</bean>
+
+</beans>

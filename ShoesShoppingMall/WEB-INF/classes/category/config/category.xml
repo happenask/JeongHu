@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap>
+	<typeAlias alias="cto" type="category.to.CategoryTO"/>
+	<sql id="selectCategory">
+		select 		product_category, 
+					category_heel, 
+					category_leather,
+					category_acc
+		from 	category
+	</sql>
+
+	<resultMap class="cto" id="categoryRM">
+		<result property="productCategory" columnIndex="1"/>
+		<result property="heel" columnIndex="2"/>
+		<result property="leather" columnIndex="3"/>
+		<result property="acc" columnIndex="4"/>
+	</resultMap>
+	
+	<!-- select 쿼리 처리 태그들 -->
+	<select id="selectCategoryByProduct" resultMap="categoryRM">
+		<include refid="selectCategory"/>
+		where product_category=#value#
+	</select>
+    
+	<!-- DML 쿼리 태그들 -->
+	<insert id="insertCategory" parameterClass="cto">
+		insert into category values (
+			#productCategory#, #heel#, #leather#,#acc#
+		)
+	</insert>
+	<update id="updateCategory" parameterClass="cto">
+		update 	category 
+			set 	product_category=#productCategory#, 
+					category_heel=#heel#, 
+					category_leather=#leather#,
+					category_acc=#acc#,
+		where 	product_category=#productCategory#
+	</update>
+	<delete id="deleteCategoryByProduct">
+		delete from category where product_category=#productCategory#
+	</delete>
+	
+</sqlMap>
+
+
+
+
+
+
+
+
+
+

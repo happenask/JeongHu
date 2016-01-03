@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="EUC-KR" ?>
+<!--
+타일즈 설정파일
+-->
+
+ <!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+	<!-- 
+		definition 태그 - 1개의 화면 또는 abstract definition 정의
+			속성: name - 태그 id.client코드에서 호출 할때 사용할 이름
+				  template-틀이 되는 jsp파일을 지정.
+				  extends: 다른 definition을 참조 할때 사용.
+	 		하위 태그: put-attribute
+	 	put-attribute: definition을 구성하는 요소들을 정의. template.jsp 를 구성할 요소들(jsp,문자열)등을 선언
+	 		속성: name - 설정에 대한 식별자. -template에서 호출할 이름.
+	 			  value - 구성 요소를 지정
+	 -->
+	 <definition name = "layout_tiles" template="/templates/template.jsp">
+	 	<put-attribute name="header" value = "/templates/header.jsp"/>
+	 	<put-attribute name="left" value = "/templates/left.jsp"/>
+	 	<put-attribute name="footer" value = "/templates/footer.jsp"/>
+	 </definition>
+ 	 <definition name = "main" extends="layout_tiles">
+	 	<put-attribute name="title" value = "메인페이지"/>
+	 	<put-attribute name="main" value = "/jsp/main.jsp"/><!-- 이렇게 쓸때는 jsp폴더 안에 들어가야된다 --> 
+	 </definition><!-- lay_out_tiles를 상속받아서 쓴다.(오바라이딩도 가능)  -->
+	
+	 <definition name = "join_form" extends="layout_tiles">
+	 	<put-attribute name="title" value = "가입폼"/>
+	 	<put-attribute name="main" value = "/memberjsp/register_form.jsp"/>
+	 </definition>
+	  <definition name = "mypage_form" extends="layout_tiles">
+	 	<put-attribute name="title" value = "마이페이지"/>
+	 	<put-attribute name="main" value = "/memberjsp/mypage_form.jsp"/>
+	 </definition>
+	 
+	 <definition name = "management_form" extends="layout_tiles">
+	 	<put-attribute name="title" value = "통합 매니지먼트"/>
+	 	<put-attribute name="main" value = "/memberjsp/management_form.jsp"/>
+	 </definition>
+	 
+	 <definition name = "login_form" extends ="layout_tiles">
+	 	<put-attribute name="title" value = "로그인 페이지"/>
+	 	<put-attribute name="main" value="/memberjsp/login.jsp"/>
+	 </definition>
+	 
+	 <definition name = "register_success" extends ="layout_tiles">
+	 	<put-attribute name="title" value = "로그인 페이지"/>
+	 	<put-attribute name="main" value="/memberjsp/register_success.jsp"/>
+	 </definition>
+	 
+	 
+	 <definition name = "update_form" extends ="layout_tiles">
+	 	<put-attribute name="title" value = "회원정보 수정"/>
+	 	<put-attribute name="main" value="/memberjsp/update_form.jsp"/>
+	 </definition>
+	 
+	 
+	 <definition name = "cate_list" extends ="layout_tiles">
+	 	<put-attribute name="title" value = "상품목록"/>
+	 	<put-attribute name="main" value="/categoryjsp/cate_list.jsp"/>
+	 </definition>
+	
+	 
+	 
+	  <definition name = "product_insert_form" extends ="layout_tiles">
+	 	<put-attribute name="title" value = "주문등록"/>
+	 	<put-attribute name="main" value="/WEB-INF/jsp/product_insert_form.jsp"/>
+	 </definition>
+	 
+	 
+	 <definition name="model_insert_form" extends="layout_tiles">
+		<put-attribute name="title" value="모델등록"/>
+		<put-attribute name="main" value="/WEB-INF/jsp/model_insert_form.jsp"/>
+	</definition>
+	<definition name="model_insert_success" extends="layout_tiles">
+		<put-attribute name="title" value="모델 삽입 완료"/>
+		<put-attribute name="main" value="/WEB-INF/jsp/model_success.jsp"/>
+	</definition>
+		<definition name="model_list" extends="layout_tiles">
+		<put-attribute name="title" value="모델리스트"/>
+		<put-attribute name="main" value="/WEB-INF/jsp/model_list.jsp"/>
+	</definition>
+	<definition name="order_form" extends="layout_tiles">
+		<put-attribute name="title" value="상세주문정보 입력"/>
+		<put-attribute name="main" value="/WEB-INF/jsp/order_form.jsp"/>
+	</definition>
+	<definition name="order_insert_success" extends="layout_tiles">
+		<put-attribute name="title" value="상품 주문 완료"/>
+		<put-attribute name="main" value="/WEB-INF/jsp/order_success.jsp"/>
+	</definition>
+	<definition name="order_list" extends="layout_tiles">
+		<put-attribute name="title" value="주문 리스트"/>
+		<put-attribute name="main" value="/WEB-INF/jsp/order_list.jsp"/>
+	</definition>
+	<definition name="order_list_admin" extends="layout_tiles">
+		<put-attribute name="title" value="주문 리스트(관리자)"/>
+		<put-attribute name="main" value="/WEB-INF/jsp/order_list_admin.jsp"/>
+	</definition>
+	<definition name="chart" extends="layout_tiles">
+		<put-attribute name="title" value="chart"/>
+		<put-attribute name="main" value="/WEB-INF/jsp/chart.jsp"/>
+	</definition>
+	<definition name="error" extends="layout_tiles">
+		<put-attribute name="title" value="에러 페이지"/>
+		<put-attribute name="main" value="/jsp/error.jsp"/>
+	</definition>
+	
+	<definition name="show_content" extends="layout_tiles">
+		<put-attribute name="title" value="글확인"/>
+		<put-attribute name="main" value="/WEB-INF/boardjsp/show_content.jsp"/>
+	</definition>
+	<definition name="list" extends="layout_tiles">
+		<put-attribute name="title" value="글목록"/>
+		<put-attribute name="main" value="/WEB-INF/boardjsp/list.jsp"/>
+	</definition>
+	
+	 <definition name="writeForm" extends="layout_tiles">
+		<put-attribute name="title" value="글쓰기"/>
+		<put-attribute name="main" value="/WEB-INF/boardjsp/write_form.jsp"/>
+	</definition>
+	
+	 <definition name="modify_form" extends="layout_tiles">
+		<put-attribute name="title" value="글수정"/>
+		<put-attribute name="main" value="/WEB-INF/boardjsp/modify_form.jsp"/>
+	</definition>
+	
+	<definition name="reply_form" extends="layout_tiles">
+		<put-attribute name="title" value="답변"/>
+		<put-attribute name="main" value="/WEB-INF/boardjsp/reply_form.jsp"/>
+	</definition>
+	 
+
+	 <!-- 김진혁 tiles -->
+	 <definition name="*/*.tiles" extends="layout_tiles">
+		<put-attribute name="title" value="{1}"/>
+		<put-attribute name="main" value="/mnsjsp/{2}.jsp"/>
+	</definition>
+	<definition name="material_register_success" extends="layout_tiles">
+        <put-attribute name="title" value="재료 등록 완료"/>
+        <put-attribute name="main" value="/mnsjsp/material_register_success.jsp"/>
+    </definition>
+    <definition name="supplier_register_success" extends="layout_tiles">
+        <put-attribute name="title" value="거래처 등록 완료"/>
+        <put-attribute name="main" value="/mnsjsp/supplier_register_success.jsp"/>
+    </definition>
+    <definition name="supplier_search_success" extends="layout_tiles">
+        <put-attribute name="title" value="거래처 검색 완료"/>
+        <put-attribute name="main" value="/mnsjsp/supplier_search_success.jsp"/>
+    </definition>
+    <definition name="material_search_success" extends="layout_tiles">
+        <put-attribute name="title" value="재료 검색 완료"/>
+        <put-attribute name="main" value="/mnsjsp/material_search_success.jsp"/>
+    </definition>
+    <definition name="supplier_modify_success" extends="layout_tiles">
+        <put-attribute name="title" value="거래처 수정 완료" />
+        <put-attribute name="main" value="/mnsjsp/supplier_modify_success.jsp"/>
+    </definition>
+    <definition name="material_modify_success" extends="layout_tiles">
+        <put-attribute name="title" value="재료 수정 완료"/>
+        <put-attribute name="main" value="/mnsjsp/material_modify_success.jsp"/>
+    </definition>
+    
+    
+	<definition name="materialSuppriesForm" extends="layout_tiles">
+        <put-attribute name="title" value="재료관리"/>
+        <put-attribute name="main" value="/memberjsp/material_form.jsp"/>
+    </definition> 
+	<definition name="modelSuppriesForm" extends="layout_tiles">
+        <put-attribute name="title" value="모델관리"/>
+        <put-attribute name="main" value="/memberjsp/model_form.jsp"/>
+    </definition> 
+</tiles-definitions>
+
+
+
+
+
+
+

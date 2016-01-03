@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap>
+	<typeAlias alias="mdto" type="model.to.ModelTO"/>
+	<sql id="selectModel">
+		select model_num,
+				model_heel,
+				model_leather,
+				model_price,
+				model_name,
+				model_type		
+		from 	model
+	</sql>
+
+	<resultMap class="mdto" id="modelRM">
+		<result property="modelNum" columnIndex="1"/>
+		<result property="modelHeel" columnIndex="2" nullValue="0"/>
+		<result property="modelLeather" columnIndex="3"/>
+		<result property="modelPrice" columnIndex="4"/>
+		<result property="modelName" columnIndex="5"/>
+		<result property="modelType" columnIndex="6"/>
+	</resultMap>
+	
+	<!-- select 쿼리 처리 태그들 -->
+	<select id="selectModelNumber" resultClass="int">
+		select model_number.nextval from dual
+	</select>
+	
+	<select id="selectModelListByNum" resultMap="modelRM">
+		<include refid="selectModel"/>
+		where model_num=#modelNum#
+	</select>
+	<select id="selectModelListByType" resultMap="modelRM">
+		<include refid="selectModel"/>
+		where model_type=#modelType#
+	</select>
+	<select id="selectModelList" resultMap="modelRM">
+		<include refid="selectModel"/>
+	</select>
+	
+	 <select id="selectModelListAtTt" resultMap="modelRM">
+		select model_num,
+				model_heel,
+				model_leather,
+				model_price,
+				model_name,
+				model_type	 from(
+									select model_num,
+											model_heel,
+											model_leather,
+											model_price,
+											model_name,
+											model_type	
+							 		 from model
+									order by model_num desc
+								) 
+		where rownum &lt; 13
+	</select> 
+		
+	<!-- DML 쿼리 태그들 -->
+	<insert id="insertModel" parameterClass="mdto">
+		insert into model values (
+			#modelNum#, #modelHeel#, #modelLeather#, #modelPrice#, #modelName#, #modelType#
+		)
+	</insert>
+	<update id="updateModel" parameterClass="mdto">
+		update 	model 
+			set 	model_heel=#modelHeel#, 
+					model_leather=#modelLeather#, 
+					model_price=#modelPrice#,
+					model_name=#modelName#
+					model_type=#modelType#
+		where 	model_num=#modelNum#
+	</update>
+	<delete id="deleteModelByModelNum">
+		delete from model where model_num=#modelNum#
+	</delete>
+	
+</sqlMap>
+
+
+
+
+
+
+
+
+
+

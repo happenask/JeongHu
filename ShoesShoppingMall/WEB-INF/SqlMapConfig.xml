@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMapConfig      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+
+<sqlMapConfig>
+
+  <!-- Configure a built-in transaction manager.  If you're using an 
+       app server, you probably want to use its transaction manager 
+       and a managed datasource -->
+  
+ 	<sqlMap resource="product/config/product.xml"/>
+ 	<sqlMap resource="order/config/order.xml"/>
+ 	<sqlMap resource="member/config/member.xml"/>
+ 	<sqlMap resource="model/config/model.xml"/>
+ 	<sqlMap resource="board/config/board.xml"/>
+ 	
+ 	
+ 	<sqlMap resource="material/config/material.xml"/>
+ 	<sqlMap resource="category/config/category.xml"/>
+ 	<sqlMap resource="supplier/config/supplier.xml"/>
+</sqlMapConfig>
+
+
+
+
+
+
+
+
+
+

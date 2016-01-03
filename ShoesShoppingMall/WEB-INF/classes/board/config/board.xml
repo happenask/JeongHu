@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ 
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap> 
+	<typeAlias type="board.to.BoardTO" alias="boardTO"/>
+	<!-- insert - 원본글과 답변글의 경우 refamily 넣는 방법의 차이가 있어 두개를 만든다. -->
+	<!-- 원본 글인 경우는 no와 refamily를 같이 해야 한다. -->
+	<insert id="insertContentForNewCount" parameterClass="boardTO">
+		<selectKey keyProperty="no" resultClass="int">
+			select board_no_seq.nextVal from dual
+		</selectKey>
+		insert into board (no, title, writer, content, writedate, viewcount, refamily, restep, relevel,fileName)
+			values(		#no#, #title#, #writer#, #content#, #writedate#, 0,	#no#, 0, 0, #fileName#)
+	</insert>
+	<!-- 답변 글의 경우 refamily를 boardTO로 받아서 넣는다.  -->
+	<insert id="insertContentForReply" parameterClass="boardTO">
+		<selectKey keyProperty="no" resultClass="int">
+			select board_no_seq.nextVal from dual
+		</selectKey>
+		insert into board (no, title, writer, content, writedate, viewcount, refamily, restep, relevel,fileName)
+		values(#no#, #title#, #writer#, #content#, #writedate#, 0,#refamily#, #restep#, #relevel#,#fileName#)
+	</insert>
+	<!--조회수로 image 조회  -->
+	<select id='selectImageByViewNum' resultClass="string">
+		select fileName
+		from board
+		order by viewcount desc		
+	</select>
+	
+	
+	
+	<!-- paging없는 전체 조회 -->
+	<select id='selectBoardAllList' resultClass="boardTO">
+		select 	no, 
+					title, 
+					writer, 
+					content, 
+					writedate,
+					viewcount, 
+					refamily, 
+					restep, 
+					relevel,
+					fileName
+		
+		from board
+		order by refamily desc, restep asc		
+	</select>
+	<!-- 전체 list 조회-paging-->
+	<select id="selectBoardListByPage" parameterClass="hashmap" resultClass="boardTO">
+		select		no, 
+					title, 
+					writer,
+					content,
+					writedate,
+					viewcount,
+					refamily,
+					restep,
+					relevel,
+					fileName
+				
+		from 	(
+				select	 ceil(rownum/#contentPerPage#) page, 
+							no, 
+							title, 
+							writer, 
+							content, 
+							writedate, 
+							viewcount, 
+							refamily, 
+							restep, 
+							relevel,
+							fileName
+					
+				from(	
+						select  	no, 
+									title, 
+									writer, 
+									content, 
+									writedate, 
+									viewcount, 
+									refamily, 
+									restep, 
+									relevel,
+									fileName
+						
+						from 		board 						
+						order by refamily desc, restep asc	
+				)
+		) 
+		where page = #page#
+	</select>
+	<select id="selectTotalContent" resultClass="int">
+		select		count(no) 
+		from 		board
+	</select>
+	<update id="updateViewCount" parameterClass="int">
+		update 	board 
+		set 		viewcount=viewcount+1 
+		where no=#no#
+	</update>
+	<select id="selectContentByNO" parameterClass="int" resultClass="boardTO">
+		select	no,
+					title,
+					writer, 
+					content, 
+					writedate, 
+					viewcount, 
+					refamily, 
+					restep, 
+					relevel,
+					fileName
+		
+		from 	board 
+		where 	no=#no#
+	</select>
+	<update id="updateContent" parameterClass="boardTO">
+		update	board 
+		set 		title=#title#, 
+					writer=#writer#, 
+					content=#content#, 
+					writedate=#writedate#
+		where 	no = #no#
+	</update>
+	<delete id="deleteContentByNO" parameterClass="int">
+		delete from board where no=#no#
+	</delete>
+	<update id="updateRestep" parameterClass="hashmap">
+		update	board 
+		set 	restep = restep+1 
+		where 	refamily=#refamily# 
+		  and 	restep > #restep#
+	</update>
+</sqlMap>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+<style type="text/css">
+.aaa {
+    background-color: blue;
+}
+</style>
+<script type="text/javascript" src = '/text/jquery.js'></script>
+<script type="text/javascript">
+// toggle() click 이벤트를 여러 이벤트 핸들러를 번갈아가며 실행할 수 있게 연결합니다.
+// hover() mouseenter 이벤트와 mouseleave 이벤트를 동시에 연결합니다.
+
+
+// toggle() 메서드는 매ㅐ개변수에 여러개의 함수를 입력할 수 있습니다.
+$('h1').toggle(function () {
+
+    $(this).css('color', 'blue');
+
+},
+
+function () {
+    $(this).css('color', 'red');
+
+}
+
+);
+
+// 이벤트를 한번만 연결하고 싶을 때 , unbind() 메소드를 이용해서 할 수도 있지만,
+// one()메소드를 활용하면 슆다. one() 메소드는 bind() 메소드와 동일하되 한번만 이벤트가 연결된다.
+
+// context 객체및 좌표 구하기 
+
+var canvas = document.getElementById('canvas');
+var context = canvas.getContext('2d');
+
+$(canvas).toggle(function (event) {
+    var position = $(this).offset();
+    var x = event.pageX - position.left;
+    var y = event.pageY - position.top;
+    alert('x:' + x + ',y:' + y);
+
+    context.beginPath();
+
+    context.moveTo(x, y);
+},
+
+function (event) {
+    var position = $(this).offset(); //offset() -> 특정요소의 문서상의 상대적인 현재 위치
+    var x = event.pageX - position.left;
+    var y = event.pageY - position.top;
+
+    context.lineTo(x, y);
+    context.stroke();
+
+});
+
+
+// 이벤트 강제 연결 trigger('click');
+
+// 기본 이벤트와 이벤트 전달
+
+$('a').click(function(event){
+    
+    $(this).attr('class','aaa');
+    event.preventDefault();
+    event.stopPropagation();
+});
+
+$('h1').click(function(){
+    
+   $(this).addClass('aaa');
+});
+
+
+
+// 이벤트 연결의 종류
+// bind() 현재 존재하는 문서 객제에만 이벤트를 연결 <-> unbind()
+// live(), delegation() 현재 또는 미래에 존재하는 이벤트를 연결  <-> die(), undelegation()
+// live() 는 새로생긴 문서객체에 대해서도 이벤트가 연결 된다.
+/// one() 한번만 이벤트를 연결
+</script>
+</head>
+<body>
+<h1>header</h1>
+<h1>header</h1>
+<h1>header</h1>
+
+
+
+<h1>
+<a href='http://www.naver.com'>dsfggd<a>
+</h1>
+</body>
+</html>

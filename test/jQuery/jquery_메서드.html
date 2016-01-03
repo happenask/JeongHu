@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+<script type="text/javascript" src = "/test/jquery.js"></script>
+<script type="text/javascript">
+ 
+ $(function(){
+		
+ // jquery 로 객체 확장 하기 $.extend() 메서드
+	 var object = {name:'an'};
+	 
+	 $.extend(object,{
+		 gender:'Male',
+		 part  :'programmer'
+		 
+	 });
+	 
+	 var output = "";
+	 
+	 $.each(object,function(key,item){
+		 
+		 output += "key:"+key+", item:"+item;
+	 });
+	 
+	 alert(output);
+	 
+// fileter 메서드의 활용 
+	
+	 $('h3').filter(':even').css({backgroudColor:'Black',color:'blue'});
+	
+	 $('h3').filter(function(index){
+	     return index % 3 === 0;
+	 }).css({backgroudColor:'Black',color:'blue'});
+
+// 선택자의 범위를 점점 축소하면서 찾는 (first,last,filter) 메서드 대신 add()메서드를 확용
+// 하면 선택자의 범위를 확장 할 수있다. 
+
+	 $('h1').css({backgroud:'Gray'}).add('h2').css({float:'left'}); //add(매개변수로 선택자를 입력한다.) 메서드를 활용하여 추가로 선택자를 추가한다.
+	 
+// 문서객체가 특징을 가지고 있는지 판단할 때 is(매개변수로 선택자를 입력한다.)메서드 활용
+	$('h1').each(function(){
+		if($(this).is('.select')){
+			$(this).css('backgroud':'Orange');
+		}
+
+// XML 문서에서 데이터를 추출할 때 많이 사용하는 find() -> 특정 태그를 선택한다.
+
+
+	
+	});
+ });
+
+</script>
+</head>
+<body>
+	<h3>Header-0</h3>
+	<h3>Header-1</h3>
+	<h3>Header-2</h3>
+	<h3>Header-3</h3>
+</body>
+</html>

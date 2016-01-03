@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap>
+	<typeAlias alias="mto" type="member.dto.MemberDTO"/>
+	<sql id="selectSQL">
+		select 		id, 
+					password, 
+					name, 
+					register_number1,
+					register_number2,
+					tel,
+					member_level,
+					mileage, 
+					zipcode,
+					address,
+					member_num
+		from 		member
+		
+	
+				
+	</sql>
+	<resultMap class="mto" id="memberRM">
+		<result property="id" columnIndex="1"/>
+		<result property="password" columnIndex="2"/>
+		<result property="name" columnIndex="3"/>
+		<result property="registerNumber1" columnIndex="4"/>
+		<result property="registerNumber2" columnIndex="5"/>
+		<result property="tel" columnIndex="6" />
+		<result property="memberLevel" columnIndex="7" nullValue="A"/>
+		<result property="mileage" columnIndex="8" nullValue="0"/>
+		<result property="zipcode" columnIndex="9" />
+		<result property="address" columnIndex="10" />
+		<result property="memberNum" columnIndex="11" nullValue="1"/>
+		
+	</resultMap>
+	
+	<!-- select 쿼리 처리 태그들 -->
+	<select id="selectMemberById" resultMap="memberRM">
+		<include refid="selectSQL"/>
+		where id=#value#
+	</select>
+	
+	<select id="selectAddressBydong" resultClass="member.dto.AddressTO">
+			select 	zipcode, 
+					sido, 
+					gugun, 
+					dong,
+					bunji,
+					seq 
+		    from 	zipcode where dong like '%'||#dong#||'%'  
+	</select>
+	
+	<select id="selectMemberByRegisterNumber" resultMap="memberRM" parameterClass="hashmap">
+		<include refid="selectSQL"/>
+		where 	register_number1=#reg1#
+		 and		register_number2=#reg2#
+	</select>
+	
+	<select id="selectSquence" resultClass="int">
+		select member_seq.nextval 
+		from dual
+	</select>
+	
+	<insert id="insertMember" parameterClass="mto">
+		insert into member values (
+			#id#, #password#, #name#, #registerNumber1#, #registerNumber2#, #tel#, #memberLevel#,#mileage#,#zipcode#,#address#,#memberNum#
+		)
+	</insert>
+
+	<update id="updateMember" parameterClass="mto">
+		update 	member 
+			set 	password=#password#, 
+					name=#name#, 
+					register_number1=#registerNumber1#,
+					register_number2=#registerNumber2#,
+					tel=#tel#,
+					zipcode=#zipcode#,
+					address=#address#
+		where 	id=#id#
+	</update>
+
+
+	<!-- DML 쿼리 태그들 -->
+	<delete id="deleteMemberById">
+		delete from member where id=#value#
+	</delete>
+
+	
+	<select id="selectMemberByRegisterNumberAndId" resultMap="memberRM" parameterClass="hashmap">
+		<include refid="selectSQL"/>
+		where 	id!=#id#
+		 and		(register_number1=#registerNumber1#
+		 and		register_number2=#registerNumber2#)
+	</select>
+	<select id="selectAllMember" resultMap="memberRM">
+		<include refid="selectSQL"/>
+	</select>
+	<select id="selectMemberByMileageRange" resultMap="memberRM" parameterClass="hashmap">
+		<include refid="selectSQL"/>
+		where mileage between #sMileage# and #eMileage#
+	</select>
+	<select id="selectMemberByName" resultMap="memberRM">
+		<include refid="selectSQL"/>
+		where name like '%'||#value#||'%'
+	</select>	
+		
+</sqlMap>
+
+
+
+
+
+
+
+
+
+

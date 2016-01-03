@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+<script type="text/javascript">
+
+
+function Operation(operator) {
+    
+    this.operator = operator;
+
+    this.toString = function () {
+        var output = "";
+
+        output = this.num1 + this.operator + this.num2;
+        return output;
+    };
+}
+
+Operation.prototype.caculation = function () {
+
+    switch (this.operator) {
+        case '+':
+            return this.num1 + this.num2;
+        case '-':
+            return this.num1 - this.num2;
+        case '*':
+            return this.num1 * this.num2;
+
+
+    }
+
+
+};
+
+function make_number() {
+    var result = Math.floor(Math.random() * 18) + 1;
+
+   this.num1 = Math.floor(Math.random() * result - 1) + 1; // 결과보다 낮은 값 중에서 랜덤으로 숫자를 생성한다.
+
+    this.num2 = result - num1;
+    
+	var opt  = new Operation('+');
+	alert(this.num1);
+	opt.caculation.call(this);
+
+}
+
+
+var aa = make_number();
+alert(aa);
+
+var b = new make_number();
+b.
+
+</script>
+</head>
+<body>
+여기는 pos.gn-food.com 의 테스트 페이지 입니다.
+</body>
+</html>

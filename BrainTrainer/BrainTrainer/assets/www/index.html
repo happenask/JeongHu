@@ -1,0 +1,186 @@
+<!DOCTYPE html> 
+<html>
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"> 
+<!-- <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" /> -->
+<meta name="format-detection" content="telephone=no" />
+<meta name="msapplication-tap-highlight" content="no" />
+ 
+<title>Insert title here</title>
+<style>
+.spinner {
+  margin: 100px auto 0;
+  width: 300px;
+  height:200px;
+  text-align: center;
+}
+
+
+
+.spinner > div {
+  /* width: 20px;
+  height: 18px;
+   */
+
+  display: inline-block;
+  -webkit-animation: bouncedelay 1.4s  ease-in-out;
+  animation: bouncedelay 1.4s  ease-in-out;
+  /* Prevent first frame from flickering when animation starts */
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+h1{
+font: 100% "PublicGothicCircular";
+}
+.spinner .bounce1 {
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+
+.spinner .bounce2 {
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+.spinner .bounce3 {
+  -webkit-animation-delay: -0.02s;
+  animation-delay: -0.0s;
+}
+
+
+img{
+	width:100%;
+}
+
+
+@-webkit-keyframes bouncedelay {
+  0%, 90%, 100% { -webkit-transform: scale(1.0) }
+  50% { -webkit-transform: scale(0.0) }
+}
+@-moz-keyframes bouncedelay {
+  0%, 80%, 100% { 
+    transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+  } 40% { 
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+  }
+}
+@keyframes bouncedelay {
+  0%, 80%, 100% { 
+    transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+  } 40% { 
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+  }
+}
+
+
+
+
+h1 {
+	font: 90px "PublicGothicCircular";
+	color:rgb(234, 242, 242);
+/* 	color: rgb(218,88,110); */
+text-shadow:rgb(134, 140, 140) 1px 1px 0,rgb(134, 140, 140) 2px 2px 0
+				, rgb(134,140,140) 3px 3px 0  
+				, rgb(134,140,140) 4px 4px 0  
+				, rgb(134,140,140) 5px 5px 0  
+				, rgb(134,140,140) 6px 6px 0  
+				, rgb(134,140,140) 7px 7px 0  
+				, rgb(134,140,140) 8px 8px 0  
+				, rgb(134,140,140) 9px 9px 0  
+				, rgb(134,140,140) 10px 10px 0
+				, rgb(134,140,140) 11px 11px 0
+				, rgb(134,140,140) 12px 12px 0
+				, rgb(134,140,140) 13px 13px 0
+				, rgb(134,140,140) 14px 14px 0
+				, rgb(134,140,140) 15px 15px 0
+				, rgb(134,140,140) 16px 16px 0
+				, rgb(134,140,140) 17px 17px 0
+				, rgb(134,140,140) 18px 18px 0
+				, rgb(134,140,140) 19px 19px 0
+				, rgb(134,140,140) 20px 20px 0
+				, rgb(134,140,140) 21px 21px 0
+				, rgb(134,140,140) 22px 22px 0
+				, rgb(134,140,140) 23px 23px 0
+
+}
+
+.bounce1 h1:after {
+	content:'J';
+	color: rgb(124, 232, 203);
+	left: 10px;
+	top: 70px;
+	font-weight: bold;
+	text-shadow: none;
+	position: absolute;
+}
+.bounce2 h1:after {
+	content:'H';
+	color: rgb(124, 232, 203);
+	left: 10px;
+	top: 70px;
+	font-weight: bold;
+	text-shadow: none;
+	position: absolute;
+}
+.bounce3 h1:after {
+	content:'A';
+		/* color: rgb(103,184,227); */
+	color: rgb(124, 232, 203);
+	left: 10px;
+	top: 70px;
+	font-weight: bold;
+	text-shadow: none;
+	position: absolute;
+}
+
+</style>
+
+<script type="text/javascript" src = "./js/jquery-1.11.1.js"></script>
+<script src="./jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<script type="text/javascript"  src="cordova.js"></script>
+<script type="text/javascript"  src="cordova_plugins.js"></script>   
+
+<link rel="stylesheet" href="./jquery.mobile-1.4.5/jquery.mobile.structure-1.4.5.css" />
+<link rel="stylesheet" href="./jquery.mobile-1.4.5/jquery.mobile.icons-1.4.5.min.css" />
+
+<script type="text/javascript">
+
+	$(function(){
+		
+		setTimeout(function(){
+			
+			window.location.replace('game_main.html');
+			
+		},1500);
+	});
+
+</script>
+</head>
+
+<body>
+<div id='page' data-role="page" data-theme='a'>
+
+<div id="content" data-role="content" >
+	<div class="spinner">
+ <!--   <div class="bounce1"><img alt="" src="logo1.png"></div>
+  <div class="bounce2"><img alt="" src="logo2.png"></div>
+  <div class="bounce3"><img alt="" src="logo3.png"></div>  -->
+  
+ <div class="bounce1"><h1>J</h1></div>
+  <div class="bounce2"><h1>H</h1></div>
+  <div class="bounce3"><h1>A</h1></div>  
+      
+</div>
+		
+</div>
+
+</div>
+
+
+</body>
+</html>
