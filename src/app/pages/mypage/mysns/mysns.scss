@@ -1,0 +1,98 @@
+.facebook-content{
+  width:100%;
+  text-align: center;
+}
+.instagram-content{
+  width:100%;
+  text-align: center;
+}
+.facebook-content h3{
+  margin-top:20px;
+}
+.instagram-content h3{
+  margin-top:20px;
+}
+
+.facebook-provider.connected{
+  position:relative;
+  width:200px;
+  margin: 0 auto;
+  background: #3b5998;
+  height: 50px;
+  text-align: center;
+  border:none;
+  color: #fff;
+}
+.facebook-provider{
+  position:relative;
+  width:200px;
+  margin: 0 auto;
+  height: 50px;
+  text-align: center;
+  border: 2px solid gainsboro;
+  color: gainsboro;
+}
+.facebook-provider .title{
+  line-height: 50px;
+  font-size: 20px;
+  letter-spacing: -0.06em;
+}
+
+.facebook-provider .icon{
+  position: absolute;
+  left: 10px;
+  line-height: 50px;
+  font-size: 25px;
+}
+.instagram-provider.connected{
+  position:relative;
+  width:200px;
+  margin: 0 auto;
+  background: rgb(45, 105, 156);
+  height: 50px;
+  text-align: center;
+  color: #fff;
+  border:none;
+}
+.instagram-provider{
+  position:relative;
+  width:200px;
+  margin: 0 auto;
+  height: 50px;
+  text-align: center;
+  color: gainsboro;
+  border:2px solid gainsboro;
+}
+
+.instagram-provider .title{
+  line-height: 50px;
+  font-size: 20px;
+  letter-spacing: -0.06em;
+
+}
+.instagram-provider .icon{
+  position: absolute;
+  left: 10px;
+  line-height: 50px;
+  font-size: 25px;
+}
+.panel-title{
+  text-align: center;
+}
+.btn-refresh{
+  position: absolute;
+  left: -50px;
+  top: 10px;
+  color:black;
+  font-size:25px;
+}
+.status-color{
+  position:absolute;
+  top:0;
+  right:0;
+  color:red;
+  font-size:25px;
+}
+.meta.red{
+  color:red;
+}

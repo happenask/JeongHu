@@ -1,0 +1,24 @@
+.btn-facebook-inversed[data-connected="false"] {
+  background-color: white;
+  color: #4863ae;
+}
+
+.btn-facebook-inversed:hover {
+  background-color: transparent;
+  color: #4863ae;
+}
+
+.btn-facebook-inversed {
+  background-color: #4863ae;
+  border-color: #4863ae;
+  color: white;
+}
+.btn-instagram-inversed[data-connected="false"] {
+  background-color: white;
+  color: #3f729b;
+}
+.btn-instagram-inversed {
+  background-color: #3f729b;
+  border-color: #3f729b;
+  color: white;
+}

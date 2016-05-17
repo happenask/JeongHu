@@ -1,0 +1,72 @@
+<div class="divide50"></div>
+<div class="popup-logo" style="position: absolute; top: 20px; left: 30px; right: 30px; height: 32px;">
+    <img src="//static.08liter.com/resources/logo/logo.png" height="32">
+</div>
+<div class="container">
+    <div class="container content">
+        <form ng-if="!vm.state" ng-submit="vm.sendPhoneNumber()" class="sky-form likeitForm">
+            <fieldset>
+                <div class="row">
+                    <section class="col col-4">
+                        <label class="select">
+                            <select class="" ng-model="vm.selectedCountryCode" ng-change="vm.countryCodeChanged()">
+                                <option ng-repeat="country in vm.countryCode" value="{{country.callingCodes[0]}}">{{country.name}}</option>
+                            </select>
+                            <i></i>
+                        </label>
+                    </section>
+                    <section class="col col-2">
+                        <label class="input state-disabled">
+                            <input disabled value="+{{vm.selectedCountryCode}}">
+                        </label>
+                    </section>
+                    <section class="col col-6">
+                        <label class="input">
+                            <i class="icon-prepend fa fa-phone"></i>
+                            <!--  수정: 번역추가 {{'MENU'|translate}} 인증받으실 전화번호를 입력해주세요 인증신청 -->
+                            <input type="tel" required ng-model="vm.phone" placeholder="인증받으실 전화번호를 입력해주세요">
+                        </label>
+                    </section>
+
+                </div>
+                <footer style="text-align: right; background-color: transparent;">
+                    <button type="submit" class="btn btn-theme-dark btn-lg likeitBtn">인증번호신청</button>
+                </footer>
+            </fieldset>
+        </form>
+
+        <form ng-if="vm.state" ng-submit="vm.sendOTPNumber()" class="sky-form likeitForm">
+            <fieldset>
+                <div class="row">
+                    <section>
+                        <label class="input state-disabled">
+                            <i class="icon-prepend fa fa-phone"></i>
+                            <input type="tel" required disabled value="+{{vm.selectedCountryCode}} {{vm.phone}}">
+                        </label>
+                    </section>
+                </div>
+                <div class="row">
+                    <section>
+                        <label class="input">
+                            <i class="icon-prepend fa fa-lock"></i>
+                            <input type="text" required ng-pattern="/^[0-9]+$/" minlength="6" maxlength="6" ng-model="vm.opt" placeholder="인증번호를 입력해주세요">
+                        </label>
+                        <div style="text-align: right;">
+                            남은시간:
+                            <timer countdown="3" max-time-unit="'minute'" interval="1000" finish-callback="vm.countDownCallback()">
+                                {{hours}}:{{mminutes}}:{{sseconds}}
+                            </timer>
+                        </div>
+
+                    </section>
+                </div>
+                <footer style="text-align: right; background-color: transparent;">
+                    <button type="button" class="btn btn-theme-dark btn-lg likeitBtn" ng-click="vm.formReset()">다시신청하기</button>
+                    <button type="submit" class="btn btn-theme-dark btn-lg likeitBtn">인증신청</button>
+                </footer>
+            </fieldset>
+        </form>
+    </div>
+</div>
+
+<div class="divide60"></div>

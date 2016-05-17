@@ -1,0 +1,84 @@
+<div class="col-md-9">
+    <div class="center-heading">
+        <h2 class="rawText" style="margin: 0;">MY TRY</h2>
+        <span class="center-line" style="border-top: 2px solid #888"></span>
+    </div>
+
+    <ul class="filter list-inline categoryFilter">
+        <li class="nopaddingStrong"><a  ng-class="active" class="category productCategory category-try active" href="#" ng-click="vm.onClickApply()" data-filter=".apply">TRY</a></li>
+        <li class="nopaddingStrong"><a  class="category productCategory category-win" href="#" ng-click="vm.onClickWin()" data-filter=".complete">WIN</a></li>
+        <li class="nopaddingStrong"><a  class="category productCategory category-fail" href="#" ng-click="vm.onClickFail()" data-filter=".complete">FAIL</a></li>
+    </ul>
+
+
+    <div class="dynamic-grid" angular-grid="vm.listview" grid-width="190" gutter-size="18" angular-grid-id="gallery" refresh-on-img-load="true" >
+
+        <div class="appliedEvent memberApplys complete grid" ng-repeat="item in vm.listview">
+            <div ng-if="item.status">
+                <a class="mpImg detailBtn">
+                    <img ng-src="{{item.image.orgName}}" class="img-responsive completeThumbnailImg" data-actual-width="500" data-actual-height="300" alt="workimg">
+                </a>
+          <!--      <div class="blurDiv "></div>-->
+                <div class="item-img-overlay">
+
+                    <a ng-if="item.resultCode == '1000'&&item.reviewYn == 'N'" href="/review/write?id={{item.campaignId}}">
+                        <span class="overlay"></span>
+                        <div class="review-yet">
+                            <div class="review-text">REVIEW</div>
+                            <div class="remain-time">
+                                <timer  countdown="item.remainTime" max-time-unit="'hour'" interval="1000">{{hours}}:{{mminutes}}:{{sseconds}}</timer>
+                            </div>
+                        </div>
+                    </a>
+                    <a ng-if="item.resultCode == '1000'&&item.reviewYn == 'Y'" href="/review/detail?rid={{item.id}}">
+                        <span class="overlay"></span>
+                    </a>
+                    <a ng-if="item.resultCode == '1000'&&item.reviewYn == 'N'" href="/review/write?id={{item.campaignId}}">
+                        <span class="overlay"></span>
+                            <div class="review-yet over-expired">
+                                <div class="review-text">REVIEW</div>
+                                <div class="remain-time">
+                                    <i class="fa fa-plus timer-plus" aria-hidden="true"></i><timer  countup="item.remainTime" max-time-unit="'hour'" interval="1000">{{hours}}:{{mminutes}}:{{sseconds}}</timer>
+                                </div>
+                            </div>
+                    </a>
+                    <a ng-if="item.resultCode == '3000'" href="try/detail?id={{item.campaignId}}">
+                        <span class="overlay"></span>
+                        <div class="timer timer-1970 timer-small">
+                            <timer  countdown="item.remainTime" max-time-unit="'hour'" interval="1000">{{hours}}:{{mminutes}}:{{sseconds}}</timer>
+                        </div>
+                    </a>
+                    <a ng-if="item.resultCode == '2000'" href="try/detail?id={{item.campaignId}}">
+                        <span class="overlay"></span>
+                        <div class = "average-score">
+                            <i class="fa fa-star" aria-hidden="true"></i>{{item.averageScore}}
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+<!--            <div ng-if="!item.status">
+
+
+                <a class="mpImg detailBtn" href="/review/detail?rid={{item.id}}">
+
+
+                    <img ng-src="{{item.images[0].modName}}" class="img-responsive completeReviewImg" data-actual-width="500" data-actual-height="300"  alt="workimg">
+
+
+                </a>
+            </div>-->
+        </div>
+
+    </div>
+
+    <div  ng-if="vm.emptyList" class="text-center error-text">
+        <div class="divide30"></div>
+        <h1 class="error-digit wow animated fadeInUp margin20 animated" style="visibility: visible;"><i class="fa fa-smile-o"></i></h1>
+        <h2>신청 내역이 없습니다</h2>
+    </div>
+
+
+
+
+</div>

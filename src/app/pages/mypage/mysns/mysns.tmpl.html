@@ -1,0 +1,97 @@
+<div class="divide60"></div>
+    <!-- Profile Content -->
+<div class="sns-content clearfix">
+        <div class="facebook-content">
+            <h3>FACE BOOK</h3>
+            <div class="facebook-provider" ng-class="{connected: vm.fbState.state}">
+                <i class="fa fa-exclamation-circle status-color" aria-hidden="true" ng-if="vm.passFBCheckIcon"></i>
+                <a href="#" class="btn-refresh facebook" ng-click="vm.refreshFaceBook()"><i class="fa fa-retweet" aria-hidden="true"></i></a>
+                <i class="fa fa-facebook icon" aria-hidden="true"></i>
+                <span class="title">
+                    FACEBOOK
+                </span>
+            </div>
+            <p></p>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true">{{vm.passFBYnText | translate}}</a>
+                    </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse" aria-expanded="true" >
+                    <div class="panel-footer">
+                        <div class="connected-sns-info-body">
+                            <div class="connected-sns-meta clearfix">
+
+                                <div class="meta" ng-class = "{red:vm.fbResult.followerNo<vm.minFollowerNum}">
+                                    <i class="fa fa-users keycolor"></i>
+                                    <span>
+                                        <strong class="keycolor">{{"MYSNS.FOLLOWER"| translate}}</strong> <span class="stat"><strong>{{vm.fbResult.followerNo}}</strong>
+											/ {{vm.minFollowerNum}}</span>
+                                    </span>
+                                </div>
+
+
+                                <div class="meta" ng-class="{red:vm.fbResult.feedNoin30<vm.minFeedNum}">
+                                    <i class="fa fa-comments-o keycolor"></i>
+                                    <span>
+                                        <strong class="keycolor">{{"MYSNS.MIN_FEED30"| translate}}</strong> <span class="stat"><strong>{{vm.fbResult.feedNoin30}}</strong>
+										/ {{vm.minFeedNum}}</span>
+                                    </span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+               </div>
+            </div>
+    </div>
+    <div class="instagram-content">
+        <h3>INSTAGRAM</h3>
+        <div class="instagram-provider " ng-class="{connected: vm.instaState.state}">
+            <i class="fa fa-exclamation-circle status-color" aria-hidden="true" ng-if="vm.passInstaCheckIcon"></i>
+            <a href="#" class="btn-refresh instagram" ng-click="vm.refreshInstagram()"><i class="fa fa-retweet" aria-hidden="true"></i></a>
+            <i class="fa fa-instagram icon" aria-hidden="true"></i>
+            <span class="title">
+                INSTAGRAM
+            </span>
+        </div>
+        <p></p>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true">{{vm.passInstaYnText | translate}}</a>
+                </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse" aria-expanded="true" >
+                <div class="panel-footer">
+                    <div class="connected-sns-info-body">
+                        <div class="connected-sns-meta clearfix">
+
+                            <div class="meta" ng-class = "{red:vm.instaResult.followerNo<vm.minFollowerNum}">
+                                <i class="fa fa-users keycolor"></i>
+                                    <span>
+                                        <strong class="keycolor">{{"MYSNS.FOLLOWER"| translate}}</strong> <span class="stat"><strong>{{vm.instaResult.followerNo}}</strong>
+											/ {{vm.minFollowerNum}}</span>
+                                    </span>
+                            </div>
+
+
+                            <div class="meta" ng-class="{red:vm.instaResult.feedNoin30<vm.minFeedNum}">
+                                <i class="fa fa-comments-o keycolor"></i>
+                                    <span>
+                                        <strong class="keycolor">{{"MYSNS.MIN_FEED30"| translate}}</strong> <span class="stat"><strong>{{vm.instaResult.feedNoin30}}</strong>
+										/ {{vm.minFeedNum}}</span>
+                                    </span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+

@@ -1,0 +1,158 @@
+<div class="review-container">
+    <slick settings="vm.slick" style="margin-bottom: 0;" lazy-load="ondemand" dots="true" touch-move="true" infinite="false"
+           slides-to-show="1" slides-to-scroll="1" speed="300" init-onload="true" data="vm.loadedImages">
+        <div class="{{item.info}}" ng-repeat="item in vm.loadedImages" ng-if="$index < vm.loadedImages.length">
+            <div class="review-images over-blur" style="background-image: url({{item.serviceName}});"></div>
+            <div ng-if="item.info" class="item-anchor">
+                <div class="review-brand-image" style="background-image: url(http://static.08liter.com/images/review/compression/b93c9c15-e8a5-45e9-b9a3-0c47ef75b9d6.jpg)"></div><br><br>
+                VANT 36.5<br>
+                <span class="item-anchor-desc">{{"DETAIL.CONTEXT1" | translate}}</span>
+            </div>
+        </div>
+    </slick>
+    <div class="divide20"></div>
+    <div class="reviewContentWrap">
+        <div class="full tcenter">
+            <div class="profTextStyle normal">BEAUTY | 색조</div>
+        </div>
+        <div class="full tcenter">
+            <div class="profTextStyle bold">VENT 36.5 CC CUSHION</div>
+        </div>
+    </div>
+    <div class="divide35" style="width: 90%; margin: 0 auto 20px; border-bottom: 1px solid #d7d7d7;"></div>
+    <style>
+        .friends-list {
+            text-align: center;
+        }
+        .friends-list > .friends-friend {
+            display: inline-block;
+            width:80px;
+            height: 80px;
+            margin: 4px;
+            -webkit-background-size:cover;
+            background-size:cover;
+            background-position: 50% 50%;
+        }
+        .survey-chart-button {
+            text-align: center;
+        }
+        .survey-chart-button > button {
+            font-size: 42px;
+        }
+    </style>
+    <div class="row">
+        <div class="survey-body">00의 친구들이 관심있데요</div>
+        <div class="friends-list">
+            <a class="friends-friend" href="#" style="background-image: url(http://static.08liter.com/images/event/thumbnail/69ac936a-6cc0-43cc-a23f-dc4cf24d164c.jpg);"></a>
+            <a class="friends-friend" href="#" style="background-image: url(http://static.08liter.com/images/event/thumbnail/69ac936a-6cc0-43cc-a23f-dc4cf24d164c.jpg);"></a>
+            <a class="friends-friend" href="#" style="background-image: url(http://static.08liter.com/images/event/thumbnail/69ac936a-6cc0-43cc-a23f-dc4cf24d164c.jpg);"></a>
+            <a class="friends-friend" href="#" style="background-image: url(http://static.08liter.com/images/event/thumbnail/69ac936a-6cc0-43cc-a23f-dc4cf24d164c.jpg);"></a>
+            <a class="friends-friend" href="#" style="background-image: url(http://static.08liter.com/images/event/thumbnail/69ac936a-6cc0-43cc-a23f-dc4cf24d164c.jpg);"></a>
+        </div>
+    </div>
+    <div class="divide35" style="width: 90%; margin: 0 auto 20px; border-bottom: 1px solid #d7d7d7;"></div>
+    <div class="row">
+        <div class="survey-body">321명의 친구들 중에 185명이 추천해요</div>
+        <div class="survey-chart-button">
+            <button>{{vm.surveyChart.yes.people}} YES</button>
+            <button>{{vm.surveyChart.no.people}} NO</button>
+        </div>
+        <div class="col-md-6">
+            <div class="col-xs-6 col-md-6">
+                <div>{{vm.surveyChart.yes.gender.women}}%</div>
+                <div style="height: 100px;">
+                    <div class="" style="position:absolute; bottom:0px; left: 0px; right: 0px; background-color: #888; height: {{vm.surveyChart.yes.gender.women}}px;"></div>
+                </div>
+            </div>
+            <div class="col-xs-6 col-md-6">
+                <div>{{vm.surveyChart.yes.gender.man}}%</div>
+                <div style="height: 100px;">
+                    <div class="" style="position:absolute; bottom:0px; left: 0px; right: 0px; background-color: #888; height: {{vm.surveyChart.yes.gender.man}}px;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            연령별
+        </div>
+    </div>
+    <style>
+        #graph-wrap {
+            width: 100%; height: 260px;
+            border: 1px solid black; padding: 20px;
+            position: relative;
+        }
+        .graph-label {
+            width: 32px;
+            height: 32px;
+            padding-top: 20px;
+            position: absolute;
+        }
+        .graph-label-value {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 20px;
+            text-align: center;
+            color: #d7d7d7;
+            font-size: 18px;
+            -webkit-transition: color .8s;
+        }
+        .graph-label-button {
+            width:32px;height:32px;position:relative;
+            border:3px solid #ebebeb; background-color: white;
+            color: #d7d7d7; font-size: 21px;
+            text-align: center;
+            line-height: 28px;
+            cursor: pointer;
+
+            -webkit-transition: color .8s, border-color .8s;
+        }
+        .graph-label:hover .graph-label-button {
+            color: #888;
+            border-color: #888;
+        }
+        .graph-label:hover .graph-label-value {
+            color: #888;
+        }
+    </style>
+    <div id="graph-wrap" style="">
+        <!--<div class="graph-label" ng-repeat="item in vm.data">-->
+            <!--<div class="graph-label-value">{{item}}</div>-->
+            <!--<div class="graph-label-button"></div>-->
+        <!--</div>-->
+    </div>
+
+</div>
+
+<div class="review-container">
+    <div class="center-heading" style="position: relative; height: 24px;">
+        <p class="rawText" style="margin: 0;"><span style="font-weight: bold;"><span style="color:#d7d7d7">36.5 CC CUSHION</span> REVIEWS</span></p>
+        <a class="moreBtn" href="/review/list?campaign={{vm.campaign.id}}" target="_self"><i class="fa fa-plus"></i> MORE</a>
+    </div>
+    <div class="divide5" style="width: 90%; margin: 0 auto 20px; border-bottom: 1px solid #d7d7d7;"></div>
+    <div class="row">
+
+        <div class="dynamic-grid" angular-grid="vm.reviews" grid-width="240" gutter-size="30" angular-grid-id="gallery" refresh-on-img-load="true" >
+
+            <div class="grid project-post" bindonce="item" ng-repeat="item in vm.reviews">
+                <a href="/review/detail?rid={{item.id}}"></a>
+                <form action="/review/detail" method="get">
+                    <a href="/review/detail?rid={{item.id}}">
+                        <input type="hidden" name="rid" value="{{item.id}}">
+                        <div class="item-img-wrap ">
+                            <img bo-src="item.images[0].modName"  data-actual-width = "640"  data-actual-height="500" class="project-img" alt="workimg">
+                            <div class="item-desc-wrap">
+                                <span class="item-desc yesno">{{item.yesno}}</span><br>
+                                <span class="item-desc contentText">{{item.content | shortly }}</span>
+                            </div>
+                        </div>
+                    </a>
+                </form>
+                <!--<review-item item="item"></review-item>-->
+            </div>
+
+        </div>
+
+    </div>
+</div>

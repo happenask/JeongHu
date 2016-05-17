@@ -1,0 +1,160 @@
+<div class="profile-body margin-bottom-20">
+    <div class="tab-v1">
+        <ul class="nav nav-justified nav-tabs no-border-radius">
+            <li class="profile-tab active"><a data-toggle="tab" class="no-border-radius" href="#profileTab">{{"PROFILE.PROFILE_CHANGE.MAIN_CONTEXT" | translate}}</a></li>
+            <li class="profile-tab"><a data-toggle="tab" class="" href="#stateTab">{{"PROFILE.BLACK_LIST.MAIN_CONTEXT" | translate}}</a></li>
+            <li class="profile-tab"><a data-toggle="tab" class="" href="#passwordTab">{{"PROFILE.PWD_CHANGE.MAIN_CONTEXT" | translate}}</a></li>
+            <li class="profile-tab"><a data-toggle="tab" class="" href="#signoutTab">{{"PROFILE.MEMBER_DROP.MAIN_CONTEXT" | translate}}</a></li>
+        </ul>
+        <div class="tab-content">
+            <div id="profileTab" class="profile-edit tab-pane fade in active">
+                <h2 class="heading-md">{{"PROFILE.PROFILE_CHANGE.SUB_CONTEXT1" | translate}}</h2>
+                <p>{{"PROFILE.PROFILE_CHANGE.SUB_CONTEXT2" | translate}}</p>
+                <div ng-show="!vm.member.certified" class="alert alert-danger fade in no-border-radius">
+                    {{"PROFILE.PROFILE_CHANGE.SUB_CONTEXT3" | translate}}
+                </div>
+                <span ng-show="vm.member.certified" class="zeliter-color" style="font-size: 1.0em;line-height: 15px;"><i class="glyphicon glyphicon-ok-circle"></i> {{"PROFILE.PROFILE_CHANGE.CERT_MEMBER" | translate}}</span>
+                <br>
+                <form class="sky-form profileEditForm {{vm.editMode?'on':'off'}}" style="box-shadow: none;">
+                    <fieldset>
+                        <dl class="dl-horizontal">
+                            <dt>
+                                <strong>{{"PROFILE.PROFILE_CHANGE.EMAIL" | translate}}</strong>
+                            </dt>
+                            <dd>
+                                <span>{{vm.member.email}}</span>
+                            </dd>
+                            <hr class="divider">
+                            <dt>
+                                <strong>{{"PROFILE.PROFILE_CHANGE.NICK_NAME" | translate}}</strong>
+                            </dt>
+                            <dd>
+                                <span class="profileText">{{vm.member.nickname}}</span>
+                                <label class="input profileLabel"><input ng-model="vm.member.nickname" type="text" placeholder="닉네임을 입력해주세요" name="nickname">
+                            </label>
+                            </dd>
+                            <hr class="divider">
+                            <dt>
+                                <strong>{{"PROFILE.PROFILE_CHANGE.BIRTH_DAY" | translate}}</strong>
+                            </dt>
+                            <dd>
+                                <span>{{vm.member.birthday}}</span>
+                            </label>
+                            </dd>
+                            <hr class="divider">
+                            <dt>
+                                <strong>{{"PROFILE.PROFILE_CHANGE.GENDER" | translate}}</strong>
+                            </dt>
+                            <dd>
+                                <span>{{vm.member.genderStr}}</span>
+                            </dd>
+                            <hr class="divider">
+                            <dt>
+                                <strong>{{"PROFILE.PROFILE_CHANGE.NAME" | translate}}</strong>
+                            </dt>
+                            <dd>
+                                <span>{{vm.member.name}}</span>
+                            </label>
+                            </dd>
+                            <hr class="divider">
+                            <dt>
+                                <strong>{{"PROFILE.PROFILE_CHANGE.PHONE_NUM" | translate}}</strong>
+                            </dt>
+                            <dd>
+                                <span class="profileText" id="phoneNumberSpan" data-exist="true">{{vm.member.phone}}</span>
+                                <label class="input profileLabel"><input ng-model="vm.member.phone" type="tel" name="phoneNumber" placeholder="휴대전화번호 (배송용)"></label>
+                            </dd>
+                            <hr class="divider">
+                            <dt>
+                                <strong>{{"PROFILE.PROFILE_CHANGE.SHIPPING_ADDRESS" | translate}}</strong>
+                            </dt>
+                            <dd>
+                                <span class="profileText" id="addressSpan" data-exist="true">{{vm.member.address.address}} {{vm.member.address.detail}} {{vm.member.address.postNum}}</span>
+                                <label class="input profileLabel">
+                                    <input type="button" class="btn btn-default" ng-click="vm.searchPostcode()" value={{"PROFILE.PROFILE_CHANGE.POST_SEARCH" | translate}} >
+                                    <input ng-model="vm.member.address.postNum" type="text" name="postcode" style="margin-top:5px;" placeholder={{"PROFILE.PROFILE_CHANGE.POST_NUM" | translate}} disabled="">
+                                    <input ng-model="vm.member.address.address" type="text" name="address" style="margin-top:5px;" placeholder={{"PROFILE.PROFILE_CHANGE.SHIPPING_ADDRESS" | translate}} disabled="">
+                                    <input ng-model="vm.member.address.detail" type="text" name="addressDetails" style="margin-top:5px;" placeholder={{"PROFILE.PROFILE_CHANGE.SHIPPING_DETAIL" | translate}}>
+                                </label>
+                            </dd>
+                            <hr class="divider">
+                        </dl>
+                        <div class="alert alert-danger fade in no-border-radius profileEditAlert off"></div>
+                        <button ng-click="vm.editMode = true" type="button" class="btn-u modifyBtn editBtn">{{'PROFILE.PROFILE_CHANGE.BUTTON_NAME1' | translate}}</button>
+                     <!--   <button ng-click="vm.editMode = false" type="button" class="btn-u btn-u-default modifyBtn cancelBtn">{{'LABEL.CANCEL' | translate}}</button>
+                        <button ng-click="vm.updateMember()" type="button" class="btn-u saveBtn">{{'LABEL.SAVE' | translate}}</button>-->
+                        <popup-btn ng-show="!vm.member.certified" btn="'btn-u btn-u-default'" popup="vm.certifiedPopupUrl" callback="vm.certifiedPopupCallback" dimensions="width=500,height=300">{{'PROFILE.PROFILE_CHANGE.BUTTON_NAME2' | translate}}</popup-btn>
+                    </fieldset>
+                </form>
+            </div>
+            <div id="stateTab" class="profile-edit tab-pane fade">
+                <div class="warning-notify-wrap">
+                    <div class="warning-notify-item-wrap {{vm.warning.length? 'warned':''}}">
+                        <div class="warning-notify-item-title">{{'PROFILE.BLACK_LIST.SUB_CONTEXT1' | translate}}</div>
+                        <div class="warning-notify-item-state">{{vm.warning.length}} {{'PROFILE.BLACK_LIST.SUB_CONTEXT3' | translate}}</div>
+                    </div>
+                    <div class="warning-notify-item-wrap">
+                        <div class="warning-notify-item-title">{{'PROFILE.BLACK_LIST.SUB_CONTEXT2' | translate}}</div>
+                        <div class="warning-notify-item-state">NO</div>
+                    </div>
+                </div>
+                <dl class="warning-list-wrap">
+                    <!--http://static.08liter.com/images/event/thumbnail/07134d51-4529-4216-b8b8-7dd7881efa32.jpg-->
+                    <dd class="warning-list-item" ng-repeat="item in vm.warning">
+                        <div class="warning-list-item-thumb" style="background-image: url({{item.image}})"></div>
+                        <div class="warning-list-item-context">
+                            <p class="">{{item.date | date : 'yyyy-mm-dd h:mma' }}</p>
+                            <p class="">{{item.productName}}</p>
+                            <p class="">{{item.context | translate}} {{item.count}} {{'PROFILE.BLACK_LIST.SUB_CONTEXT3' | translate}}</p>
+                        </div>
+                        <a class="warning-list-item-button" href="/mypage/write?id={{item.targetId}}">{{'PROFILE.BLACK_LIST.BUTTON_NAME1' | translate}}</a>
+                    </dd>
+                </dl>
+            </div>
+            <div id="passwordTab" class="profile-edit tab-pane fade">
+                <h2 class="heading-md">{{'PROFILE.PWD_CHANGE.SUB_CONTEXT1' | translate}}</h2>
+                <p>{{'PROFILE.PWD_CHANGE.SUB_CONTEXT2' | translate}}</p>
+                <br>
+                <form class="sky-form passwordEditForm" id="sky-form4" action="#" style="box-shadow: none;">
+                    <dl class="dl-horizontal">
+                        <dt>{{'PROFILE.PWD_CHANGE.SUB_CONTEXT3' | translate}}</dt>
+                        <dd>
+                            <section>
+                                <label class="input"> <i class="icon-append fa fa-lock"></i> <input ng-model="vm.passwdData.oldPasswd" type="password" name="usedPassword" placeholder="Password">
+                                    <b class="tooltip tooltip-bottom-right">{{'PROFILE.PWD_CHANGE.SUB_CONTEXT3' | translate}}</b>
+                                </label>
+                            </section>
+                        </dd>
+                        <dt>{{'PROFILE.PWD_CHANGE.SUB_CONTEXT4' | translate}}</dt>
+                        <dd>
+                            <section>
+                                <label class="input"> <i class="icon-append fa fa-lock"></i> <input ng-model="vm.passwdData.newPasswd" type="password" name="password" placeholder="{{'PROFILE.PWD_CHANGE.SUB_CONTEXT6' | translate}}">
+                                    <b class="tooltip tooltip-bottom-right">{{'PROFILE.PWD_CHANGE.SUB_CONTEXT6' | translate}}</b>
+                                </label>
+                            </section>
+                        </dd>
+                        <dt>{{'PROFILE.PWD_CHANGE.SUB_CONTEXT5' | translate}}</dt>
+                        <dd>
+                            <section>
+                                <label class="input"> <i class="icon-append fa fa-lock"></i> <input ng-model="vm.passwdData.checkPasswd" type="password" placeholder="{{'PROFILE.PWD_CHANGE.SUB_CONTEXT7' | translate}}">
+                                    <b class="tooltip tooltip-bottom-right">{{'PROFILE.PWD_CHANGE.SUB_CONTEXT7' | translate}}</b>
+                                </label>
+                            </section>
+                        </dd>
+                    </dl>
+                    <br>
+                </form>
+                <div class="alert alert-danger fade in no-border-radius passwordEditAlert {{vm.passwdErrMsg? 'on':'off'}}">{{vm.passwdErrMsg | translate}}</div>
+                <button class="btn-u passwordEditSaveBtn" ng-click="vm.updatePasswd()">{{'PROFILE.PWD_CHANGE.BUTTON_NAME1' | translate}}</button>
+            </div>
+            <div id="signoutTab" class="profile-edit tab-pane fade">
+                <h2 class="heading-md">{{'PROFILE.MEMBER_DROP.SUB_CONTEXT1' | translate}}</h2>
+                <p>{{'PROFILE.MEMBER_DROP.SUB_CONTEXT2' | translate}}</p>
+                <br>
+                <div class="row">
+                    <div class="col-md-12"><a class="col-md-12 btn btn-theme-bg no-border-radius signoutBtn" href="#">{{'PROFILE.MEMBER_DROP.BUTTON_NAME1' | translate}}</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,61 @@
+<div class="divide60"></div>
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-sm-12 sky-form-login-register v2">
+            <div class="margin10">
+
+                <form class="sky-form signupForm" novalidate="novalidate">
+                    <h3 class="text-center">Welcome</h3>
+                    <p class="text-center notice">8초만에 회원가입하고 무료로 서비스를 이용하세요!</p>
+                    <fieldset>
+                        <section>
+                            <label class="input">
+                                <i class="icon-append fa fa-envelope-o"></i>
+                                <input ng-model="vm.sign.email" type="text" name="email" placeholder="이메일 주소 입력">
+                                <b class="tooltip tooltip-bottom-right">이메일 주소를 입력해주세요.</b>
+                            </label>
+                        </section>
+
+                        <section>
+                            <label class="input">
+                                <i class="icon-append fa fa-lock"></i>
+                                <input ng-model="vm.sign.passwd" type="password" name="password" placeholder="비밀번호 (7자리 이상)" id="password">
+                                <b class="tooltip tooltip-bottom-right">7자리 이상의 비밀번호를 입력해주세요.</b>
+                            </label>
+                        </section>
+
+                        <section>
+                            <label class="input">
+                                <i class="icon-append fa fa-lock"></i>
+                                <input ng-model="vm.sign.ckPasswd" type="password" name="passwordConfirm" placeholder="비밀번호 확인">
+                                <b class="tooltip tooltip-bottom-right">비밀번호를 한번 더 입력해주세요.</b>
+                            </label>
+                        </section>
+
+                        <section>
+                            <label class="input">
+                                <i class="icon-append fa fa-user"></i>
+                                <input ng-model="vm.sign.nickname" type="text" name="nickname" placeholder="사용할 닉네임">
+                                <b class="tooltip tooltip-bottom-right">사용할 닉네임을 입력해주세요.</b>
+                            </label>
+                        </section>
+
+                        <section>
+                            <label class="checkbox"><input ng-model="vm.sign.aggrement" type="checkbox" name="subscription" id="subscription"><i></i></label>
+                            <span class="agree"><a href="/policy" target="_blank">이용약관</a>과
+                            <a href="/privacy" target="_blank">개인정보취급방침</a>에 동의합니다.</span>
+                        </section>
+                        <div class="alert alert-danger fade in no-border-radius signupAlert {{vm.alert.show}}">{{vm.alert.msg}}</div>
+                    </fieldset>
+                    <footer>
+                        <button class="button signupBtn" ng-click="vm.doSignUp()">시작하기</button>
+                    </footer>
+                </form>
+            </div>
+            <!--login form wrap end-->
+        </div>
+    </div>
+</div>

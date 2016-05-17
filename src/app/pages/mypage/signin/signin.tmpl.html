@@ -1,0 +1,53 @@
+<div class="divide60"></div>
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-sm-12 sky-form-login-register v2">
+
+                <form id="sky-form" class="sky-form signupForm loginForm2" novalidate="novalidate">
+                    <div class="margin10">
+                        <div class="facebook-login" ng-click="vm.loginFacebook()">
+                            <i class="fa fa-facebook icon" aria-hidden="true"></i>
+                            <span class="title">
+                            Connect with Facebook
+                            </span>
+                        </div>
+
+                    </div>
+                    <div class="or-container">
+                        <hr class="or-hr">
+                        <div class="or">or</div>
+                    </div>
+                    <h4 class="text-center">이메일 로그인</h4>
+
+                    <fieldset>
+                        <section>
+                            <label class="input">
+                                <i class="icon-append fa fa-envelope-o"></i> <input ng-model="vm.sign.email" type="text" name="email" placeholder="이메일 주소 입력"> <b
+                                    class="tooltip tooltip-bottom-right">이메일 주소를 입력해주세요.</b>
+                            </label>
+                        </section>
+
+                        <section>
+                            <label class="input"> <i class="icon-append fa fa-lock"></i>
+                                <input ng-model="vm.sign.passwd" type="password" name="password" placeholder="비밀번호 (7자리 이상)" id="password"> <b class="tooltip tooltip-bottom-right">7자리 이상의 비밀번호를 입력해주세요.</b>
+                            </label>
+                        </section>
+                        <div class="alert alert-danger fade in no-border-radius loginAlert2 off"></div>
+                    </fieldset>
+
+                    <div class="alert alert-danger fade in no-border-radius signupAlert off"></div>
+                    <footer style="text-align: center;">
+                        <button ng-click="vm.doSignIn()" class="loginBtn " style="position:relative;"><i class="loginBtn-email fa fa-envelope" aria-hidden="true"></i>로그인</button>
+                        <div style="padding-top: 10px;">
+                        아직 회원이 아니세요? <a href="/signup" class="signupBtn">회원가입</a>
+                        </div>
+                    </footer>
+                </form>
+            </div>
+            <!--login form wrap end-->
+        </div>
+    </div>
+</div>

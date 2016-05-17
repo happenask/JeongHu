@@ -1,0 +1,19 @@
+<div class="col-md-12 nopadding">
+    <div class="profile-pic-container">
+
+        <div class="profile-bg" style="background-image:url({{currentUser.profileImg?currentUser.profileImg:vm.ALT_IMG.profile}})"></div>
+        <div class="profile-pic" style="background-image:url({{currentUser.profileImg?currentUser.profileImg:vm.ALT_IMG.profile}})"></div>
+        <button class="profile-button" type="file" ngf-select="vm.updateProfilePic($file, $invalidFiles)" accept="image/*" ngf-max-height="10000" ngf-max-size="10MB">Select File</button>
+        <div class="profile-name">
+            <strong class="name">{{currentUser.nickname}}</strong> <a href="#" class="email">{{currentUser.email}}</a>
+        </div>
+    </div>
+</div>
+<button class="profile-icon" type="file" style=" background-image:url({{currentUser.profileImg?currentUser.profileImg:vm.ALT_IMG.profile}})"ngf-select="vm.updateProfilePic($file, $invalidFiles)" accept="image/*" ngf-max-height="10000" ngf-max-size="10MB"></button>
+<left-side-menu></left-side-menu>
+<!--<ul class="list-group sidebar-nav-v1 margin-bottom-40" id="sidebar-nav-1">-->
+    <!--<li class="list-group-item no-border-radius sideBarTab"><a href="/user/reviews"><i class="fa fa-list"></i> MY TRY</a></li>-->
+    <!--<li class="list-group-item no-border-radius sideBarTab"><a href="/user/overall"><i class="fa fa-share-alt-square"></i> MY SNS</a></li>-->
+    <!--<li class="list-group-item active no-border-radius sideBarTab"><a href="/user/profile"><i class="fa fa-user"></i> PROFILE</a></li>-->
+    <!--<li class="list-group-item no-border-radius sideBarTab"><a href="/user/notification"><i class="fa fa-bell"></i> MESSAGE</a></li>-->
+<!--</ul>-->

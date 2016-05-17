@@ -1,0 +1,108 @@
+<div class="navbar navbar-default navbar-static-top yamm sticky" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" style="margin-right: 5px;">
+                <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+            </button>
+            <a href="/review">
+                <div class="navbar-icon" style="background-image: url('/assets/images/ico/ico_dots2.png');"></div>
+            </a>
+            <a href="/try">
+                <div class="navbar-icon" style="background-image: url('/assets/images/ico/ico_dots1.png');"></div>
+            </a>
+            <a class="navbar-brand" href="/"><img src="//static.08liter.com/resources/logo/logo.png" alt="0.8L"></a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a ui-sref="common.default.try" data-toggle="collapse" data-target=".navbar-collapse">TRY</a></li>
+                <li><a ui-sref="common.default.review-list" data-toggle="collapse" data-target=".navbar-collapse">REVIEW</a></li>
+                <li class="dropdown"><a class="dropdown-toggle {{globals.sign?'':'disabled'}}" ng-click="vm.toggleDropdown('needSign')" data-toggle="dropdown" href="#">MY PAGE <i class="fa fa-angle-down"></i></a>
+                    <ul class="dropdown-menu mypage-menu" role="menu">
+                        <li><a ui-sref="common.leftSideMenu.mytry" data-toggle="collapse" data-target=".navbar-collapse">MY TRY</a></li>
+                        <li><a ui-sref="common.leftSideMenu.like" data-toggle="collapse" data-target=".navbar-collapse">LIKE</a></li>
+                        <li><a ui-sref="common.leftSideMenu.mysns" data-toggle="collapse" data-target=".navbar-collapse">MY SNS</a></li>
+                        <li><a ui-sref="common.leftSideMenu.profile" data-toggle="collapse" data-target=".navbar-collapse">PROFILE</a></li>
+                        <li><a ui-sref="common.leftSideMenu.message" data-toggle="collapse" data-target=".navbar-collapse">MESSAGE</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">HELP <i class="fa fa-angle-down"></i></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a ui-sref="common.default.howtouser" data-toggle="collapse" data-target=".navbar-collapse">HOW TO USE </a></li>
+                        <li><a ui-sref="common.default.faq" data-toggle="collapse" data-target=".navbar-collapse">FAQ </a></li>
+                        <li><a ui-sref="common.default.ask" data-toggle="collapse" data-target=".navbar-collapse">ASK </a></li>
+                        <li><a ui-sref="common.default.certification" data-toggle="collapse" data-target=".navbar-collapse">본인인증 안내</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown" ng-show="globals.sign"><a href="#" class="dropdown-toggle openMessageBoxBtn" ng-click="vm.toggleDropdown('messages')"  data-toggle="dropdown">
+                    <i class="fa fa-bell"></i><span ng-show="globals.currentUser.newMsgCount > 0" class="rBadge">N</span></a>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-login-box">
+                        <ul class="list-unstyled popular-post">
+                            <li ng-if="vm.messages.length === 0" class="no-msgLi">
+                                <div class="popular-img">
+                                    <i class="icon-custom icon-sm rounded-x icon-bg-red icon-line icon-check"></i>
+                                </div>
+                                <div class="popular-desc">
+                                    <h5>메세지가 없습니다.</h5>
+                                </div>
+                            </li>
+                            <li ng-if="vm.messages.length > 0" class="msgLi" ng-repeat="item in vm.messages">
+                                <div class="popular-img">
+                                    <i class="icon-custom icon-sm rounded-x icon-bg-red icon-line fa-envelope-o fa"></i>
+                                </div>
+                                <div class="popular-desc">
+                                    <h5>{{item.msg}}</h5>
+                                    <h6>{{item.createdAt | date:'yyyy-MM-dd HH:mm'}}</h6>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle {{globals.sign?'disabled':''}}" ng-click="vm.toggleDropdown(globals.sign?'logout':'login')"><i class="fa fa-lock"></i> {{globals.sign?'LOGOUT':'LOGIN'}}</a>
+                </li>
+                <!--menu login li end here-->
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+
+        <form action="sky-form/php_files/demo-login-process.php" id="sky-form2" class="sky-form sky-form-modal">
+            <header>비밀번호 찾기</header>
+            <fieldset>
+                <section>
+                    <label class="label">이메일 입력</label> <label class="input emailForFindPassword"> <i class="icon-append fa fa-envelope-o"></i> <input type="email" name="email" id="email">
+                </label>
+                </section>
+                <div class="alert alert-danger fade in no-border-radius findPasswordAlert off" style="margin: 10px 0 !important"></div>
+            </fieldset>
+
+            <footer>
+                <a href="#" class="button button-secondary modal-closer">닫기</a>
+                <button type="button" name="submit" class="button findPasswordBtn">요청</button>
+            </footer>
+
+            <div class="message">
+                <i class="fa fa-check"></i>
+                <p>Your request successfully sent!<br> <a href="#" class="modal-closer">Close window</a></p>
+            </div>
+        </form>
+    </div>
+    <!--container-->
+</div>
+<!--navbar-default-->
+
+<div class="modal fade in" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 id="myModalLabel1" class="modal-title">{{'MODAL.SIGN.NEEDSING_1' | translate}}</h4>
+            </div>
+            <div class="modal-body">{{'MODAL.SIGN.NEEDSING_2' | translate}}</div>
+            <div class="modal-footer">
+                <button data-dismiss="modal" class="btn-u btn-u-default" type="button">{{'LABEL.CANCEL' | translate}}</button>
+                <button ng-click="vm.goSignIn()" class="btn-u" type="button">{{'LABEL.LOGIN' | translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>

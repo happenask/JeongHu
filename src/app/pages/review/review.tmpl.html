@@ -1,0 +1,43 @@
+
+<div class="divide5"></div>
+
+<div class="container">
+    <div class="center-heading">
+        <img src="//static.08liter.com/images/menu/dots2.png" style="width:27px">
+        <p class="rawText" style="margin: 0;"><span style="font-weight: bold;">REVIEW</span></p>
+    </div>
+
+    <div class="switcher-box">
+        <switcher ng-model="vm.param.type" ng-change="vm.typeSelect()" true-value="'new'" true-label="NEW" false-value="'hot'" false-label="HOT"></switcher>
+    </div>
+    <style>
+
+        .grid-item {
+            /*float: left;*/
+        }
+        .grid-item-width {
+            width: 370px;
+        }
+    </style>
+    <div class="row">
+        <!--review-item: Directive in /app/common/components/reviewitem/ made By Leo-->
+        <div class="dynamic-grid" angular-grid="vm.reviews" ag-gutter-size="30" ag-angular-grid-id="gallery" ag-refresh-on-img-load="true" >
+            <div class="grid project-post" ng-repeat="item in vm.reviews" bindonce="item">
+                    <a href="/review/detail?rid={{item.id}}"></a>
+                    <form action="/review/detail" method="get">
+                        <a href="/review/detail?rid={{item.id}}">
+                            <input type="hidden" name="rid" value="{{item.id}}">
+                            <div class="item-img-wrap ">
+                                <img bo-src="item.images[0].modName"  data-actual-width = "640"  data-actual-height="500" class="img-responsive project-img" alt="workimg">
+                                <div class="item-desc-wrap">
+                                    <span class="item-desc yesno">{{item.yesno}}</span><br>
+                                    <span class="item-desc contentText">{{item.content | shortly }}</span>
+                                </div>
+                            </div>
+                        </a>
+                    </form>
+                <!--<review-item item="item"></review-item>-->
+            </div>
+        </div>
+    </div>
+</div>

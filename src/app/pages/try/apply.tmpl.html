@@ -1,0 +1,140 @@
+<div class="divide60"></div>
+<div class="review-container">
+    <div class="center-heading">
+        <h4 style="color: #d7d7d7;">APPLY</h4>
+        <h2 class="" style="margin: 0; letter-spacing: -1px; line-height: 32px;">{{vm.campaign.title}}</h2>
+        <span class="center-line"></span>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 margin30 sky-form-columns">
+            <form ng-submit="vm.postApply()" class="sky-form likeitForm">
+                <fieldset>
+                    <div class="row">
+                        <div class="share-wrap">
+                            <a href="#" class="share-fb active"><span class="fa fa-facebook"></span>FACEBOOK</a>
+                            <a href="#" class="share-ig"><span class="fa fa-instagram"></span>INSTAGRAM</a>
+                        </div>
+                        <div class="dropdown" style="text-align: center; margin-bottom: 0px;">
+                            <button type="button" class="" data-toggle="collapse" data-target=".sns-requires" style="margin-top: 5px; width: 100%; max-width: 410px; border: 0; background-color:transparent; border-bottom: 1px solid #d7d7d7;">
+                                선정기준 통과 <i class="fa fa-angle-down"></i>
+                            </button>
+                            <div class="sns-requires collapsing">
+                                <div class="" style="padding: 20px 0;">선정기준</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="survey-body" style="max-width: 410px; border-bottom: 1px solid #d7d7d7; margin-right: auto; margin-left: auto; margin-bottom: 20px;">
+                            OPTIONS
+                        </div>
+                    </div>
+                    <div class="row">
+                        <section class="col {{vm.campaignApply.options.length%2 == 0 ? 'col-6':'col-4'}}" ng-repeat="option in vm.campaignApply.options" ng-switch="option.optionCode">
+                            <label ng-switch-when="0000" class="input">
+                                <i class="icon-prepend fa fa-plus-circle"></i>
+                                <input ng-model="option.value" type="text" placeholder="{{option.placeHolder}}" required>
+                            </label>
+                            <label ng-switch-when="0001" class="select">
+                                <select ng-model="option.value" required>
+                                    <option value="">{{option.placeHolder}}</option>
+                                    <option ng-repeat="opt in option.selection" value="{{opt}}">{{opt}}</option>
+                                </select>
+                                <i></i>
+                            </label>
+                        </section>
+                    </div>
+                    <!--<div class="row">-->
+                        <!--<div class="survey-body" style="width: 410px; border-bottom: 1px solid #d7d7d7; margin-right: auto; margin-left: auto; margin-bottom: 20px;">-->
+                            <!--BASIC INFO-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <div class="row">
+                        <div class="survey-body" style="max-width: 410px; border-bottom: 1px solid #d7d7d7; margin-right: auto; margin-left: auto; margin-bottom: 20px;">
+                            BASIC INFO
+                        </div>
+                    </div>
+                    <div class="row">
+                        <section class="col col-6">
+                            <label class="input">
+                                <i class="icon-prepend fa fa-user"></i>
+                                <input type="text" required ng-model="vm.member.nickname" disabled>
+                            </label>
+                        </section>
+
+                        <section class="col col-6">
+                            <label class="input">
+                                <i class="icon-prepend fa fa-phone"></i>
+                                <input type="tel" required ng-model="vm.member.phone" placeholder="전화번호 (받는분 휴대폰)">
+                            </label>
+                        </section>
+                    </div>
+                    <div class="row">
+                        <section class="col col-8">
+                            <label class="input">
+                                <input type="text" required ng-model="vm.member.birthday" placeholder="생년월일">
+                            </label>
+                        </section>
+                        <section class="col col-4" style="text-align: center;">
+                            <button class="select-button {{vm.member.genderStr=='women'?'active':''}}" ng-click="vm.member.genderStr = 'women'" type="button">여자</button>
+                            <button class="select-button {{vm.member.genderStr=='men'?'active':''}}" ng-click="vm.member.genderStr = 'men'" type="button">남자</button>
+                        </section>
+                        <!--<section class="col col-2" style="font-size: 24px;">-->
+                            <!--<label class="radio state-success">-->
+                                <!--<input type="radio" name="gender">-->
+                                <!--<i></i>-->
+                                <!--남자-->
+                            <!--</label>-->
+                        <!--</section>-->
+                        <!--<section class="col col-2">-->
+                            <!--<label class="radio state-success">-->
+                                <!--<input type="radio" name="gender">-->
+                                <!--<i></i>-->
+                                <!--여자-->
+                            <!--</label>-->
+                        <!--</section>-->
+                    </div>
+                    <div class="row">
+                        <section class="col col-3">
+                            <label class="input" ng-click="vm.searchPostcode()">
+                                <input type="text" required disabled ng-model="vm.member.address.postNum" placeholder="우편번호">
+                            </label>
+                        </section>
+                        <section class="col col-9">
+                            <label class="input" ng-click="vm.searchPostcode()">
+                                <input type="text" required disabled ng-model="vm.member.address.address" placeholder="배송지 주소">
+                            </label>
+                        </section>
+                    </div>
+
+                    <div class="row">
+                        <section class="col col-3">
+
+                        </section>
+                        <section class="col col-9">
+                            <label class="input">
+                                <input type="text" required ng-model="vm.member.address.detail" placeholder="주소 상세 (정확하게 입력하지 않으시면 리뷰어 선정에서 제외됩니다)">
+                            </label>
+                        </section>
+                    </div>
+
+                </fieldset>
+                <div class="divide30"></div>
+                <hr>
+                <div class="divide30"></div>
+
+                <footer class="text-center">
+                    <div ng-if="!vm.member.memberCert" class="alert alert-danger fade in no-border-radius">
+                        자신에게 꼭 맞는 상품을 만나보고 싶으셨나요?
+                        이제 공팔리터에서 성별, 연령별 맞춤 체험 서비스를 제공합니다.
+                        이를 위해 최초 1회 본인인증을 필요로 하오니 번거로우시더라도 꼭 진행해주세요. :)
+                    </div>
+                    <button type="button" ng-if="!vm.member.memberCert" onclick="fnPopup();" id="certify-btn" class="btn btn-theme-gray btn-lg">본인인증</button>
+                    <button type="submit" class="btn btn-theme-dark btn-lg likeitBtn">신청완료</button>
+                </footer>
+
+            </form>
+
+        </div>
+    </div>
+</div>

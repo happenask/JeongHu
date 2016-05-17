@@ -1,0 +1,15 @@
+<div>
+    <a href="/review/detail?rid={{item.id}}"></a>
+    <form action="/review/detail" method="get">
+        <a href="/review/detail?rid={{item.id}}">
+            <input type="hidden" name="rid" value="{{item.id}}">
+            <div class="item-img-wrap ">
+                <img bo-src="item.images[0].modName"  data-actual-width = "640"  data-actual-height="500" class="project-img" alt="workimg">
+                <div class="item-desc-wrap">
+                    <span class="item-desc yesno">{{item.yesno}}</span><br>
+                    <span class="item-desc contentText">{{item.content | shortly }}</span>
+                </div>
+            </div>
+        </a>
+    </form>
+</div>

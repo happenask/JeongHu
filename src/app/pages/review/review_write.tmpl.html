@@ -1,0 +1,97 @@
+<div class="col-md-9">
+<form ng-submit="vm.postReview()" name="reviewWriteForm">
+    <!--<section class="col col-6">-->
+        <!--<label class="input">-->
+            <!--<i class="icon-prepend fa fa-user"></i>-->
+            <!--<input type="text" required ng-model="vm.member.name" placeholder="이름 (받는분 실명)">-->
+        <!--</label>-->
+    <!--</section>-->
+    <div class="review">
+        <div class=""><h3 class="page-title"><span style="color: #d7d7d7">WRITE</span> REVIEW</h3>
+      <!--  <button  type="button" class="btn_next btn btn-default">NEXT</button>-->
+        </div>
+
+        <div style="width: 100%; position: relative; height: 240px; overflow: hidden; background-image: url({{vm.campaign.images[0].cdnUploaded == 'Y' ? vm.campaign.images[0].modName : vm.campaign.images[0].orgName}}); background-size: 120%; background-position: 50% 50%;">
+
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-3"><b>{{'WRITE.PRODUCT_NAME'|translate}}</b></div><div class="col-xs-6">하이트진로 이슬톡톡 6pcs</div>
+                </div>
+            </div>
+        </div>
+<!--
+        * 추후 추가 예정
+       <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="panel-btn col-xs-3">카테고리</div><div class="panel-btn col-xs-3">BEAUTY</div>
+                    <div class="panel-btn col-xs-3">색조</div><div class="panel-btn col-xs-3">BASE</div>
+                </div>
+            </div>
+        </div>-->
+        <div class="divide35"></div>
+        <div class = "picture-upload">
+            <div style="position: absolute; top: 0; left: 0; right: 0; height: 40px;">
+                <div style="padding-left: 10px; height: 22px; line-height: 22px; float: left;">{{'WRITE.REVIEW_IMAGE'|translate}}</div>
+                <div ng-show="reviewWriteForm.files.$error.required" style="padding-left: 10px; height: 22px; font-size: 12px; font-style: italic; line-height: 22px; float: left;">{{'WRITE.REVIEW_IMAGE_REQUIRED' | translate}}</div>
+                <button class="profile-button fa fa-plus" type="file" name="files" ngf-select ng-model="vm.review.files" ngf-multiple="false" ngf-keep="true" accept="image/*" ngf-max-height="10000" ngf-max-size="10MB" ng-disabled="vm.review.files.length == 5" required></button>
+            </div>
+            <div class="thumb-container">
+                <div ng-repeat="img in vm.review.files" class="thumbs-wrap">
+                    <img ngf-thumbnail="img" ngf-size="{width: 120, height: 120, quality: 0.9}">
+                    <button class="remove-thumb fa fa-trash-o" ng-click="vm.removeFile($index)"></button>
+                </div>
+                <div ng-if="!vm.review.files.length" class="no-thumb fa fa-photo"></div>
+            </div>
+        </div>
+
+        <div class = "survey-body">COMMENT</div>
+        <label class="input" style="display: block;">
+            <textarea required spellcheck="false" class="form-control" rows="4" id="content" ng-model="vm.review.content" placeholder="{{'WRITE.REVIEW_CONTEXT'|translate}}"></textarea>
+        </label>
+        <div class="">
+            <div class="form-control" style="margin-top: 15px; border-bottom: 0px; background-color: #ddd; font-size: 16px;">#새라제나 #퓨리파잉딥클렌져 #뷰티 #뷰스타그램 #클랜져 #08l</div>
+            <label class="input" style="display: block;">
+                <textarea required spellcheck="false" class="form-control" rows="3" ng-model="vm.customTag" ng-pattern="/\B#[a-zA-Z가-힣0-9]+$/" placeholder="{{'WRITE.REVIEW_HASHTAG'|translate}}"></textarea>
+            </label>
+        </div>
+
+        <div class = "survey-body">SCORE</div>
+        <div class="form-control" style="border-bottom: 0px; background-color: #ddd; font-size: 16px; text-align: center;">{{'WRITE.SCORE'+((vm.review.designScore-1)*2) | translate}}</div>
+        <div class="form-control" style="height: auto;">
+            <div class="score-input-wrap">
+                <input type="text" class="" ng-model="vm.review.designScore" name="designScore" min="1" max="5" value="" disabled>
+                <button type="button" ng-disabled="vm.review.designScore == 1" class="adjust-button fa fa-minus" ng-click="vm.adjustScore('designScore', -0.5)"></button>
+                <button type="button" ng-disabled="vm.review.designScore == 5" class="adjust-button fa fa-plus" ng-click="vm.adjustScore('designScore', 0.5)"></button>
+            </div>
+        </div>
+
+        <div class = "survey-body">{{'WRITE.RECOMMAND'|translate}}</div>
+        <div class="yesno-button-wrap">
+            <a href="#" ng-click="vm.stateYesNo = 'YES'" class="yesno-button yesno-button-{{vm.stateYesNo == 'YES' ? 'active':''}}">YES</a>
+            <a href="#" ng-click="vm.stateYesNo = 'NO'" class="yesno-button yesno-button-{{vm.stateYesNo == 'NO' ? 'active':''}}">NO</a>
+        </div>
+        <label class="input" style="display: block;">
+            <textarea required spellcheck="false" class="form-control" style="margin-top: 10px" rows="2" ng-model="vm.yesnoComment" placeholder="{{'WRITE.YESNO_CONTEXT'|translate}}"></textarea>
+        </label>
+
+        <div class = "survey-body">SHARE</div>
+        <div class="share-wrap">
+            <a href="#" class="share-fb active"><span class="fa fa-facebook"></span>FACEBOOK</a>
+            <a href="#" class="share-ig"><span class="fa fa-instagram"></span>INSTAGRAM</a>
+        </div>
+
+        <div class="divide35"></div>
+        <div class = "submit-container">
+            <button type="submit" class = "btn btn-info">{{'WRITE.SUBMIT'|translate}}</button>
+        </div>
+    </div>
+</form>
+
+</div>
+</div>
+
+

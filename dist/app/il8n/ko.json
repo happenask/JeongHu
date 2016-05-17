@@ -1,0 +1,83 @@
+{
+    "MENU": {
+        "MYPAGE": {
+            "MYTRY" : "MY TRY",
+            "MYSNS" : "MY SNS",
+            "LIKE" : "LIKE",
+            "PROFILE" : "PROFILE",
+            "MESSAGE" : "MESSAGE"
+        }
+    },
+    "LABEL": {
+        "CANCEL": "취소",
+        "OK": "확인",
+        "LOGIN": "로그인",
+        "MODIFY": "수정하기",
+        "SAVE": "저장하기"
+    },
+    "MODAL": {
+        "SIGN": {
+            "NEEDSING_1": "로그인이 필요합니다.",
+            "NEEDSING_2": "로그인 하시겠습니까?"
+        }
+    },
+
+    "FOOTER": {
+        "ABOUT_SERVICES_1": "전 세계 예쁜 상품을 경험하는 곳, 0.8L(공팔리터)입니다.",
+        "ABOUT_SERVICES_2": "지금 보고 계신 상품이 마음에 드시나요?",
+        "ABOUT_SERVICES_3": "직접 무료로 만나보세요!"
+    },
+
+    "ADMIN": {
+        "TOOLBAR": {
+            "SETTINGS": "설정",
+            "PROFILE": "프로필",
+            "LOGOUT": "로그아웃",
+            "SIDEBAR_TOGGLE": "메뉴"
+        },
+        "NOTIFICATIONS": {
+            "ACCOUNT_SETTINGS": "계정 설정",
+            "CHAT_SETTINGS": "대화 설정",
+            "USER_STATS": "사용자 상태",
+            "SERVER_STATS": "서버 상태",
+            "SHOW_LOCATION": "나의 위치",
+            "SHOW_AVATAR": "내 아바타",
+            "SEND_NOTIFICATIONS": "알림 보내기",
+            "ALLOW_BACKUPS": "백업하기",
+            "SHOW_USERNAME": "유저네임 보기",
+            "SHOW_PROFILE": "유저 프로필 보기",
+            "STORAGE_SPACE": "저장 공간 (120/160 Gb)",
+            "BANDWIDTH_USAGAE": "사용 대역 (10/100 Gb)",
+            "MEMORY_USAGAE": "사용 메모리 (1/8 Gb)"
+        }
+    },
+    "LANGUAGES": {
+        "CHINESE": "중국",
+        "ENGLISH": "미국",
+        "KOREAN": "한국"
+    },
+    "TABLES": {
+        "NEXT": "다음 페이지",
+        "PREV": "이전 페이지",
+        "OF": "의",
+        "ROWS": "현재 페이지:"
+    },
+    "404": {
+        "TITLE": "404",
+        "HOME": "홈으로",
+        "MESSAGE": "페이지가 현재 존재 하지 않습니다.",
+        "DESCRIPTION": "죄송합니다. 접속하신 페이지가 현재 존재 하지 않습니다. 홈페이지로 이동하세요."
+    },
+    "500": {
+        "TITLE": "500",
+        "MESSAGE": "잘못된 페이지 입니다.",
+        "DESCRIPTION": "죄송합니다. 접속하신 페이지가 현재 존재 하지 않습니다. 홈페이지로 이동하세요.",
+        "HOME": "홈으로"
+    },
+    "MESSAGES": {
+        "LANGUAGE_CHANGED": "언어가 변경되었습니다.",
+        "VALIDATION": {
+            "REQUIRED": "필수항목입니다."
+        }
+    }
+}

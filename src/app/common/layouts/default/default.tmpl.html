@@ -1,0 +1,13 @@
+<div ui-view="menu" ng-show="layout.headMenu"></div>
+<div class="container {{layout.containerClass}}">
+    <div class="alert alert-success fade in no-border-radius" style="width: 90%; margin: 0 auto;" ng-if="layout.isMobile">
+        <a class="text-success" href="{{layout.mobile.install}}" data-schema="{{layout.mobile.launch}}" ng-click="launchApp($event)">
+            공팔리터의 APP으로 좀 더 즐거운 경험을 느끼세요
+        </a>
+    </div>
+    <div class="row">
+        <div ui-view="leftsidemenu" class="{{layout.leftSideClass}}"></div>
+        <div ui-view="content" class="{{layout.contentSideClass}}" ></div>
+    </div>
+</div>
+<div ui-view="footer" ng-show="layout.footer"></div>

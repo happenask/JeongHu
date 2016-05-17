@@ -1,0 +1,95 @@
+.category-try .active{
+  font-weight: bold;
+}
+
+.category-review .active{
+  font-weight: bold;
+
+}
+.memberReviews{
+  display:none;
+}
+
+.revIcoDiv {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  top: 35%;
+  cursor: pointer;
+}
+
+
+.revIco.expiredReview {
+  background-color: red;
+}
+.revIco:before {
+  color: white;
+}
+
+.blurDiv {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  background-color: white;
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.timer.timer-small {
+  margin: -9px 0 0 0;
+}
+
+.review-yet{
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin:-25px 0 0 -75px;
+  width:150px;
+  background-color: rgba(0, 0, 0, 0.46);
+  z-index: 50;
+  border-radius: 2px;
+  border: 1px solid #616161;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  color: #FFFFFF;
+
+
+}
+.review-yet.over-expired{
+
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin:-25px 0 0 -75px;
+  width:150px;
+  background-color: rgba(0, 0, 0, 0.46);
+  z-index: 50;
+  border-radius: 2px;
+  border: 1px solid #616161;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  color: red;
+}
+
+.timer-plus{
+  font-size: 17px;
+}
+.nopaddingStrong{
+  width:30%;
+}
+.average-score{
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin:-25px 0 0 -75px;
+  width:150px;
+  background-color: rgba(0, 0, 0, 0.0);
+  z-index: 50;
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  color: #FFFFFF;
+}

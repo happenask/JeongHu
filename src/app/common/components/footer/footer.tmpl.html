@@ -1,0 +1,53 @@
+<footer id="footer" ng-controller="FooterController as vm">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-6 col-sm-6 margin30">
+                <div class="footer-col">
+                    <h3>About 0.8L</h3>
+                    <p>{{'FOOTER.ABOUT_SERVICES_1' | translate}}<br>{{'FOOTER.ABOUT_SERVICES_2' | translate}}<br>{{'FOOTER.ABOUT_SERVICES_3' | translate}}<br><br>
+                        <a href="/service/story">0.8L STORY</a><br>
+                        <a href="/service/review">0.8L REVIEW</a><br>
+                        <a href="/service/policy">이용약관</a> / <a href="/service/privacy">개인정보취급방침</a> / <a href="/service/operation">서비스 운영정책</a><br>
+                        <a href="/service/partner">제휴/제안</a>&nbsp;
+                        <img ng-repeat="language in ::vm.languages" ng-click="vm.switchLanguage(language.key)" translate="{{::language.name}}" style="width: 15px;margin-right:5px;" ng-src="assets/images/ico/ico_flag_{{::language.key}}.png"/>
+                        <br>
+                        <!--<img ng-click="vm.change()" style="width: 15px" src="//static.08liter.com/images/menu/flag-kr.png"/>-->
+                        <!--<img ng-click="vm.toggleIconMenu()" style="width: 15px" src="//static.08liter.com/images/menu/flag-cn.png"/></a>-->
+                        <!--<img ng-click="vm.toggleIconMenu()" style="width: 15px" src="//static.08liter.com/images/menu/flag-us.png"/></a><br>-->
+                        <a href="http://partner.08liter.com">파트너센터</a>
+                        <br>
+                    </p>
+                    <ul class="list-inline social-1">
+                        <li><a href="https://www.facebook.com/08liter" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="https://instagram.com/0.8liter" target="_blank"><i class="fa fa-instagram"></i></a></li>
+                        <li style="position: relative; top: 11px;"><a href="https://story.kakao.com/ch/08liter" target="_blank"><i class="fa" style="background-image: url('http://static.08liter.com/images/sns/story_icon.png'); background-size: contain"></i></a></li>
+                        <li><a href="http://weibo.com/beautifree" target="_blank"><i class="fa fa-weibo" style="background-color: #FF870F"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <!--footer col-->
+            <div class="col-md-6 col-sm-6 margin30">
+                <div class="footer-col">
+                    <h3>Contact</h3>
+
+                    <ul class="list-unstyled contact">
+                        <li><p>
+                            <strong>EVERYFRIDAY</strong><br/>(주)에브리프라이데이
+                        </p>
+                            <p>
+                                <strong>Address</strong> 서울시 강남구 선릉로 133길 14 천자빌딩 3층<br>
+                                <strong>Mail Us</strong> help@08liter.com<br>
+                                <strong>Phone</strong> 02 569 3332<br>
+                                <strong>Fax</strong> 0303 3446 3332<br>
+                                <strong>사업자등록번호</strong>
+                                120-88-23402<br/>
+
+                            </p></li>
+                    </ul>
+                </div>
+            </div>
+            <!--footer col-->
+        </div>
+    </div>
+</footer>

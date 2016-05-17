@@ -1,0 +1,60 @@
+
+<div class="divide5"></div>
+
+<div class="container">
+    <div class="center-heading">
+        <img src="//static.08liter.com/images/menu/dots2.png" style="width:27px">
+        <p class="rawText" style="margin: 0;"><span style="font-weight: bold;">REVIEW</span></p>
+    </div>
+
+    <div class="switcher-box">
+        <switcher ng-model="vm.param.type" ng-change="vm.typeSelect()" true-value="'new'" true-label="NEW" false-value="'hot'" false-label="HOT"></switcher>
+    </div>
+
+    <div class="row">
+
+        <div class="dynamic-grid" angular-grid="vm.reviews" grid-width="370" gutter-size="30" angular-grid-id="gallery" refresh-on-img-load="true" >
+
+            <div class="grid project-post" bindonce="item" ng-repeat="item in vm.reviews">
+
+                <a href="/review/detail?rid={{item.id}}"></a>
+                <form action="/review/detail" method="get">
+                    <a href="/review/detail?rid={{item.id}}">
+                        <input type="hidden" name="rid" value="{{item.id}}">
+                        <div class="item-img-wrap ">
+                            <img bo-src="item.images[0].modName" class="img-responsive" alt="workimg">
+                            <div class="item-desc-wrap">
+                                <span class="item-desc yesno">{{item.yesno}}</span><br>
+                                <span class="item-desc contentText">{{item.content | shortly }}</span>
+                            </div>
+
+                        </div>
+
+                    </a>
+                    <!--
+                    <div class="work-desc">
+                        <a href="/review/detail?rid={{item.id}}"></a>
+                        <a href="#">
+                            <img class="snsProfImg" src="http://static.08liter.com/images/profile/compression/a01b264d-2657-43dd-adfa-f5e7a86bf038.jpg">
+                        </a>
+                        <div class="snsNameDiv">
+                            <span class="userNameSpan"><a class="product_name userName" href="#">{{item.content}}</a></span>
+                            <span class="productNameSpan">
+                                <div class="star-rating rating-xs rating-disabled">
+                                    <div class="rating-container rating-gly-star" data-content="">
+                                        <div class="rating-stars" data-content="" style="width: 100%;"></div>
+                                        <input class="rating rid-rating-70821 form-control hide" data-size="xs" data-show-clear="false" data-readonly="true" data-show-caption="false">
+                                    </div>
+                                </div>
+                            </span>
+                            <span class="productNameSpan">&nbsp;{{item.priceScore}}</span>
+                            <timeleft class="parsed-time" time="item.createdAt"></timeleft>
+                        </div>
+                    </div>work desc-->
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+</div>

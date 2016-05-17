@@ -1,0 +1,251 @@
+.switcher-box {
+  text-align: right;
+  overflow: hidden;
+  margin-bottom:7px;
+}
+.switcher.active .switcher-label.true {
+  color: #01a9e0;
+}
+
+.project-post {
+  box-sizing: border-box;
+  -moz-box-sizing : border-box;
+  -webkit-transition: all 0.6s ease-out;
+  transition: all 0.6s ease-out;
+}
+
+// Added By Leo
+.item-desc-wrap {
+  position: absolute; top: 50%; margin-top: -50px; left: 0; right: 0;
+}
+.item-desc {
+  background-color: black;
+  background-color: rgba(0,0,0,0.8);
+  color: white;
+  line-height: 48px;
+}
+
+.item-desc.yesno {
+  font-weight: bold;
+  font-size: 20px;
+  letter-spacing: -1px;
+  padding: 4px 8px;
+}
+
+.item-desc.contentText {
+  font-size: 21px;
+  padding: 8px 14px;
+}
+
+
+
+.reviewContentWrap {
+  //overflow: hidden;
+  position: relative;
+}
+
+.reviewContentWrap > div {
+  position: absolute;
+}
+.reviewContentWrap > .full {
+  position: relative;
+}
+.reviewContentWrap > .tcenter {
+  text-align: center;
+}
+
+.reviewContentWrap > .left {
+  position: relative;
+  width: 80px; height: 80px;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+.reviewContentWrap > .middle {
+  left: 110px; right: 100px;
+  top: 12px;
+}
+.reviewContentWrap > .right {
+  width: 100px;
+  right: 0px; top: 12px;
+}
+
+.reviewContentWrap .profTextStyle {
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: -1px;
+  color: #a0a0a0;
+}
+.reviewContentWrap .profTextStyle.bold {
+  font-size: 21px;
+  color: black;
+  padding-bottom: 5px;
+}
+.reviewContentWrap .profTextStyle.strong {
+  color: #606060;
+}
+.reviewContentWrap .profTextStyle.tags {
+  color: #839C99;
+}
+
+.reviewContentWrap .center {
+  text-align: center;
+}
+
+.reviewContentWrap .context {
+  position: relative;
+  margin-left: 95px;
+  padding: 0px 14px;
+}
+.review-spacer {
+  position: relative !important;
+  width: 100%;
+  height: 10px;
+}
+.info-container {
+  background-color: #cbcbcb;
+  text-align: center;
+}
+
+.review-brand-image {
+  display: inline-block;
+  width: 35%;
+  padding-top: 35%;
+  -webkit-background-size: cover;
+  background-size: cover;
+  -webkit-border-radius:133px;
+  -moz-border-radius:133px;
+  border-radius:133px;
+}
+.yesno-popup {
+  overflow: hidden;
+  position: absolute; bottom: 120px; right: 10px;
+  width: 0px;
+  height: auto;
+  background-color: white;
+  border: 1px solid #d7d7d7;
+  z-index: 999;
+  opacity: 0;
+  -webkit-transition: opacity 1.6s, bottom .9s;
+  transition: opacity 1.6s, bottom .9s;
+}
+.yesno-popup.active {
+  width: 380px;
+  bottom: 80px;
+  opacity: 1;
+}
+.yesno-title {
+  padding: 10px;
+  background-color: #000;
+  margin: 5px;
+  color: #fff;
+  text-align: center;
+  font-size: 21px;
+}
+.yesno-context {
+  padding: 10px;
+  margin: 5px;
+  font-size: 18px;
+  text-align: center;
+}
+.yesno-popup-show-button {
+  position: absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  cursor: pointer;
+}
+.modal-background {
+  position: fixed;
+  top:0;
+  bottom:0;
+  width: 0px;
+  right:0;
+  background-color: #000;
+  z-index: 100;
+  opacity: .7;
+  -webkit-transition: opacity 1.2s;
+  transition: opacity 1.2s;
+}
+.modal-background.active {
+  opacity: .7;
+  left:0;
+  width: auto;
+}
+
+//@function browser-prefix($name, $value) {
+//  $result -webkit-#{$name} #{$value};
+//  @return
+//}
+
+@mixin set-transition($value...) {
+  -webkit-transition: $value;
+  -moz-transition: $value;
+  -ms-transition: $value;
+  transition: $value;
+}
+.review-images {
+  width: 100%; padding-top: 100%;
+  background-repeat:no-repeat;
+  background-position:50% 50%;
+  -webkit-background-size: cover;
+  background-size: cover;
+}
+.info-container .over-blur {
+  opacity: 0.6;
+  -webkit-filter: blur(40px);
+  filter: blur(40px);
+}
+.info-container .item-anchor {
+  position: absolute;
+  bottom: 20%; left: 0; right: 0;
+  z-index: 10;
+  //-webkit-transition: opacity .3s;
+  color: #000000;
+  font-size: 28px;
+  font-weight: bold;
+  text-decoration: none;
+  line-height: 32px;
+}
+.info-container .item-anchor-desc {
+  color: #FFFFFF;
+  border-top: 1px solid #FFF;
+  font-size: 18px;
+  display: inline-block;
+  padding: 2px 40px 0px;
+  margin-top: 12px;
+}
+
+// End
+
+//20160510 justin add
+@media screen and (max-width: 428px) {
+  .slick-next,.slick-next:hover{
+    background:none;
+    right:0;
+  }
+
+  .slick-prev,.slick-prev:hover{
+    background:none;
+    left:0;
+  }
+
+  .slick-review img{
+    width: 100%;
+  }
+  .slick-prev:before{
+    color: #2c2c2c;
+    content:'←';
+  }
+  .slick-next:before{
+    color: #2c2c2c;
+    content:'→';
+  }
+  //20160511 Leo Added
+  .reviewContentWrap .context {
+    margin-left: 0px;
+  }
+
+}
+
+//end

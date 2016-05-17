@@ -1,0 +1,47 @@
+
+
+// Added for item page
+.moreBtn {
+  display: block;
+  position: absolute;
+  bottom: 0px;
+  right: 20px;
+  width: 60px;
+  height: 34px;
+  border: 1px solid #a2a2a2;
+  font-size: 12px;
+  line-height: 34px;
+  color: #a2a2a2;
+}
+.moreBtn:hover {
+  text-decoration: none;
+  color: black;
+  border-color: black;
+}
+
+// End
+
+// Added By Leo
+.item-desc-wrap {
+  position: absolute; top: 42%; bottom: 0; left: 0; right: 0;
+}
+.item-desc {
+  background-color: black;
+  background-color: rgba(0,0,0,0.8);
+  color: white;
+  line-height: 48px;
+}
+
+.item-desc.yesno {
+  font-weight: bold;
+  font-size: 20px;
+  letter-spacing: -1px;
+  padding: 4px 8px;
+}
+
+.item-desc.contentText {
+  font-size: 21px;
+  padding: 8px 14px;
+}
+
+// End

@@ -1,0 +1,51 @@
+
+.faq-category-filter-container {
+    margin:0 auto;
+    max-width:400px;
+    margin-bottom:20px;
+}
+.faq-category-filter {
+    text-align:center;
+    font-size:0;
+    padding:0;
+    margin:0 -4px;
+
+}
+
+.faq-category-filter li {
+    display:inline-block;
+    width:25%;
+    padding:0 4px;
+
+}
+
+.faq-category-filter li a {
+    font-size:14px;
+    display: block;
+    text-align:center;
+    line-height:40px;
+    border:2px solid #f5f5f5;
+    letter-spacing: -1px;
+    text-decoration: none;
+}
+
+.faq-category-filter li a.active {
+    border-color: #01a9e0;
+    color: #01a9e0;
+}
+
+@media screen and (max-width:480px) {
+    .faq-category-filter li a {
+        font-size:12px;
+    }
+
+    .panel-group .panel-heading a {
+        font-size:13px;
+        padding:10px;
+    }
+
+    .panel-group .panel-body {
+        font-size:11px;
+        padding:10px;
+    }
+}

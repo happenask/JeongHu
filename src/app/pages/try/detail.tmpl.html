@@ -1,0 +1,71 @@
+<div class="review-container"><!-- {{vm.applied?vm.campaign.images.length-1:0}} -->
+    
+    <slick settings="vm.slick" style="height:{{vm.slickHeight}}" lazy-load="ondemand" dots="true" touch-move="true" infinite="false"
+           slides-to-show="1" slides-to-scroll="1" speed="300">
+        <div ng-if="vm.applied"><img ng-src="{{vm.campaign.images[vm.campaign.images.length-1].orgName}}">
+            <div class="over">
+                <div class="top-button-wrap">
+                    <a href="#" class="fa fa-heart-o"></a>
+                    <a href="#" class="icon-share"></a>
+                </div>
+                <div class="inside project-post">
+                    <div class="campaign-requirement">
+                        <span>WOMEN ONLY</span>
+                    </div>
+                    <div class="timer timer-1970">
+                        <timer countdown="252570.877" max-time-unit="'hour'" interval="1000">{{hours}}:{{mminutes}}:{{sseconds}}</timer>
+                    </div>
+                    <div class="btns">
+                        <a href="try/apply/{{vm.campaign.id}}" class="btn-u btn-grey getItBtn">정보변경</a>
+                        <a href="http://www.goodal.co.kr/product/product.asp?PID=P160225112843AEB" target="_blank" class="btn-u btn-white">자세히 보기</a>
+                    </div>
+                </div>
+                <div class="brand-wrap">
+                    <div class="thumb-wrap" style="background-image: url(http://static.08liter.com/images/review/compression/b93c9c15-e8a5-45e9-b9a3-0c47ef75b9d6.jpg);">
+                    </div>
+                    <div class="brand-product-name">
+                        <span>VANT</span> <span>36.5 CC CUSHION</span>
+                    </div>
+                    <a href="try/apply/{{vm.campaign.id}}" class="follow-button" ng-class="{activated: vm.campaign.brandFollow}" ng-click="vm.toggleFollow($event)"><span class="fa fa-plus"></span> Follow</a>
+                </div>
+            </div>
+        </div>
+        <div ng-repeat="item in vm.campaign.images" ng-if="$index < vm.campaign.images.length-1"><img ng-src="{{item.orgName}}"></div>
+        <div ng-if="!vm.applied"><img ng-src="{{vm.campaign.images[vm.campaign.images.length-1].orgName}}">
+            <div class="over">
+                <div class="top-button-wrap">
+                    <a href="#" class="fa fa-heart-o"></a>
+                    <a href="#" class="icon-share"></a>
+                </div>
+                <div class="inside project-post">
+
+                    <div class="timer timer-1970">
+                        <timer countdown="252570.877" max-time-unit="'hour'" interval="1000">{{hours}}:{{mminutes}}:{{sseconds}}</timer>
+                    </div>
+                    <div class="btns">
+                        <a href="try/apply/{{vm.campaign.id}}" class="btn-u btn-blue">신청하기</a>
+                        <a href="http://www.goodal.co.kr/product/product.asp?PID=P160225112843AEB" target="_blank" class="btn-u btn-white">자세히 보기</a>
+                    </div>
+                </div>
+                <div class="brand-wrap">
+                    <div class="thumb-wrap" style="background-image: url(http://static.08liter.com/images/review/compression/b93c9c15-e8a5-45e9-b9a3-0c47ef75b9d6.jpg);">
+                    </div>
+                    <div class="brand-product-name">
+                        <span>VANT</span> <span>36.5 CC CUSHION</span>
+                    </div>
+                    <a href="try/apply/{{vm.campaign.id}}" class="follow-button" ng-click="vm.toggleFollow($event)"><span class="fa fa-plus"></span> FOLLOW</a>
+                </div>
+            </div>
+        </div>
+    </slick>
+</div>
+
+<div class="dailyFooter">
+    <div class="shares">
+        <a href="#facebook" class="btn-facebook">facebook</a> <a href="#instagram" class="btn-instagram">instagram</a> <a href="#kakaostory" class="btn-kakaostory">kakaostory</a> <a href="#kakaotalk" class="btn-kakaotalk">kakaotalk</a> <a href="#url" class="btn-url">url</a>
+    </div>
+    <div class="inner">
+        <span>{{vm.campaign.title}}</span>
+		<span><i class="fa fa-user"></i> <em>{{vm.campaign.applyCnt}} | {{vm.campaign.recruitNo}}</em></span>
+    </div>
+</div>

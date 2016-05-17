@@ -1,0 +1,36 @@
+
+<div class="divide5"></div>
+<div class="container">
+    <div class="center-heading">
+        <img src="//static.08liter.com/images/menu/dots1.png" style="width:27px">
+        <p class="rawText" style="margin: 0;" ><span style="font-weight: bold;">TRY</span></p>
+    </div>
+    <ul class="filter list-inline categoryFilter">
+        <li class="nopaddingStrong" target="all" ng-click="vm.targetSelect('new')"><a class="active category productCategory" href="#">NEW</a></li>
+        <li class="nopaddingStrong" target="man" ng-click="vm.targetSelect('hot')"><a class="category productCategory" href="#">HOT</a></li>
+    </ul>
+
+    <div class="row">
+
+        <div class="dynamic-grid" angular-grid="vm.campaigns" gutter-size="30" angular-grid-id="gallery" refresh-on-img-load="false" >
+
+            <div class="grid project-post" bindonce="item" ng-repeat="item in vm.campaigns">
+                <a href="/try/detail?id={{item.id}}"><div class="item-img-wrap">
+                    <img bo-src="item.images[0].orgName" data-actual-width = "640"  data-actual-height="500" class="project-img" alt="workimg">
+                    <div class="item-img-overlay">
+                        <div class="timer timer-1970">
+                            <timer countdown="item.remainTime" max-time-unit="'hour'" interval="1000">{{hours}}:{{mminutes}}:{{sseconds}}</timer>
+                        </div>
+                        <a href="/try/detail?id={{item.id}}">
+                            <span class="overlay"></span>
+                        </a>
+                    </div>
+                </div></a>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<div class="scrollup" ng-click="vm.scrollUp($event)" style="opacity: 1;display: none"><div class="fa fa-chevron-up" aria-hidden="true"></div></div>

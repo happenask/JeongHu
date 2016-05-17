@@ -1,0 +1,87 @@
+<!--<div class="{{item.brandInfo}}" ng-repeat="item in vm.slickImages" ng-if="$index < vm.slickImages.length" style="height: {{item.height}}px;">-->
+    <!--<img class="over-blur" ng-src="{{item.modName}}">-->
+    <!--<a ng-if="item.brandInfo" href="/item/detail?id={{vm.reviews.campaignId}}" class="item-anchor">-->
+        <!--VANT 36.5 CC CUSHION<br>-->
+        <!--<span class="item-anchor-desc">{{"DETAIL.CONTEXT1" | translate}}</span>-->
+    <!--</a>-->
+<!--</div>-->
+
+<div class="review-container"><!-- {{vm.applied?vm.campaign.images.length-1:0}} -->
+    <slick class="slick-review" settings="vm.slick" style="height:{{vm.slickHeight}}; margin-bottom: 0;"  lazy-load="ondemand" dots="true" touch-move="true" infinite="false"
+           slides-to-show="1" slides-to-scroll="1" speed="300" init-onload="true" data="vm.slickImages">
+        <div class="{{item.brandInfo}}" ng-repeat="item in vm.slickImages" ng-if="$index < vm.slickImages.length">
+            <div class="review-images over-blur" style="background-image: url({{item.modName}});"></div>
+            <a ng-if="item.brandInfo" href="/item/detail?id={{vm.reviews.campaignId}}" class="item-anchor">
+                <div class="review-brand-image" style="background-image: url(http://static.08liter.com/images/review/compression/b93c9c15-e8a5-45e9-b9a3-0c47ef75b9d6.jpg)"></div><br><br>
+                VANT 36.5 CC CUSHION<br>
+                <span class="item-anchor-desc">{{"DETAIL.CONTEXT1" | translate}}</span>
+            </a>
+        </div>
+    </slick>
+    <div class="reviewContentWrap">
+        <div class="left" style="background-image: url({{vm.reviews.member.profileImg}});"></div>
+        <div class="middle">
+            <div class="profTextStyle bold">{{vm.reviews.member.nickname}}</div>
+            <timeleft class="profTextStyle normal" time="vm.reviews.createdAt"></timeleft>
+        </div>
+        <div class="right">
+            <div class="modal-background" ng-class="{active: vm.yesnoPopup}" ng-click="vm.yesnoPopup = false"></div>
+            <div class="yesno-popup" ng-class="{active: vm.yesnoPopup}">
+                <div class="yesno-title">친구에게 이 제품을 추천하시나요?</div>
+                <div class="yesno-context">YES - 가격대비 용량 최고</div>
+            </div>
+            <div class="yesno-popup-show-button" ng-click="vm.yesnoPopup = true"></div>
+            <div class="profTextStyle bold center">{{vm.reviews.yesno}}</div>
+            <div class="profTextStyle normal center">{{"DETAIL.CONTEXT2" | translate}}</div>
+        </div>
+    </div>
+    <div class="review-spacer"></div>
+    <div class="reviewContentWrap">
+        <div class="profTextStyle strong context">
+            {{vm.reviews.content}}
+        </div>
+        <div class="review-spacer"></div>
+        <div class="profTextStyle tags context">
+            TYPE 여성 / 20대 / 건성
+        </div>
+        <div class="profTextStyle tags context">
+            TAG #천사연구소 #콜라겐미스트 #미스트 #천연화장품 #딥블루캐비어콜라겐미스트 #공팔리터 #08l
+        </div>
+        <div class="profTextStyle tags context">
+            {{"DETAIL.CONTEXT3" | translate}} {{vm.reviews.ascore}} / {{"DETAIL.CONTEXT4" | translate}} {{vm.reviews.designScore}} / {{"DETAIL.CONTEXT5" | translate}} {{vm.reviews.priceScore}} / {{"DETAIL.CONTEXT6" | translate}} {{vm.reviews.etc1Score}} / {{"DETAIL.CONTEXT7" | translate}} {{vm.reviews.etc2Score}}
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="center-heading">
+        <p class="rawText" style="margin: 0;"><span style="font-weight: bold;"><span style="color:#d7d7d7">ANOTHER</span> REVIEWS</span></p>
+    </div>
+    <div class="divide5" style="width: 90%; margin: 0 auto 20px; border-bottom: 1px solid #d7d7d7;"></div>
+    <div class="row">
+        <div class="dynamic-grid" angular-grid="vm.tailList" ag-gutter-size="20" ag-angular-grid-id="gallery" ag-refresh-on-img-load="true" >
+
+            <div class="grid" bindonce="item" ng-repeat="item in vm.tailList" >
+                <!--<a href="/review/detail?rid={{item.id}}">-->
+                    <!--<img ng-src="{{item.images[0].modName}}" class="img-responsive" alt="workimg">-->
+                <!--</a>-->
+                <a href="/review/detail?rid={{item.id}}"></a>
+                <form action="/review/detail" method="get">
+                    <a href="/review/detail?rid={{item.id}}">
+                        <input type="hidden" name="rid" value="{{item.id}}">
+                        <div class="item-img-wrap ">
+                            <img bo-src="item.images[0].modName" class="img-responsive" alt="workimg">
+                            <div class="item-desc-wrap">
+                                <span class="item-desc yesno">{{item.yesno}}</span><br>
+                                <span class="item-desc contentText">{{item.content | shortly }}</span>
+                            </div>
+                        </div>
+                    </a>
+                </form>
+                <!--<review-item item="item"></review-item>-->
+            </div>
+
+        </div>
+
+    </div>
+</div>

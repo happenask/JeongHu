@@ -1,0 +1,405 @@
+<div class="row">
+    <input type="hidden" id="faqNum" value="">
+    <div class="col-md-12">
+        <div class="faq-category-filter-container">
+            <ul class="faq-category-filter">
+                <li><a class="active"  href="" ng-click="vm.changeTab($event,'#tab1');">서비스운영</a></li>
+                <li><a class=""   href="" ng-click="vm.changeTab($event,'#tab2')">계정관리</a></li>
+                <li><a class=""   href="" ng-click="vm.changeTab($event,'#tab3')">배송</a></li>
+                <li><a class=""   href="" ng-click="vm.changeTab($event,'#tab4')">제휴/제안</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="panel-group faq-tab-content" id="tab1">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"data-target="#collapseOne"> 1. 0.8L은 어떻게 읽나요?</a>
+                    </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        0.8L은 ‘공팔리터’라고 읽습니다.<br>공팔리터는 전세계 어디에서나 '공유, 팔로우, 라이크'를 불러 일으키는 예쁜 신상품을 경험하는 곳이라는 뜻 입니다.
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"data-target="#collapseTwo"> 2. 0.8L는 어떤 서비스인가요?</a>
+                    </h4>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse">
+                    <div class="panel-body">0.8L (이하 공팔리터)는 이 세상의 모든 트렌디하고 예쁜 신상품을 가장 빠르게 경험하는 곳입니다. 뷰티, 패션, 라이프 카테고리의 상품 중 2030 여성의 감성에 맞고, 디자인이 예쁘면서도 품질이 우수한 신상품만을 엄선하여 제공하고 있습니다. 지금 공팔리터에서 예쁜 상품을 발견하셨나요? 직접 경험하실 수 있도록 소셜 에디터를 신청하세요. 선정이 되시고 상품을 받은 후에는 자신의 SNS에 매거진의 에디터처럼 예쁜 사진 한 장과 간단한 글, 그리고 해시태그로 표현하면 됩니다. 이제는 공팔리터에서 전 세계의 예쁜 신상품을 가장 빨리, 무료로 경험하세요! </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"data-target="#collapseThree"> 3. 소셜 에디터가 무엇인가요? </a>
+                    </h4>
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse">
+                    <div class="panel-body">소셜 에디터는 예쁜 신상품을 가장 빨리 만나보고, 그것을 자신의 SNS에 올려 팔로워들에게 멋지게 보여줄 수 있는 사람을 말합니다. 마치 매거진의 편집장처럼 소셜 에디터는 상품을 받아보고 단 1장의 사진이나 영상으로 자신만의 느낌을 표현하여 해시태그를 입력하여 포스팅합니다.</div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"data-target="#collapse4"> 4. 0.8L 소셜 에디터는 어떻게 신청하나요? </a>
+                    </h4>
+                </div>
+                <div id="collapse4" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        캠페인에 참여하기 위해서는 최소 1개의 SNS 계정을 연동해야 합니다. 그리고 바로 원클릭으로 신청이 가능합니다. 신청 시에는 선정이 되었을 때 제품을 수령할 주소를 함께 기재하시면 됩니다. 공팔리터는 리뷰 작성 공간을 미리 확인하기 위해 SNS를 연동하는 것을 원칙으로 하며, 허위 SNS 계정일 경우 서비스 이용에 제한이 발생할 수 있습니다.
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"data-target="#collapse5"> 5. 0.8L 소셜 에디터 선정 기준은 무엇인가요?
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapse5" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        공팔리터는 팔로워가 많지 않아도 일상적으로 SNS를 이용하는 분이라면 누구나 이용이 가능한 서비스입니다. 따라서 최소한의 기준을 마련하여 이벤트 계정이나 중복 계정, 가상 계정 등을 거르고 있습니다. 선정 기준은 아래와 같습니다.<br>
+                        [페이스북]<br>
+                        팔로어 수 &lt; 150<br>
+                        최근 30일 피드 수  &lt; 5<br>
+                        최근 7일 피드 수 &lt; 1<br>
+                        최근 7일 댓글 수 &lt; 5<br>
+                        최근 7일 좋아요 평균 &lt; 5<br><br>
+
+                        [인스타그램]<br>
+                        최근 팔로어 수 &lt; 70<br>
+                        최근 30일 피드 수 &lt; 10<br>
+                        최근 7일 피드 수 &lt; 1<br>
+                        최근 7일 댓글 수 &lt; 10<br>
+                        최근 7일 좋아요 평균 &lt; 10<br><br>
+
+                        [카카오스토리]<br>
+                        최근 30일 피드 수 &lt; 10<br>
+                        최근 7일 피드 수 &lt; 1<br>
+                        최근 7일 댓글 수 &lt; 10<br>
+                        최근 7일 좋아요 평균 &lt; 4<br><br>
+
+                        더불어 계정은 '전체공개'여야만 확인이 가능하므로, 비공개 또는 친구공개 계정이신 경우 전체공개로 변경 부탁드립니다. 모두가 함께 보고 공유하고 나눌 수 있어야 합니다.
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"data-target="#collapse6"> 6. 선정 후 리뷰 작성은 어떻게 하나요? </a>
+                    </h4>
+                </div>
+                <div id="collapse6" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        공팔리터는 감성 리뷰를 지향합니다. 기존의 기업에게 대가를 받고 작성된 상업적인 홍보글과 달리 객관적인 리뷰를 통해 올바른 소비문화를 형성하는 데 기여하고자 합니다. 제시된 해시태그를 포함하여 단 1장의 사진 또는 영상으로 자신이 받은 상품을 자신의 팔로워에게 보여주세요.
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"data-target="#collapse7"> 7. 제품을 받으면 꼭 리뷰를 써야 하나요? </a>
+                    </h4>
+                </div>
+                <div id="collapse7" class="panel-collapse collapse">
+                    <div class="panel-body">공팔리터의 모든 서비스와 제품은 무상으로 진행됩니다. 우수한 상품을 가지고 있는 기업이라면 누구나 무상으로 공팔리터를 통해 회원님들께 상품에 대해 보여줄 수 있고, 회원님 또한 상품을 구입하기 전에 무상으로 미리 경험해 볼 수 있는 만큼, 상품 수령 후 리뷰를 필수로 제출해 주셔야 합니다. 따라서 리뷰 작성 의사가 있는 경우에만 소셜 에디터 신청을 해야 하며, 제품을 수령한 이후에는 정해진 기한 내에 자신의 SNS에 리뷰를 작성하여 해당 게시물을 공팔리터에 제출해야 합니다. 리뷰 작성이 정해진 기한을 넘기거나 제출하지 않을 경우, 추후 이벤트 선정에서 제외됩니다.</div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"data-target="#collapse8"> 8. 블랙리스트는 어떻게 운영되고 있는건가요? </a>
+                    </h4>
+                </div>
+                <div id="collapse8" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        &lt;패널티 적용 대상&gt;<br>
+                        리뷰 작성 만료 후 7일 이내 작성 시 패널티 1회 적용<br>
+                        리뷰 미작성 시 패널티 1회 적용<br><br>
+                        패널티 2회 누적 시 블랙리스트로 관리되며, 공팔리터 이용에 제한이 있습니다. TRY 신청은 가능하나, 선정에서 제외 됩니다.<br>
+                        블랙리스트를 운영하는 목적은 성실하게 임하는 다른 에디터들에게 더 많은 기회를 드리기 위함입니다.<br><br>
+
+                        부득이한 사정이나 배송문제로 리뷰 작성이 어려우실 경우, help@08liter.com 으로 문의 주시기 바랍니다.
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"data-target="#collapse9"> 9. 소셜 에디터 발표는 언제 하나요?
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapse9" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        공팔리터는 소셜 에디터 모집 기간을 3일로 운영하고 있습니다. 모집 마감 후 1 영업일 이내로 자동 선정되며, 즉시 발표가 진행됩니다.
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"data-target="#collapse10"> 10. 리뷰 작성 후, 제출은 어디서 하는 건가요?
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapse10" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        MY LIST &gt; 리뷰 작성 &gt; 상품을 클릭하면 작성한 리뷰를 제출할 수 있습니다. 자신의 SNS 게시물을 자동으로 불러온 뒤 해당 사진을 클릭하고 '제출하기' 버튼을 누르면 완료됩니다.<br><br>
+                        단, 업체 측에서 운송장번호를 업로드 해야만 리뷰 제출이 가능하기 때문에 리뷰제출이 안되는 경우는 조금만 기다려주시면 바로 해결해드리도록 하겠습니다.
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"data-target="#collapse11"> 11. 리뷰를 작성하고 삭제해도 되나요?
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapse11" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        리뷰 작성 후 1개월 동안 삭제 없이 전체공개를 유지해주셔야 합니다. 일정 기간 내에 리뷰 확인이 되지 않을 경우 패널티를 적용 받게 됩니다.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-group faq-tab-content hide" id="tab2">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"data-target="#collapse12"> 1.개인정보가 유출될 가능성이 있나요? </a>
+                    </h4>
+                </div>
+                <div id="collapse12" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        공팔리터는 고객님의 모든 정보를 소중히 관리합니다. 고객님의 동의 없이 외부 또는 제3자에게 개인정보가 노출되지 않으며 자세한 방침은 개인정보취급방침 내용을 확인하세요.
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"data-target="#collapse13"> 2.공팔리터는 익명서비스인가요?</a>
+                    </h4>
+                </div>
+                <div id="collapse13" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        그렇습니다. 공팔리터에 입력한 고객님의 정보는 고객님의 동의 없이 외부 또는 제3자에게 노출되지 않으며, 공팔리터 내의 다른 유저들도 확인할 수 없습니다. 단, SNS 연결 시에 고객님의 SNS 프로필 이미지가 최초에 자동으로 등록됩니다. 프로필 사진은 언제나 자유롭게 변경할 수 있습니다. 또한 제출한 리뷰를 수집 후, 별도로 모아보기 기능을 제공하는데, 고객님의 SNS URL이 함께 제공됩니다.
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"data-target="#collapse14">3.프로필 이미지를 변경하고 싶어요.</a>
+                    </h4>
+                </div>
+                <div id="collapse14" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        MY PAGE에서 프로필 이미지를 클릭하시면 자유롭게 변경할 수 있습니다.
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"data-target="#collapse15">4. 계정을 삭제하고 싶어요.</a>
+                    </h4>
+                </div>
+                <div id="collapse15" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        My PAGE &gt; MY PROFILE에서 계정을 삭제할 수 있습니다. 계정 삭제 후에는 고객님의 모든 정보와 활동 내역이 함께 삭제 후 복구되지 않으므로 주의해주세요.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-group faq-tab-content hide" id="tab3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"data-target="#collapse16">1. 소셜 에디터가 되었어요. 상품은 언제 배송되나요?</a>
+                    </h4>
+                </div>
+                <div id="collapse16" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        소셜 에디터 선정 후 3일 이내 발송을 원칙으로 합니다. MY PAGE에서 해당 상품의 배송 정보를 바로 확인할 수 있으며, 배송 받으신 날로부터 7일 이내 리뷰 작성이 진행되니 배송 및 리뷰 작성 일정을 꼭 확인해 주세요.
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"data-target="#collapse17">2. 선정된 후 알림이나 리뷰 작성 가이드 등이 발송되나요?</a>
+                    </h4>
+                </div>
+                <div id="collapse17" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        선정이 되신 분들께는 별도로 사이트 내에 알림이 제공됩니다. 또한 공팔리터는 해당 기업에서 상품이 발송된 후 해시태그와 리뷰 작성 기한이 담긴 가이드 메일을 보내드리고 있습니다. 상품을 받으신 후 메일이 오지 않으셨다면 help@08liter.com 로 문의주세요.
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"data-target="#collapse18">3. 상품이 파손되어 왔어요.</a>
+                    </h4>
+                </div>
+                <div id="collapse18" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        상품이 파손되어 왔을 시, 파손되어 있는 상품 사진과 성함과 전화번호를 help@08liter.com 로 보내주세요. 공팔리터에서 상품 확인 후 새로운 상품을 보내드리겠습니다. 리뷰 작성 기간은 새로운 상품을 수령하는 데 소요되는 기간만큼 연장됩니다.
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"data-target="#collapse19">4. 배송이 무료인가요? 착불로 배송이 왔어요..</a>
+                    </h4>
+                </div>
+                <div id="collapse19" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        모든 상품은 무료로 배송되고 있습니다. 착불로 배송 받았을 시 help@08liter.com 로 연락주세요. 확인 후 배송비를 돌려드립니다.
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"data-target="#collapse20">5. 주소를 잘못 기재했는데 어떻게 해야 하나요?</a>
+                    </h4>
+                </div>
+                <div id="collapse20" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        선정된 이후에는 배송지 변경이 불가능합니다. 이미 배송사로 발송이 끝난 상태이기 때문입니다. 부득이 상품 수령이 어려우신 분들은 공팔리터에서 운송장번호와 택배사를 조회하여 확인하신 후 help@08liter.com으로 문의주시기 바랍니다.
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"data-target="#collapse21">6. 해외 배송이 가능한가요?</a>
+                    </h4>
+                </div>
+                <div id="collapse21" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        공팔리터는 한국과 중국에서 이용이 가능한 글로벌 서비스입니다. 캠페인 별로 배송이 가능한 국가가 지정되며, 국내에서 진행되는 체험단의 경우 무료로 배송되는 서비스 특성상, 배송 가능 지역은 국내로만 제한하고 있습니다.
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"data-target="#collapse28">7. 배송 조회는 어떻게 하나요?</a>
+                    </h4>
+                </div>
+                <div id="collapse28" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        당첨되신 에디터 분들은 사이트 내에서 배송 조회가 가능합니다.<br>
+                        MY LIST 에서 당첨된 상품의 아이콘이 택배차 모양일 때는 '배송준비중' 이라는 뜻이고, + 아이콘으로 변경 된 이후 리뷰 작성하기 &gt; 배송조회 탭을 눌러 조회하시면 됩니다.
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"data-target="#collapse29">8. 배송 아직 안 받았는데, 시간이 왜 가나요?</a>
+                    </h4>
+                </div>
+                <div id="collapse29" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        업체에서 발송 후 운송장을 올려주시면 '리뷰 제출'이 가능한 시간이 가게 되어 있습니다.  배송기간 2일 + 리뷰 작성기간 7일해서 총 9일의 시간이 가게 설정 되어 있습니다.<br>
+                        상품을 아직 받지 않으셨더라도 배송 중에 있으니 '배송조회' 이용을 부탁 드립니다.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-group faq-tab-content hide" id="tab4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"data-target="#collapse22">1.어떤 상품이나 0.8L에서 캠페인을 진행할 수 있나요?</a>
+                    </h4>
+                </div>
+                <div id="collapse22" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        공팔리터는 2030 여성의 감성에 맞춘 예쁜 디자인과 우수한 품질의 상품, 출시 6개월 이내의 신제품만 캠페인 진행이 가능합니다. 상품 선정 기준은 아래와 같으며, 모든 상품은 품질 및 기업의 신뢰도가 바탕이 되어야 합니다.<br>
+                        - 뷰티 : 패키지 디자인이 예쁜 화장품, 많은 여성들이 선호하는 브랜드의 화장품,  SNS로 표현하기 좋은 색조 화장품<br>
+                        - 패션 : 베이직한 아이템, 트렌디한 아이템, 유니크하면서도 관심이 가는 아이템<br>
+                        - 라이프 : 디자인이 예쁜 2030 여성 감성의 인테리어 소품, 문구, 잡화 등의 아이템<br>
+                        정확한 상품 선정은 공팔리터 서비스 팀 내부 협의를 거쳐 확정되오니 제휴 문의 contact@08liter.com을 통해 신청해 주시기 바랍니다.
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"data-target="#collapse23">2.0.8L 캠페인 진행 시 어떤 효과를 볼 수 있나요?</a>
+                    </h4>
+                </div>
+                <div id="collapse23" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        이제 기업에서 이야기하는 '정보 검색' 중심의 콘텐츠는 확산이 어렵습니다. 우리는 검색하지 않아도 고객에게 자연스럽게 노출되는 네이티브 AD가 가능합니다. 나아가 고객이 직접 귀사의 소셜 에디터가 되어 스스로 모바일에서 자신의 팔로워들에게 귀사의 상품을 멋지게 리뷰로 남기고 이야기하도록 합니다.<br>
+                        특히 신상품의 경우 SNS를 통한 빠른 확산과 믿을 수 있는 소셜 체험 마케팅으로 콘텐츠를 확보하실 수 있습니다. 소셜 에디터의 활동으로 얻은 리뷰 결과물은 해시태그 검색을 통해 SNS 상에서 확산되며, 기업에게는 자신의 사이트를 통해 활용할 수 있도록 리뷰를 제공합니다.
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"data-target="#collapse24">3. 0.8L 캠페인 진행 신청은 어떻게 하나요?</a>
+                    </h4>
+                </div>
+                <div id="collapse24" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        기업명, 상품명, 상품 설명, 홈페이지, 체험단 진행 희망 개수, 담당자명, 담당자 연락처, 담당자 이메일 등을 기재하여 contact@08liter.com으로 메일을 보내주시면 됩니다. 메일 접수 후 순차적으로 해당 상품에 대하여 검토되오며, 기업사와 내부 협의 후 진행이 확정됩니다. 추후 보다 간편하게 신청하실 수 있도록 시스템을 제공 할 예정입니다.
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"data-target="#collapse25">4. 캠페인 진행 시 발생하는 비용이 있나요?</a>
+                    </h4>
+                </div>
+                <div id="collapse25" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        공팔리터는 더 많은 분들께 더 많은 우수한 상품을 경험하게 하는 데에 그 목적이 있습니다. 공팔리터가 지향하는 ‘예쁜 상품’으로 선정되시면 모든 서비스 비용은 무료입니다. 단, 캠페인 진행을 위한 상품 및 상품 배송비는 기업의 부담입니다.
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"data-target="#collapse26">5. 공팔리터를 통해 중국 현지 캠페인을 진행하고 싶습니다.</a>
+                    </h4>
+                </div>
+                <div id="collapse26" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        공팔리터는 글로벌 서비스로, 한국과 중국에서 각각 이용이 가능합니다. 우수한 상품을 갖고 있지만 유통망이나 마케팅 비용으로 인해 해외 진출이 어려웠던 기업을 위하여 중국 캠페인 진행도 무상으로 진행됩니다. 진행 절차는 한국 진행과 동일하며 중국 현지 캠페인 신청 및 문의는 contact@08liter.com으로 메일을 보내주시면 됩니다.
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"data-target="#collapse27">6. 기타 제휴 및 문의</a>
+                    </h4>
+                </div>
+                <div id="collapse27" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        공팔리터는 2030 여성 유저를 대상으로 한 모든 기업과의 제휴를 희망합니다. 제휴는 contact@08liter.com으로 메일을 보내주시기 바랍니다. 빠른 시일 내에 100% 답변드리도록 하겠습니다. 감사합니다.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--collapse col-->
+</div>

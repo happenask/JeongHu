@@ -1,0 +1,390 @@
+.switcher-box {
+  text-align: right;
+  overflow: hidden;
+  margin-bottom:7px;
+}
+.switcher.active .switcher-label.true {
+  color: #01a9e0;
+}
+
+.project-post {
+  box-sizing: border-box;
+  -moz-box-sizing : border-box;
+  -webkit-transition: all 0.6s ease-out;
+  transition: all 0.6s ease-out;
+}
+
+.timer {
+  position: absolute;
+  right: 0;
+  top:50%;
+  font-family: Bombard !important;
+  font-size: 40px;
+  width: 100%;
+  text-align: center;
+  height: 30px;
+  color: white;
+  margin-bottom: 5px;
+}
+
+//plugin dynamic-grid
+.dynamic-grid {
+  position: relative;
+  display: none;
+}
+.dynamic-grid.angular-grid {
+  display: block;
+}
+
+.grid {
+  position: absolute;
+  list-style: none;
+  box-sizing: border-box;
+  -webkit-transition: all 400ms ease;
+  transition: all 400ms ease;
+  overflow: hidden;
+}
+.grid.ng-leave {
+  -webkit-transition: all ease 400ms;
+  transition: all ease 400ms;
+}
+.grid.ng-leave.ng-leave-active {
+  -webkit-transform: scale(0.5);
+  transform: scale(0.5);
+  opacity: 0;
+}
+.grid.ng-enter {
+  -webkit-transition: all ease 400ms;
+  transition: all ease 400ms;
+  -webkit-transition-delay: 500ms;
+  transition-delay: 500ms;
+  -webkit-transform: scale(0.5);
+  transform: scale(0.5);
+  opacity: 0;
+}
+.grid.ng-enter.ng-enter-active {
+  -webkit-transform: scale(1);
+  transform: scale(1);
+  opacity: 1;
+}
+.grid-img {
+  width: 100%;
+  vertical-align: middle;
+  background-color: #fff;
+  opacity: 0;
+  visibility: hidden;
+}
+.grid-img.img-loaded {
+  visibility: visible;
+  opacity: 1;
+}
+
+.review-container {
+  max-width: 760px;
+  margin: 0 auto;
+  padding-bottom: 52px;
+}
+
+.review-container .over {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, .4);
+}
+
+.review-container .over .inside {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 340px;
+  height: 150px;
+  margin-left: -170px;
+  margin-top: -150px;
+}
+
+.review-container .over .timer {
+  text-align: center;
+  color: #fff;
+  font-family: Bombard !important;
+  font-size: 100px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.review-container .over .inside .btns .btn-blue{
+  background: #01a9e0;
+}
+.review-container .over .inside .btns .btn-white {
+  background: #ffffff;
+  color: #666;
+}
+.review-container .over .inside .btns a {
+  width: 50%;
+  float: left;
+  text-align: center;
+  font-size: 16px;
+  padding: 0;
+  height: 40px;
+  line-height: 40px;
+}
+.review-container .over .inside .btns{
+  position: absolute;
+  top: 170px;
+  width: 100%;
+}
+
+.review-container img {
+  display: block;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+.dailyFooter {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #fff;
+  height: auto;
+}
+.dailyFooter .shares {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 100%;
+  margin-bottom: 10px;
+  height: 50px;
+  background: #fff;
+  background: rgba(255, 255, 255, .8);
+  line-height: 50px;
+  text-align: center;
+  display: none;
+}
+.dailyFooter .inner {
+  color: #999;
+  font-size: 13px;
+  line-height: 50px;
+}
+.top-button-wrap {
+  position: absolute;
+  top: 20px;
+  left:20px;
+  right:20px;
+  height: 40px;
+  text-align: right;
+}
+.top-button-wrap > a {
+  display: inline-block;
+  padding: 10px;
+  font-size: 32px;
+  color: #fff;
+  vertical-align: middle;
+  text-decoration: none;
+}
+.brand-wrap {
+  position: absolute;
+  bottom:24px;
+  left: 24px;
+  right: 24px;
+  height: 120px;
+  padding: 20px 60px 20px 140px;
+}
+.thumb-wrap {
+  width: 120px;
+  height: 120px;
+  overflow: hidden;
+  position: absolute;
+  top: 0px; left: 0px;
+  -webkit-background-size: 150%;
+  background-size: 150%;
+  background-position: 50% 50%;
+  border-radius: 60px;
+}
+.brand-product-name {
+  font-size: 28px;
+  color: #fff;
+  text-shadow: 1px 0px 1px #000;
+  text-shadow: 1px 0px 1px rgba(0,0,0,0.4);
+  letter-spacing: -1px;
+}
+.follow-button {
+  position: absolute;
+  display: block;
+  text-align: center;
+  line-height:45px;
+  right: 0px;
+  bottom: 10px;
+  color: #d7d7d7;
+  font-size: 22px;
+  border: 1px solid #d7d7d7;
+  width: 120px;
+  height: 45px;
+  background-color: transparent;
+}
+.follow-button > span {
+  font-size: 18px;
+}
+.follow-button:active,
+.follow-button:focus {
+  color: #d7d7d7;
+}
+.follow-button:hover {
+  border-color: #fff;
+  background-color: rgba(255,255,255,0.18);
+  color: #fff;
+  text-decoration: none;
+
+}
+.follow-button.activated {
+  background-color: rgba(255,255,255,0.8);
+  color: #000;
+}
+.follow-button.activated:hover {
+  background-color: rgba(255,255,255,0.8);
+  color: #000;
+}
+.campaign-requirement {
+  position: absolute;
+  top: 15px; left: 0px; right: 0px;
+  text-align: center;
+
+}
+
+.campaign-requirement > span {
+  display: inline-block;
+  -webkit-border-radius:15px;
+  -moz-border-radius:15px;
+  border-radius: 4px;
+  padding: 0 30px;
+  height: 46px;
+  font-size: 21px;
+  line-height: 46px;
+  letter-spacing: -1px;
+
+  background-color: #fff;
+  background-color: rgba(255,255,255,0.7);
+  color: #303030;
+}
+@media screen and (max-width: 640px) {
+  .brand-wrap {
+    height: 60px;
+    padding: 0px 0px 0px 65px;
+  }
+  .thumb-wrap {
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+  }
+  .brand-product-name {
+    font-size: 16px;
+  }
+  .follow-button {
+    bottom: 0;
+    line-height:26px;
+    font-size: 16px;
+    width: 80px;
+    height: 29px;
+  }
+  .follow-button > span {
+    font-size: 14px;
+  }
+  .top-button-wrap > a {
+    padding: 6px;
+    font-size: 24px;
+
+  }
+}
+@media screen and (max-width: 480px){
+  .review-container .over .inside {
+    top: 95px;
+    width: 260px;
+    height: 120px;
+    margin-left: -130px;
+    margin-top: -40px;
+  }
+
+  .review-container .over .inside .btns a {
+    font-size: 14px;
+    height: 40px;
+    line-height: 40px;
+  }
+
+  .review-container .over .inside .timer {
+    font-size: 60px;
+  }
+
+  .review-container .over .inside .btns{
+    top: 132px;
+  }
+
+  .campaign-requirement > span {
+    padding: 0 15px;
+    height: 32px;
+    font-size: 16px;
+    line-height: 32px;
+  }
+}
+
+/* apply page css*/
+
+// Written by Leo
+.select-button {
+  width: 45%; height: 35px;
+  border: 2px solid #e5e5e5;
+  display: inline-block; background-color: transparent;
+  -webkit-transition: color .5s, background-color .5s, border-color .5s;
+  -moz-transition: color .5s, background-color .5s, border-color .5s;
+  -ms-transition: color .5s, background-color .5s, border-color .5s;
+  -o-transition: color .5s, background-color .5s, border-color .5s;
+  transition: color .5s, background-color .5s, border-color .5s;
+}
+.select-button.active {
+  background-color: #303030;
+  border-color: #303030;
+  color: #fff;
+}
+
+// plugin slick
+.slick-dots {
+  bottom: 0;
+}
+.slick-initialized .slick-slide {
+  position: relative;
+}
+.slick-track {
+  height: 100%;
+}
+.slick-list {
+  height: 100%;
+}
+.btns a.btn-grey {
+  background: #666;
+}
+.slick-loading .slick-list{background:#fff url(/assets/images/ajax-loader.gif) center center no-repeat;}
+
+
+@media screen and (min-width: 480px) {
+  .angular-grid-item {
+    width:370px;
+  }
+}
+
+.scrollup {
+  width: 60px;
+  height: 60px;
+  position: fixed;
+  bottom: 50px;
+  right: 30px;
+  opacity: 0;
+  background-color: rgba(0,0,0,.46);
+  z-index: 50;
+  padding: 15px;
+  border-radius: 2px;
+  border: 1px solid #616161;
+  text-align: center;
+  font-size: 30px;
+  color: #FFFFFF;
+}
+
