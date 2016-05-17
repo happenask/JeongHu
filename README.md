@@ -1,5 +1,5 @@
-# 프론트개발 - 08리터 WEB
-git - https://jason_yun@bitbucket.org/08liter/front-web-user.git
+# 프론트개발
+
 
 ## Installation
 
@@ -70,9 +70,3 @@ function test() {
 
 
 
-## Credits
-
-jason@08liter.com
-
-## License
-08liter
